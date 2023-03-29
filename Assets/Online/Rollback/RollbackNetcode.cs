@@ -86,21 +86,18 @@ public class RollbackNetcode : MonoBehaviour
         // Search for same frameTime
         for (int i = opponentsButtonsQueue.Count - 1; i >= 0; i--)
         {
-            //Debug.Log("SEARCHING: " + i + " FRAME: " + opponentsButtons.frameTime + " QUEUE FRAME: " + opponentsButtonsQueue[i].frameTime);
             // If frameTime in the queue is the same as the new buttons
             if (opponentsButtonsQueue[i].frameTime == opponentsButtons.frameTime)
             {
                 // Check if already confirmed
                 if (confirmedOpponentsButtonsQueue[i])
                 {
-                    //Debug.Log("ALREADY CONFIRMED");
                     return;
                 }
 
                 // Compare if same
                 if (opponentsButtonsQueue[i].CompareButtons(opponentsButtons))
                 {
-                    //Debug.Log("SAME BUTTONS ABORTING");
                     confirmedOpponentsButtonsQueue[i] = true;
                     return;
                 }
@@ -108,12 +105,10 @@ public class RollbackNetcode : MonoBehaviour
                 // Change inputs
                 opponentsButtonsQueue[i] = opponentsButtons.CreateCopy();
                 confirmedOpponentsButtonsQueue[i] = true;
-                //Debug.Log("SUCCESSFULLY ADDED BUTTONS TO QUEUE");
 
                 // Change which frame we should rollback to
                 if (opponentsButtons.frameTime < oldestFrameToRollbackTo || oldestFrameToRollbackTo == -1)
                 {
-                    logger.Add("GOTTEN OLDEST INPUT: " + opponentsButtons.frameTime);
                     oldestFrameToRollbackTo = opponentsButtons.frameTime;
                 }
 
@@ -129,7 +124,6 @@ public class RollbackNetcode : MonoBehaviour
         else
         {
             Debug.LogError("FRAME FROM FUTURE");
-            //Debug.LogError("CURRENT FRAME: " + battleManager.gameState.frameTime + " INPUT FRAME: " + opponentsButtons.frameTime + " OLDEST: " + oldestFrameToRollbackTo);
         }
     }
 
@@ -139,9 +133,6 @@ public class RollbackNetcode : MonoBehaviour
         {
             return;
         }
-
-        logger.Add("FRAME BEFORE ROLLBACK: " + battleManager.gameState.frameTime);
-        logger.Add("POSITION BEFORE ROLLBACK - PLAYER 1: " + battleManager.gameState.player1PositionX + " PLAYER 2: " + battleManager.gameState.player2PositionX);
 
         // Search oldest frame to rollback to
         int i;
@@ -161,20 +152,14 @@ public class RollbackNetcode : MonoBehaviour
         // Rollback to when the opponent pressed their button
         battleManager.gameState = stateQueue[i].CreateCopy();
 
-        logger.Add("FRAME TO ROLLBACK TO: " + stateQueue[i].frameTime);
-        logger.Add("POSITION OF ROLLBACK START - PLAYER 1: " + battleManager.gameState.player1PositionX + " PLAYER 2: " + battleManager.gameState.player2PositionX);
-
         // Redo with the new game state
         while (i < stateQueue.Count)
         {
-            logger.Add("CURRENT ROLLBACK FRAME: " + opponentsButtonsQueue[i].frameTime);
-
             AddGameState(i);
 
             // Predict same buttons if not already confirmed
             if (!confirmedOpponentsButtonsQueue[i])
             {
-                logger.Add("SAME BUTTON");
                 int tempFrametime = opponentsButtonsQueue[i].frameTime;
                 opponentsButtonsQueue[i] = opponentsButtonsQueue[i - 1].CreateCopy();
                 opponentsButtonsQueue[i].frameTime = tempFrametime;
@@ -192,8 +177,6 @@ public class RollbackNetcode : MonoBehaviour
                 battleManager.player2Buttons = localButtonsQueue[i].CreateCopy();
                 battleManager.AdvanceGame();
             }
-
-            logger.Add("POSITION AFTER CURRENT ROLLBACK - PLAYER 1: " + battleManager.gameState.player1PositionX + " PLAYER 2: " + battleManager.gameState.player2PositionX);
 
             i++;
         }

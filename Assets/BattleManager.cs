@@ -60,10 +60,6 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        rollbackNetcode.logger.Add("-------------------------------------");
-        rollbackNetcode.logger.Add("NEW FRAME: " + gameState.frameTime);
-        rollbackNetcode.logger.Add("POSITIONS - PLAYER 1: " + gameState.player1PositionX + " PLAYER 2: " + gameState.player2PositionX);
-
         if (multiplayer)
         {
             rollbackNetcode.ProcessOnlineInputs();
