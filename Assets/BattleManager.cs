@@ -57,31 +57,33 @@ public class BattleManager : MonoBehaviour
             {
                 start = true;
             }
-
         }
 
         if (multiplayer)
         {
+            rollbackNetcode.PredictOpponentInput();
             rollbackNetcode.ProcessOnlineInputs();
-            rollbackNetcode.Rollback();
-            
+
             if (rollbackNetcode.localPlayer1)
             {
-                player1Buttons = playerInputManager.PollPlayer1Buttons();
-                rollbackNetcode.onlinePlayer1.RpcSendButtonsToClientReliable(player1Buttons);
-                rollbackNetcode.onlinePlayer1.RpcSendButtonsToClientUnReliable(player1Buttons);
+                PlayerButtons tempPlayerButtons = rollbackNetcode.AddLocalDelay(playerInputManager.PollPlayer1Buttons());
+                rollbackNetcode.onlinePlayer1.RpcSendButtonsToClientReliable(tempPlayerButtons);
+                rollbackNetcode.onlinePlayer1.RpcSendButtonsToClientUnReliable(tempPlayerButtons);
             }
             else
             {
-                player2Buttons = playerInputManager.PollPlayer1Buttons();
-                rollbackNetcode.onlinePlayer2.CmdSendButtonsToServerReliable(player2Buttons);
-                rollbackNetcode.onlinePlayer2.CmdSendButtonsToServerUnReliable(player2Buttons);
+                PlayerButtons tempPlayerButtons = rollbackNetcode.AddLocalDelay(playerInputManager.PollPlayer1Buttons());
+                rollbackNetcode.onlinePlayer2.CmdSendButtonsToServerReliable(tempPlayerButtons);
+                rollbackNetcode.onlinePlayer2.CmdSendButtonsToServerUnReliable(tempPlayerButtons);
             }
+            
+            rollbackNetcode.AddLocalButtons();
 
             rollbackNetcode.AddGameState();
 
-            rollbackNetcode.PredictOpponentInput();
-            rollbackNetcode.AddLocalButtons();
+            rollbackNetcode.Rollback();
+
+            rollbackNetcode.PollCurrentFrameButtons();
 
             AdvanceGame();
         }

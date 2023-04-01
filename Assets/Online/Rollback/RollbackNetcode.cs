@@ -11,6 +11,7 @@ public class RollbackNetcode : MonoBehaviour
     public List<PlayerButtons> localButtonsQueue;
     public List<PlayerButtons> opponentsButtonsQueue;
 
+    public List<PlayerButtons> delayQueue;
     public List<PlayerButtons> onlineButtonsQueue;
     public List<bool> confirmedOpponentsButtonsQueue;
     public int oldestFrameToRollbackTo;
@@ -23,6 +24,7 @@ public class RollbackNetcode : MonoBehaviour
     public List<string> logger;
 
     private const int rollbackListSize = 200;
+    private const int delay = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class RollbackNetcode : MonoBehaviour
         localButtonsQueue = new List<PlayerButtons>();
         opponentsButtonsQueue = new List<PlayerButtons>();
 
+        delayQueue = new List<PlayerButtons>();
         onlineButtonsQueue = new List<PlayerButtons>();
         confirmedOpponentsButtonsQueue = new List<bool>();
         oldestFrameToRollbackTo = -1;
@@ -63,7 +66,7 @@ public class RollbackNetcode : MonoBehaviour
     {
         for (int i = onlineButtonsQueue.Count - 1; i >= 0; i--)
         {
-            if (onlineButtonsQueue[i].frameTime < battleManager.gameState.frameTime)
+            if (onlineButtonsQueue[i].frameTime <= battleManager.gameState.frameTime)
             {
                 AddOpponentInput(onlineButtonsQueue[i]);
                 onlineButtonsQueue.RemoveAt(i);
@@ -79,6 +82,12 @@ public class RollbackNetcode : MonoBehaviour
         }
 
         if (opponentsButtonsQueue.Count == 0)
+        {
+            return;
+        }
+
+        // Discard if it's too old
+        if (opponentsButtons.frameTime < opponentsButtonsQueue[0].frameTime)
         {
             return;
         }
@@ -107,24 +116,19 @@ public class RollbackNetcode : MonoBehaviour
                 confirmedOpponentsButtonsQueue[i] = true;
 
                 // Change which frame we should rollback to
-                if (opponentsButtons.frameTime < oldestFrameToRollbackTo || oldestFrameToRollbackTo == -1)
+                if (opponentsButtons.frameTime < battleManager.gameState.frameTime)
                 {
-                    oldestFrameToRollbackTo = opponentsButtons.frameTime;
+                    if (opponentsButtons.frameTime < oldestFrameToRollbackTo || oldestFrameToRollbackTo == -1)
+                    {
+                        oldestFrameToRollbackTo = opponentsButtons.frameTime;
+                    }
                 }
 
                 return;
             }
         }
 
-        // If it's older than the oldest buttons in queue
-        if (opponentsButtons.frameTime < opponentsButtonsQueue[0].frameTime)
-        {
-            Debug.LogError("FRAME WAS LOST");
-        }
-        else
-        {
-            Debug.LogError("FRAME FROM FUTURE");
-        }
+        Debug.LogError("FRAME COULDN'T BE FOUND!");
     }
 
     public void Rollback()
@@ -146,6 +150,7 @@ public class RollbackNetcode : MonoBehaviour
             if (i == 0)
             {
                 Debug.LogError("State to rollback to couldn't be found!");
+                return;
             }
         }
 
@@ -153,9 +158,9 @@ public class RollbackNetcode : MonoBehaviour
         battleManager.gameState = stateQueue[i].CreateCopy();
 
         // Redo with the new game state
-        while (i < stateQueue.Count)
+        while (i < stateQueue.Count - 1)
         {
-            AddGameState(i);
+            stateQueue[i] = battleManager.gameState.CreateCopy();
 
             // Predict same buttons if not already confirmed
             if (!confirmedOpponentsButtonsQueue[i])
@@ -181,40 +186,74 @@ public class RollbackNetcode : MonoBehaviour
             i++;
         }
 
+        stateQueue[stateQueue.Count - 1] = battleManager.gameState.CreateCopy();
+
         oldestFrameToRollbackTo = -1;
     }
 
-    public void AddGameState(int rollbackFrame = -1)
+    public void AddGameState()
     {
-        if (rollbackFrame == -1)
-        {
-            stateQueue.Add(battleManager.gameState.CreateCopy());
+        stateQueue.Add(battleManager.gameState.CreateCopy());
 
-            if (stateQueue.Count > rollbackListSize)
-            {
-                stateQueue.RemoveAt(0);
-            }
-        }
-        else
+        if (stateQueue.Count > rollbackListSize)
         {
-            stateQueue[rollbackFrame] = battleManager.gameState.CreateCopy();
+            stateQueue.RemoveAt(0);
         }
+    }
+
+    public PlayerButtons AddLocalDelay(PlayerButtons delayButtons)
+    {
+        delayButtons.frameTime = battleManager.gameState.frameTime + delay;
+        delayQueue.Add(delayButtons.CreateCopy());
+
+        return delayButtons;
     }
 
     public void AddLocalButtons()
     {
-        if (localPlayer1)
+        // Search for same frameTime
+        for (int i = 0; i < delayQueue.Count; i++)
         {
-            localButtonsQueue.Add(battleManager.player1Buttons);
-        }
-        else
-        {
-            localButtonsQueue.Add(battleManager.player2Buttons);
+            // If frameTime in the queue is the same as the game state
+            if (delayQueue[i].frameTime == battleManager.gameState.frameTime)
+            {
+                localButtonsQueue.Add(delayQueue[i].CreateCopy());
+                delayQueue.RemoveAt(i);
+                break;
+            }
         }
 
         if (localButtonsQueue.Count > rollbackListSize)
         {
             localButtonsQueue.RemoveAt(0);
+        }
+    }
+
+    public void PollCurrentFrameButtons()
+    {
+        if (localPlayer1)
+        {
+            if (localButtonsQueue.Count > 0)
+            {
+                battleManager.player1Buttons = localButtonsQueue[localButtonsQueue.Count - 1].CreateCopy();
+            }
+
+            if (opponentsButtonsQueue.Count > 0)
+            {
+                battleManager.player2Buttons = opponentsButtonsQueue[opponentsButtonsQueue.Count - 1].CreateCopy();
+            }
+        }
+        else
+        {
+            if (localButtonsQueue.Count > 0)
+            {
+                battleManager.player2Buttons = localButtonsQueue[localButtonsQueue.Count - 1].CreateCopy();
+            }
+
+            if (opponentsButtonsQueue.Count > 0)
+            {
+                battleManager.player1Buttons = opponentsButtonsQueue[opponentsButtonsQueue.Count - 1].CreateCopy();
+            }
         }
     }
 
