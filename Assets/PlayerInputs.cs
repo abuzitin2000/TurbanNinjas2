@@ -14,23 +14,25 @@ public class PlayerInputs : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            polledButtons.up = true;
+            polledButtons.SetUp(true);
         }
 
         if (Input.GetKey("s"))
         {
-            polledButtons.down = true;
+            polledButtons.SetDown(true);
         }
 
         if (Input.GetKey("a"))
         {
-            polledButtons.left = true;
+            polledButtons.SetLeft(true);
         }
 
         if (Input.GetKey("d"))
         {
-            polledButtons.right = true;
+            polledButtons.SetRight(true);
         }
+
+        SOCD(polledButtons);
 
         return polledButtons;
     }
@@ -41,26 +43,44 @@ public class PlayerInputs : MonoBehaviour
 
         polledButtons.frameTime = battleManager.gameState.frameTime;
 
-        if (Input.GetKey("up"))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            polledButtons.up = true;
+            polledButtons.SetUp(true);
         }
 
-        if (Input.GetKey("down"))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            polledButtons.down = true;
+            polledButtons.SetDown(true);
         }
 
-        if (Input.GetKey("left"))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            polledButtons.left = true;
+            polledButtons.SetLeft(true);
         }
 
-        if (Input.GetKey("right"))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            polledButtons.right = true;
+            polledButtons.SetRight(true);
         }
+
+        SOCD(polledButtons);
 
         return polledButtons;
     }
+
+    private void SOCD(PlayerButtons socdButtons)
+    {
+        if (socdButtons.GetUp() && socdButtons.GetDown())
+        {
+            socdButtons.SetUp(false);
+            socdButtons.SetDown(false);
+        }
+
+        if (socdButtons.GetLeft() && socdButtons.GetRight())
+        {
+            socdButtons.SetLeft(false);
+            socdButtons.SetRight(false);
+        }
+    }
+
 }

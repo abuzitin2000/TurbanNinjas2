@@ -15,6 +15,7 @@ public class RollbackNetcode : MonoBehaviour
     public List<PlayerButtons> onlineButtonsQueue;
     public List<bool> confirmedOpponentsButtonsQueue;
     public int oldestFrameToRollbackTo;
+    public PlayerButtons oldButtons;
 
     public OnlinePlayerInputs onlinePlayer1;
     public OnlinePlayerInputs onlinePlayer2;
@@ -37,6 +38,7 @@ public class RollbackNetcode : MonoBehaviour
         onlineButtonsQueue = new List<PlayerButtons>();
         confirmedOpponentsButtonsQueue = new List<bool>();
         oldestFrameToRollbackTo = -1;
+        oldButtons = new PlayerButtons();
 
         logger = new List<string>();
     }
@@ -131,6 +133,37 @@ public class RollbackNetcode : MonoBehaviour
         Debug.LogError("FRAME COULDN'T BE FOUND!");
     }
 
+    public void ProcessLocalInputs()
+    {
+        // Add the buttons to the delay queue
+        PlayerButtons tempPlayerButtons = AddLocalDelay(battleManager.playerInputManager.PollPlayer1Buttons());
+
+        if (localPlayer1)
+        {
+            // If the buttons didn't change don't send them to the opponent
+            if (tempPlayerButtons.CompareButtons(oldButtons))
+            {
+                return;
+            }
+
+            onlinePlayer1.RpcSendButtonsToClientReliable(tempPlayerButtons);
+            onlinePlayer1.RpcSendButtonsToClientUnReliable(tempPlayerButtons);
+        }
+        else
+        {
+            // If the buttons didn't change don't send them to the opponent
+            if (tempPlayerButtons.CompareButtons(oldButtons))
+            {
+                return;
+            }
+
+            onlinePlayer2.CmdSendButtonsToServerReliable(tempPlayerButtons);
+            onlinePlayer2.CmdSendButtonsToServerUnReliable(tempPlayerButtons);
+        }
+
+        oldButtons = tempPlayerButtons;
+    }
+
     public void Rollback()
     {
         if (oldestFrameToRollbackTo == -1)
@@ -186,7 +219,20 @@ public class RollbackNetcode : MonoBehaviour
             i++;
         }
 
+        // Set states and buttons for the current frame after rollback is done
         stateQueue[stateQueue.Count - 1] = battleManager.gameState.CreateCopy();
+
+        if (!confirmedOpponentsButtonsQueue[confirmedOpponentsButtonsQueue.Count - 1])
+        {
+            if (localPlayer1)
+            {
+                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = battleManager.player2Buttons;
+            }
+            else
+            {
+                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = battleManager.player1Buttons;
+            }
+        }
 
         oldestFrameToRollbackTo = -1;
     }
@@ -266,8 +312,8 @@ public class RollbackNetcode : MonoBehaviour
         
         foreach (string log in logger)
         {
-            //File.AppendAllText(fileName, log);
-            //File.AppendAllText(fileName, "\n");
+            File.AppendAllText(fileName, log);
+            File.AppendAllText(fileName, "\n");
         }
     }
 }

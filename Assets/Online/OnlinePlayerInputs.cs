@@ -26,8 +26,6 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
         }
 
         rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
-
-        rollbackNetcode.battleManager.sayacInput++;
     }
 
     [Mirror.Command(channel = 1)]
@@ -49,8 +47,6 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
         }
 
         rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
-
-        rollbackNetcode.battleManager.sayacInput++;
     }
 
     [Mirror.ClientRpc(channel = 0)]
@@ -72,8 +68,6 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
         }
 
         rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
-
-        rollbackNetcode.battleManager.sayacInput++;
     }
 
     [Mirror.ClientRpc(channel = 1)]
@@ -95,7 +89,5 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
         }
 
         rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
-
-        rollbackNetcode.battleManager.sayacInput++;
     }
 }
