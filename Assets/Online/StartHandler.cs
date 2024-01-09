@@ -41,7 +41,7 @@ public class StartHandler : Mirror.NetworkBehaviour
 
         if (Mirror.NetworkTime.localTime > startTime)
         {
-            battleManager.start = true;
+            battleManager.StartGame();
             started = true;
         }
     }

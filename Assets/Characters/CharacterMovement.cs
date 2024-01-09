@@ -12,266 +12,261 @@ public class CharacterMovement : MonoBehaviour
         
     }
 
+    public void CalculateCharactersMovement()
+    {
+        TurnCharacters(battleManager.gameState.player1, battleManager.gameState.player2);
+        CalculateCharacterMovement(battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data);
+        CalculateCharacterMovement(battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data);
+    }
+
+    private void CalculateCharacterMovement(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    {
+        CharacterCrouch(playerButtons, characterState, characterData);
+        CharacterWalk(playerButtons, characterState, characterData);
+        CharacterJump(playerButtons, characterState, characterData);
+    }
+
     public void MoveCharacters()
     {
-        CharacterJump();
-        CharacterCrouch();
-        CharacterGravity();
-        CharacterWalk();
+        MoveCharacter(battleManager.gameState.player1, battleManager.player1Data);
+        MoveCharacter(battleManager.gameState.player2, battleManager.player2Data);
     }
 
-    private void CharacterGravity()
+    private void MoveCharacter(BattleGameState.CharacterState characterState, CharacterData characterData)
+    {
+        CharacterVerticalMovement(characterState, characterData);
+        CharacterHorizontalMovement(characterState, characterData);
+    }
+
+    private void TurnCharacters(BattleGameState.CharacterState player1State, BattleGameState.CharacterState player2State)
+    {
+        if (player1State.positionX > player2State.positionX)
+        {
+            if (!player1State.attacking && player1State.stun == 0)
+			{
+                player1State.mirrored = true;
+			}
+
+            if (!player2State.attacking && player2State.stun == 0)
+            {
+                player2State.mirrored = false;
+            }
+        }
+
+        if (player1State.positionX < player2State.positionX)
+        {
+            if (!player1State.attacking && player1State.stun == 0)
+            {
+                player1State.mirrored = false;
+            }
+
+            if (!player2State.attacking && player2State.stun == 0)
+            {
+                player2State.mirrored = true;
+            }
+        }
+    }
+
+    private void CharacterVerticalMovement(BattleGameState.CharacterState characterState, CharacterData characterData)
     {
         // Player Velocity
-        battleManager.gameState.player1PositionY += battleManager.gameState.player1VerticalVelocity;
-        battleManager.gameState.player2PositionY += battleManager.gameState.player2VerticalVelocity;
+        characterState.positionY += characterState.velocityY;
 
-        // Player 1 Gravity
-        if (battleManager.gameState.player1PositionY > battleManager.battleData.battleData.groundLevel)
+        // Gravity
+        if (characterState.positionY > battleManager.battleData.battleData.groundLevel)
         {
-            battleManager.gameState.player1VerticalVelocity -= battleManager.player1Data.characterData.fallSpeed;
+            characterState.velocityY -= characterData.stats.fallSpeed;
         }
 
         // If goes over limit
-        if (battleManager.gameState.player1PositionY < battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionY < battleManager.battleData.battleData.groundLevel)
         {
-            battleManager.gameState.player1PositionY = battleManager.battleData.battleData.groundLevel;
+            characterState.positionY = battleManager.battleData.battleData.groundLevel;
         }
 
         // Set Grounded
-        if (battleManager.gameState.player1PositionY == battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionY == battleManager.battleData.battleData.groundLevel)
         {
-            battleManager.gameState.player1Grounded = true;
-            battleManager.gameState.player1Jumping = 0;
-            battleManager.gameState.player1VerticalVelocity = 0;
+            characterState.grounded = true;
+            characterState.jumping = 0;
+            characterState.velocityY = 0;
         }
+		else
+		{
+            characterState.grounded = false;
+        }
+    }
 
-        // Player 2 Gravity
-        if (battleManager.gameState.player2PositionY > battleManager.battleData.battleData.groundLevel)
+    private void CharacterHorizontalMovement(BattleGameState.CharacterState characterState, CharacterData characterData)
+    {
+        // Player Velocity
+        characterState.positionX += characterState.velocityX;
+
+        // Deceleration on pushback
+        if (characterState.stun > 0)
         {
-            battleManager.gameState.player2VerticalVelocity -= battleManager.player2Data.characterData.fallSpeed;
+            characterState.velocityX -= 0;
         }
 
         // If goes over limit
-        if (battleManager.gameState.player2PositionY < battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionX < battleManager.battleData.battleData.stageSize * -1)
         {
-            battleManager.gameState.player2PositionY = battleManager.battleData.battleData.groundLevel;
+            characterState.positionX = battleManager.battleData.battleData.stageSize * -1;
+        }
+        if (characterState.positionX > battleManager.battleData.battleData.stageSize)
+        {
+            characterState.positionX = battleManager.battleData.battleData.stageSize;
         }
 
-        // Set Grounded
-        if (battleManager.gameState.player2PositionY == battleManager.battleData.battleData.groundLevel)
-        {
-            battleManager.gameState.player2Grounded = true;
-            battleManager.gameState.player2Jumping = 0;
-            battleManager.gameState.player2VerticalVelocity = 0;
-        }
+        // Handle character collisions
+        battleManager.collisionManager.HandleCollisionBoxes();
     }
 
-    private void CharacterWalk()
+    private void CharacterWalk(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
     {
-        // Move Player 1
-        if (battleManager.gameState.player1Stun == 0 && battleManager.gameState.player1Jumping == 0 && !battleManager.gameState.player1Crouching)
+        // Walk
+        if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
-            if (battleManager.player1Buttons.GetRight())
+            // Right
+            if (playerButtons.GetRight())
             {
-                battleManager.gameState.player1PositionX += battleManager.player1Data.characterData.moveSpeed;
-            }
-
-            if (battleManager.player1Buttons.GetLeft())
-            {
-                battleManager.gameState.player1PositionX -= battleManager.player1Data.characterData.moveSpeed;
-            }
-        }
-
-        // Move Player 2
-        if (battleManager.gameState.player2Stun == 0 && battleManager.gameState.player2Jumping == 0 && !battleManager.gameState.player2Crouching)
-        {
-            if (battleManager.player2Buttons.GetRight())
-            {
-                battleManager.gameState.player2PositionX += battleManager.player2Data.characterData.moveSpeed;
-            }
-
-            if (battleManager.player2Buttons.GetLeft())
-            {
-                battleManager.gameState.player2PositionX -= battleManager.player2Data.characterData.moveSpeed;
-            }
-        }
-    }
-
-    private void CharacterJump()
-    {
-        // Player 1 Jump Start
-        if (battleManager.gameState.player1Stun == 0 && battleManager.gameState.player1Jumping == 0)
-        {
-            if (battleManager.player1Buttons.GetUp())
-            {
-                battleManager.gameState.player1Jumping = 2;
-                battleManager.gameState.player1JumpingWindow = battleManager.inputData.inputData.jumpingWindow;
-                battleManager.gameState.player1VerticalVelocity = battleManager.player1Data.characterData.jumpForce;
-            }
-        }
-
-        // Player 2 Jump Start
-        if (battleManager.gameState.player2Stun == 0 && battleManager.gameState.player2Jumping == 0)
-        {
-            if (battleManager.player2Buttons.GetUp())
-            {
-                battleManager.gameState.player2Jumping = 2;
-                battleManager.gameState.player2JumpingWindow = battleManager.inputData.inputData.jumpingWindow;
-                battleManager.gameState.player2VerticalVelocity = battleManager.player2Data.characterData.jumpForce;
-            }
-        }
-
-        // Player 1 Jump Window
-        if (battleManager.gameState.player1Stun == 0 && battleManager.gameState.player1Jumping != 0 && battleManager.gameState.player1JumpingWindow > 0)
-        {
-            if (battleManager.player1Buttons.GetLeft())
-            {
-                if (!battleManager.gameState.player1Mirror)
+                if (!characterState.mirrored)
                 {
-                    battleManager.gameState.player1Jumping = 1;
+                    if (!characterState.crouching)
+					{
+                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+					}
+
+                    characterState.blocking = false;
                 }
                 else
                 {
-                    battleManager.gameState.player1Jumping = 3;
+                    if (!characterState.crouching)
+                    {
+                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                    }
+
+                    characterState.blocking = true;
                 }
             }
 
-            if (battleManager.player1Buttons.GetRight())
+            // Left
+            else if (playerButtons.GetLeft())
             {
-                if (!battleManager.gameState.player1Mirror)
+                if (!characterState.mirrored)
                 {
-                    battleManager.gameState.player1Jumping = 3;
+                    if (!characterState.crouching)
+                    {
+                        characterState.velocityX = characterData.stats.backwardMoveSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                    }
+
+                    characterState.blocking = true;
                 }
                 else
                 {
-                    battleManager.gameState.player1Jumping = 1;
+                    if (!characterState.crouching)
+                    {
+                        characterState.velocityX = characterData.stats.forwardMoveSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                    }
+
+                    characterState.blocking = false;
+                }
+            }
+
+            // Idle
+            else
+			{
+                if (!characterState.crouching)
+                {
+                    characterState.velocityX = 0;
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "Idle");
+                }
+
+                characterState.blocking = false;
+            }
+
+            // Can't move while crouching
+            if (characterState.crouching)
+			{
+                characterState.velocityX = 0;
+            }
+        }
+    }
+
+    private void CharacterJump(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    {
+        // Jump Start
+        if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
+        {
+            if (playerButtons.GetUp())
+            {
+                characterState.jumping = 2;
+                characterState.jumpWindow = battleManager.inputData.inputData.jumpingWindow;
+                characterState.velocityY = characterData.stats.jumpForce;
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpNeutral");
+            }
+        }
+
+        // Jump Window
+        if (characterState.stun == 0 && characterState.jumping != 0 && characterState.jumpWindow > 0)
+        {
+            if (playerButtons.GetLeft())
+            {
+                if (!characterState.mirrored)
+                {
+                    characterState.jumping = 1;
+                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed * -1;
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpBackward");
+                }
+                else
+                {
+                    characterState.jumping = 3;
+                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed * -1;
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpForward");
+                }
+            }
+
+            if (playerButtons.GetRight())
+            {
+                if (!characterState.mirrored)
+                {
+                    characterState.jumping = 3;
+                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed;
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpForward");
+                }
+                else
+                {
+                    characterState.jumping = 1;
+                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed;
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpBackward");
                 }
             }
         }
 
         // Reduce window
-        if (battleManager.gameState.player1JumpingWindow > 0)
+        if (characterState.jumpWindow > 0)
         {
-            battleManager.gameState.player1JumpingWindow--;
-        }
-
-        // Player 2 Jump Window
-        if (battleManager.gameState.player2Stun == 0 && battleManager.gameState.player2Jumping != 0 && battleManager.gameState.player2JumpingWindow > 0)
-        {
-            if (battleManager.player2Buttons.GetLeft())
-            {
-                if (!battleManager.gameState.player2Mirror)
-                {
-                    battleManager.gameState.player2Jumping = 1;
-                }
-                else
-                {
-                    battleManager.gameState.player2Jumping = 3;
-                }
-            }
-
-            if (battleManager.player2Buttons.GetRight())
-            {
-                if (!battleManager.gameState.player2Mirror)
-                {
-                    battleManager.gameState.player2Jumping = 3;
-                }
-                else
-                {
-                    battleManager.gameState.player2Jumping = 1;
-                }
-            }
-        }
-
-        // Reduce window
-        if (battleManager.gameState.player2JumpingWindow > 0)
-        {
-            battleManager.gameState.player2JumpingWindow--;
-        }
-
-        // Player 1 Air Movement
-        if (battleManager.gameState.player1Stun == 0 && battleManager.gameState.player1Jumping != 0)
-        {
-            if (battleManager.gameState.player1Jumping == 1)
-            {
-                if (!battleManager.gameState.player1Mirror)
-                {
-                    battleManager.gameState.player1PositionX -= battleManager.player1Data.characterData.jumpHorizontalSpeed;
-                }
-                else
-                {
-                    battleManager.gameState.player1PositionX += battleManager.player1Data.characterData.jumpHorizontalSpeed;
-                }
-            }
-
-            if (battleManager.gameState.player1Jumping == 3)
-            {
-                if (!battleManager.gameState.player1Mirror)
-                {
-                    battleManager.gameState.player1PositionX += battleManager.player1Data.characterData.jumpHorizontalSpeed;
-                }
-                else
-                {
-                    battleManager.gameState.player1PositionX -= battleManager.player1Data.characterData.jumpHorizontalSpeed;
-                }
-            }
-        }
-
-        // Player 2 Air Movement
-        if (battleManager.gameState.player2Stun == 0 && battleManager.gameState.player2Jumping != 0)
-        {
-            if (battleManager.gameState.player2Jumping == 1)
-            {
-                if (!battleManager.gameState.player2Mirror)
-                {
-                    battleManager.gameState.player2PositionX -= battleManager.player2Data.characterData.jumpHorizontalSpeed;
-                }
-                else
-                {
-                    battleManager.gameState.player2PositionX += battleManager.player2Data.characterData.jumpHorizontalSpeed;
-                }
-            }
-
-            if (battleManager.gameState.player2Jumping == 3)
-            {
-                if (!battleManager.gameState.player2Mirror)
-                {
-                    battleManager.gameState.player2PositionX += battleManager.player2Data.characterData.jumpHorizontalSpeed;
-                }
-                else
-                {
-                    battleManager.gameState.player2PositionX -= battleManager.player2Data.characterData.jumpHorizontalSpeed;
-                }
-            }
+            characterState.jumpWindow--;
         }
     }
 
-    private void CharacterCrouch()
+    private void CharacterCrouch(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
     {
         // Player 1 Crouch
-        if (battleManager.gameState.player1Stun == 0 && battleManager.gameState.player1Jumping == 0)
+        if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
-            if (battleManager.player1Buttons.GetDown())
+            if (playerButtons.GetDown())
             {
-                battleManager.gameState.player1Crouching = true;
+                characterState.crouching = true;
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "Crouch");
             }
             else
             {
-                battleManager.gameState.player1Crouching = false;
-            }
-        }
-
-        // Player 2 Crouch
-        if (battleManager.gameState.player2Stun == 0 && battleManager.gameState.player2Jumping == 0)
-        {
-            if (battleManager.player2Buttons.GetDown())
-            {
-                battleManager.gameState.player2Crouching = true;
-            }
-            else
-            {
-                battleManager.gameState.player2Crouching = false;
+                characterState.crouching = false;
             }
         }
     }

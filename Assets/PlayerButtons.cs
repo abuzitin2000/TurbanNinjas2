@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerButtons
 {
     public int frameTime;
-    private ushort buttons;
+    public ushort buttons;
 
     public PlayerButtons CreateCopy()
     {
@@ -22,7 +23,9 @@ public class PlayerButtons
         return compareButtons.buttons == this.buttons;
     }
 
-    public void SetUp(bool up)
+    // SETTERS
+
+    public void SetUpPress(bool up)
     {
         if (up)
         {
@@ -34,9 +37,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetDown(bool down)
+    public void SetUpHold(bool up)
     {
-        if (down)
+        if (up)
         {
             buttons = (ushort)(buttons | 2);
         }
@@ -46,9 +49,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetLeft(bool left)
+    public void SetDownPress(bool down)
     {
-        if (left)
+        if (down)
         {
             buttons = (ushort)(buttons | 4);
         }
@@ -58,9 +61,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetRight(bool right)
+    public void SetDownHold(bool down)
     {
-        if (right)
+        if (down)
         {
             buttons = (ushort)(buttons | 8);
         }
@@ -70,9 +73,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetLPunch(bool lpunch)
+    public void SetLeftPress(bool left)
     {
-        if (lpunch)
+        if (left)
         {
             buttons = (ushort)(buttons | 16);
         }
@@ -82,9 +85,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetLKick(bool lkick)
+    public void SetLeftHold(bool left)
     {
-        if (lkick)
+        if (left)
         {
             buttons = (ushort)(buttons | 32);
         }
@@ -94,9 +97,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetHPunch(bool hpunch)
+    public void SetRightPress(bool right)
     {
-        if (hpunch)
+        if (right)
         {
             buttons = (ushort)(buttons | 64);
         }
@@ -106,9 +109,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetHKick(bool hkick)
+    public void SetRightHold(bool right)
     {
-        if (hkick)
+        if (right)
         {
             buttons = (ushort)(buttons | 128);
         }
@@ -118,9 +121,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetMacro1(bool macro1)
+    public void SetLPPress(bool lp)
     {
-        if (macro1)
+        if (lp)
         {
             buttons = (ushort)(buttons | 256);
         }
@@ -130,9 +133,9 @@ public class PlayerButtons
         }
     }
 
-    public void SetMacro2(bool macro2)
+    public void SetLPHold(bool lp)
     {
-        if (macro2)
+        if (lp)
         {
             buttons = (ushort)(buttons | 512);
         }
@@ -142,53 +145,117 @@ public class PlayerButtons
         }
     }
 
-    public bool GetUp()
+    public void SetLKPress(bool lk)
     {
-        return (buttons & 1) == 1;
+        if (lk)
+        {
+            buttons = (ushort)(buttons | 1024);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~1024);
+        }
     }
 
-    public bool GetDown()
+    public void SetLKHold(bool lk)
     {
-        return (buttons & 2) == 2;
+        if (lk)
+        {
+            buttons = (ushort)(buttons | 2048);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~2048);
+        }
     }
 
-    public bool GetLeft()
+    public void SetHPPress(bool hp)
     {
-        return (buttons & 4) == 4;
+        if (hp)
+        {
+            buttons = (ushort)(buttons | 4096);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~4096);
+        }
     }
 
-    public bool GetRight()
+    public void SetHPHold(bool hp)
     {
-        return (buttons & 8) == 8;
+        if (hp)
+        {
+            buttons = (ushort)(buttons | 8192);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~8192);
+        }
     }
 
-    public bool GetLPunch()
+    public void SetHKPress(bool hk)
     {
-        return (buttons & 16) == 16;
+        if (hk)
+        {
+            buttons = (ushort)(buttons | 16384);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~16384);
+        }
     }
 
-    public bool GetLKick()
+    public void SetHKHold(bool hk)
     {
-        return (buttons & 32) == 32;
+        if (hk)
+        {
+            buttons = (ushort)(buttons | 32768);
+        }
+        else
+        {
+            buttons = (ushort)(buttons & ~32768);
+        }
     }
 
-    public bool GetHPunch()
+    // GETTERS
+
+    public bool GetUp(bool hold)
     {
-        return (buttons & 64) == 64;
+        return hold ? (buttons & 2) == 2 : (buttons & 1) == 1;
     }
 
-    public bool GetHKick()
+    public bool GetDown(bool hold)
     {
-        return (buttons & 128) == 128;
+        return hold ? (buttons & 8) == 8 : (buttons & 4) == 4;
     }
 
-    public bool GetMacro1()
+    public bool GetLeft(bool hold)
     {
-        return (buttons & 256) == 256;
+        return hold ? (buttons & 32) == 32 : (buttons & 16) == 16;
     }
 
-    public bool GetMacro2()
+    public bool GetRight(bool hold)
     {
-        return (buttons & 512) == 512;
+        return hold ? (buttons & 128) == 128 : (buttons & 64) == 64;
+    }
+
+    public bool GetLP(bool hold)
+    {
+        return hold ? (buttons & 512) == 512 : (buttons & 256) == 256;
+    }
+
+    public bool GetLK(bool hold)
+    {
+        return hold ? (buttons & 2048) == 2048 : (buttons & 1024) == 1024;
+    }
+
+    public bool GetHP(bool hold)
+    {
+        return hold ? (buttons & 8192) == 8192 : (buttons & 4096) == 4096;
+    }
+
+    public bool GetHK(bool hold)
+    {
+        return hold ? (buttons & 32768) == 32768 : (buttons & 16384) == 16384;
     }
 }

@@ -12,6 +12,11 @@ public class PlayerInputs : MonoBehaviour
 
         polledButtons.frameTime = battleManager.gameState.frameTime;
 
+        if (Input.GetKeyDown("w"))
+        {
+            polledButtons.SetUp(true);
+        }
+
         if (Input.GetKey("w"))
         {
             polledButtons.SetUp(true);
@@ -30,6 +35,11 @@ public class PlayerInputs : MonoBehaviour
         if (Input.GetKey("d"))
         {
             polledButtons.SetRight(true);
+        }
+
+        if (Input.GetKey("o"))
+        {
+            polledButtons.SetLPunch(true);
         }
 
         SOCD(polledButtons);

@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abb5ee72e02e8c4fa4bfff8332e1838, type: 3}
-  m_Name: BlueNinja
+  m_Script: {fileID: 11500000, guid: d358fff18c13c854a97238e6b25f02b2, type: 3}
+  m_Name: Battle
   m_EditorClassIdentifier: 
-  characterData:
-    moveSpeed: 10
-    jumpForce: 30
-    jumpHorizontalSpeed: 15
-    fallSpeed: 1
+  battleData:
+    groundLevel: -300
+    stageSize: 1000
+    timer: 0

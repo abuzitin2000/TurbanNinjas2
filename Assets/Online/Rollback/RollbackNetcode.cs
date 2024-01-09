@@ -25,7 +25,6 @@ public class RollbackNetcode : MonoBehaviour
     public List<string> logger;
 
     private const int rollbackListSize = 200;
-    private const int delay = 1;
 
     // Start is called before the first frame update
     void Start()

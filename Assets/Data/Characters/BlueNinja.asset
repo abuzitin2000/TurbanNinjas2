@@ -1,0 +1,798 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abb5ee72e02e8c4fa4bfff8332e1838, type: 3}
+  m_Name: BlueNinja
+  m_EditorClassIdentifier: 
+  stats:
+    health: 1000
+    forwardMoveSpeed: 5
+    backwardMoveSpeed: 5
+    jumpForce: 25
+    jumpHorizontalSpeed: 10
+    fallSpeed: 1
+  characterAnimations:
+  - name: Idle
+    loop: 1
+    frames:
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 5e46adb714058dd40b47532daa1fbcc3, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 730143639f74e874683a39fc60343fba, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 413649ac33d05984888524a6d02bc12f, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: WalkForward
+    loop: 1
+    frames:
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 74f3b4e8ba40bfa439614163acd9d3a5, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: d1b5fcecefcd1a744b6bec1fc25ff372, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 50abf6f1ed565d745b5c1832a3439b30, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 4477583e095331048b7dcab4a2bd001f, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: f800aa581cfa24741bbc2afaf76a3cf2, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: WalkBackward
+    loop: 1
+    frames:
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 3f7d6318843eb9647860ada2e946923b, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 94c03331609342e4084df42006bf07c5, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 1bfc36cd061780440b04e7adc4dd8142, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 8ca1c7168737ab54799d7af31f0f998e, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 04c167a4c9c310849a6b31d619b87f0d, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: c6685d0870524cf4da6e622aedf0970b, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: JumpNeutral
+    loop: 0
+    frames:
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 0981c8d34d1111841b1441f90cfc7836, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: JumpForward
+    loop: 0
+    frames:
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 22c5d3c1fc0d89c49a9ec88bbc096f31, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: JumpBackward
+    loop: 0
+    frames:
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 2b33f49cd99a60e40bf8a0460beb309b, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: Crouch
+    loop: 1
+    frames:
+    - duration: 20
+      sprite: {fileID: 21300000, guid: 5c3775432301e6247b0750cd740e4035, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -109
+        positionoffsetY: 345
+        sizeX: 234
+        sizeY: 339
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 20
+      sprite: {fileID: 21300000, guid: 493f9e0f4eca7fc4c9ba189ffeefcf4e, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -109
+        positionoffsetY: 345
+        sizeX: 234
+        sizeY: 339
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: StandingHit
+    loop: 0
+    frames:
+    - duration: 100
+      sprite: {fileID: 21300000, guid: 5d576e3efe3510340b45ab54c93e9a24, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: StandingBlock
+    loop: 0
+    frames:
+    - duration: 100
+      sprite: {fileID: 21300000, guid: 53b7ca471703ce744abbacdf11f0b585, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: CrouchingHit
+    loop: 0
+    frames:
+    - duration: 100
+      sprite: {fileID: 21300000, guid: 53dbdf34bf39b9840acb78f01037d5f2, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -109
+        positionoffsetY: 345
+        sizeX: 234
+        sizeY: 339
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: CrouchingBlock
+    loop: 0
+    frames:
+    - duration: 100
+      sprite: {fileID: 21300000, guid: 5612d98d373cc3c42bb4d099b093284f, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -109
+        positionoffsetY: 345
+        sizeX: 234
+        sizeY: 339
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: LPunch
+    loop: 0
+    frames:
+    - duration: 3
+      sprite: {fileID: 21300000, guid: d7314de24220ddb48b6db8036e03cf1e, type: 3}
+      specialCancellable: 1
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 4
+      sprite: {fileID: 21300000, guid: 357112eabd39b5e41adf99b387bb4fcc, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes:
+      - positionoffsetX: 132
+        positionoffsetY: 368
+        sizeX: 80
+        sizeY: 61
+        damage: 30
+        chipDamage: 5
+        hitStun: 20
+        blockStun: 15
+        type: 0
+        pushbackStrength: 10
+        pushbackDuration: 4
+        hitStop: 6
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: d7314de24220ddb48b6db8036e03cf1e, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
