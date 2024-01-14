@@ -55,8 +55,6 @@ public class BattleManager : MonoBehaviour
         characterAnimator.player2SpriteRenderer = character2.GetComponent<SpriteRenderer>();
 
         gameState = new BattleGameState();
-        player1Buttons = new PlayerButtons();
-        player2Buttons = new PlayerButtons();
         player1InputHistory = new Dictionary<int, PlayerButtons>();
         player2InputHistory = new Dictionary<int, PlayerButtons>();
 
@@ -95,8 +93,8 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            player1Buttons = playerInputManager.PollPlayer1Buttons();
-            player2Buttons = playerInputManager.PollPlayer2Buttons();
+            player1Buttons = playerInputManager.GetPlayer1Buttons();
+            player2Buttons = playerInputManager.GetPlayer2Buttons();
         }
 
         AdvanceGame();
@@ -105,6 +103,15 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (multiplayer)
+		{
+            playerInputManager.PollPlayer1Buttons();
+		}
+		else
+		{
+            playerInputManager.PollPlayer1Buttons();
+            playerInputManager.PollPlayer2Buttons();
+        }
 
         RenderGame();
     }

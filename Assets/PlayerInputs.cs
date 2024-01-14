@@ -6,90 +6,195 @@ public class PlayerInputs : MonoBehaviour
 {
     public BattleManager battleManager;
 
-    public PlayerButtons PollPlayer1Buttons()
-    {
-        PlayerButtons polledButtons = new PlayerButtons();
+    private PlayerButtons polledPlayer1Buttons = new PlayerButtons();
+    private PlayerButtons polledPlayer2Buttons = new PlayerButtons();
 
-        polledButtons.frameTime = battleManager.gameState.frameTime;
+    private bool player1Reset;
+    private bool player2Reset;
+
+    public PlayerButtons GetPlayer1Buttons()
+	{
+        PlayerButtons newButtons = polledPlayer1Buttons.CreateCopy();
+
+        newButtons.frameTime = battleManager.gameState.frameTime;
+
+        SOCD(newButtons);
+
+        // Reset First Time Presses in case Fixedupdate runs more than once per Update
+        polledPlayer1Buttons.SetUpPress(false);
+        polledPlayer1Buttons.SetDownPress(false);
+        polledPlayer1Buttons.SetLeftPress(false);
+        polledPlayer1Buttons.SetRightPress(false);
+        polledPlayer1Buttons.SetLPPress(false);
+        polledPlayer1Buttons.SetHPPress(false);
+        polledPlayer1Buttons.SetLKPress(false);
+        polledPlayer1Buttons.SetHKPress(false);
+
+        player1Reset = true;
+
+        return newButtons;
+    }
+
+    public PlayerButtons GetPlayer2Buttons()
+    {
+        PlayerButtons newButtons = polledPlayer2Buttons.CreateCopy();
+
+        newButtons.frameTime = battleManager.gameState.frameTime;
+
+        SOCD(newButtons);
+
+        // Reset First Time Presses in case Fixedupdate runs more than once per Update
+        polledPlayer2Buttons.SetUpPress(false);
+        polledPlayer2Buttons.SetDownPress(false);
+        polledPlayer2Buttons.SetLeftPress(false);
+        polledPlayer2Buttons.SetRightPress(false);
+        polledPlayer2Buttons.SetLPPress(false);
+        polledPlayer2Buttons.SetHPPress(false);
+        polledPlayer2Buttons.SetLKPress(false);
+        polledPlayer2Buttons.SetHKPress(false);
+
+        player2Reset = true;
+
+        return newButtons;
+    }
+
+    public void PollPlayer1Buttons()
+    {
+        if (player1Reset)
+		{
+            polledPlayer1Buttons.buttons = 0;
+        }
+        
+        player1Reset = false;
 
         if (Input.GetKeyDown("w"))
         {
-            polledButtons.SetUp(true);
+            polledPlayer1Buttons.SetUpPress(true);
         }
 
         if (Input.GetKey("w"))
         {
-            polledButtons.SetUp(true);
+            polledPlayer1Buttons.SetUpHold(true);
+        }
+
+        if (Input.GetKeyDown("s"))
+        {
+            polledPlayer1Buttons.SetDownPress(true);
         }
 
         if (Input.GetKey("s"))
         {
-            polledButtons.SetDown(true);
+            polledPlayer1Buttons.SetDownHold(true);
+        }
+
+        if (Input.GetKeyDown("a"))
+        {
+            polledPlayer1Buttons.SetLeftPress(true);
         }
 
         if (Input.GetKey("a"))
         {
-            polledButtons.SetLeft(true);
+            polledPlayer1Buttons.SetLeftHold(true);
+        }
+
+        if (Input.GetKeyDown("d"))
+        {
+            polledPlayer1Buttons.SetRightPress(true);
         }
 
         if (Input.GetKey("d"))
         {
-            polledButtons.SetRight(true);
+            polledPlayer1Buttons.SetRightHold(true);
+        }
+
+        if (Input.GetKeyDown("o"))
+        {
+            polledPlayer1Buttons.SetLPPress(true);
         }
 
         if (Input.GetKey("o"))
         {
-            polledButtons.SetLPunch(true);
+            polledPlayer1Buttons.SetLPHold(true);
         }
-
-        SOCD(polledButtons);
-
-        return polledButtons;
     }
 
-    public PlayerButtons PollPlayer2Buttons()
+    public void PollPlayer2Buttons()
     {
-        PlayerButtons polledButtons = new PlayerButtons();
+        if (player2Reset)
+        {
+            polledPlayer2Buttons.buttons = 0;
+        }
 
-        polledButtons.frameTime = battleManager.gameState.frameTime;
+        player2Reset = false;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            polledPlayer2Buttons.SetUpPress(true);
+        }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            polledButtons.SetUp(true);
+            polledPlayer2Buttons.SetUpHold(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            polledPlayer2Buttons.SetDownPress(true);
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            polledButtons.SetDown(true);
+            polledPlayer2Buttons.SetDownHold(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            polledPlayer2Buttons.SetLeftPress(true);
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            polledButtons.SetLeft(true);
+            polledPlayer2Buttons.SetLeftHold(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            polledPlayer2Buttons.SetRightPress(true);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            polledButtons.SetRight(true);
+            polledPlayer2Buttons.SetRightHold(true);
         }
 
-        SOCD(polledButtons);
+        if (Input.GetKeyDown("b"))
+        {
+            polledPlayer2Buttons.SetLPPress(true);
+        }
 
-        return polledButtons;
+        if (Input.GetKey("b"))
+        {
+            polledPlayer2Buttons.SetLPHold(true);
+        }
     }
 
     private void SOCD(PlayerButtons socdButtons)
     {
-        if (socdButtons.GetUp() && socdButtons.GetDown())
+        if (socdButtons.GetUp(true) && socdButtons.GetDown(true))
         {
-            socdButtons.SetUp(false);
-            socdButtons.SetDown(false);
+            socdButtons.SetUpPress(false);
+            socdButtons.SetUpHold(false);
+            socdButtons.SetDownPress(false);
+            socdButtons.SetDownHold(false);
         }
 
-        if (socdButtons.GetLeft() && socdButtons.GetRight())
+        if (socdButtons.GetLeft(true) && socdButtons.GetRight(true))
         {
-            socdButtons.SetLeft(false);
-            socdButtons.SetRight(false);
+            socdButtons.SetLeftPress(false);
+            socdButtons.SetLeftHold(false);
+            socdButtons.SetRightPress(false);
+            socdButtons.SetRightHold(false);
+
         }
     }
 

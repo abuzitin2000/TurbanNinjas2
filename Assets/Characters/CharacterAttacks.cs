@@ -6,12 +6,6 @@ public class CharacterAttacks : MonoBehaviour
 {
     public BattleManager battleManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void AttackCharacters()
 	{
         ProcessSpecials(battleManager.player1InputHistory, battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data);
@@ -35,9 +29,9 @@ public class CharacterAttacks : MonoBehaviour
             if (!characterState.crouching)
             {
                 // Light Punch
-                if (playerButtons.GetLPunch())
+                if (playerButtons.GetLP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "LPunch");
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "LP");
                     characterState.attacking = true;
                 }
             }
@@ -66,27 +60,27 @@ public class CharacterAttacks : MonoBehaviour
         }
 
         // Light Punch
-        if (playerButtons.GetLPunch())
+        if (playerButtons.GetLP(false))
         {
-            specialName += "LPunch";
+            specialName += "LP";
         }
 
         // Heeavy Punch
-        if (playerButtons.GetHPunch())
+        if (playerButtons.GetHP(false))
         {
-            specialName += "HPunch";
+            specialName += "HP";
         }
 
         // Light Kick
-        if (playerButtons.GetLKick())
+        if (playerButtons.GetLK(false))
         {
-            specialName += "LKick";
+            specialName += "LK";
         }
 
         // Heeavy Kick
-        if (playerButtons.GetHKick())
+        if (playerButtons.GetHK(false))
         {
-            specialName += "HKick";
+            specialName += "HK";
         }
 
         // Check if a buttons was pressed
@@ -153,7 +147,7 @@ public class CharacterAttacks : MonoBehaviour
 			}
 
             // Forward
-            if ((!characterState.mirrored && input.GetRight()) || (characterState.mirrored && input.GetLeft()))
+            if ((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false)))
             {
                 // QCF
                 if (qcf == 0 && i < battleManager.inputData.inputData.qcfForwardWindow)
@@ -163,7 +157,7 @@ public class CharacterAttacks : MonoBehaviour
             }
 
             // Down
-            if (input.GetDown())
+            if (input.GetDown(false))
             {
                 // QCF
                 if (qcf > 0 && i - qcf < battleManager.inputData.inputData.qcfForwardWindow)

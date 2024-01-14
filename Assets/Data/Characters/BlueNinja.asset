@@ -697,7 +697,7 @@ MonoBehaviour:
       specialFunctions:
         m_PersistentCalls:
           m_Calls: []
-  - name: LPunch
+  - name: LP
     loop: 0
     frames:
     - duration: 3

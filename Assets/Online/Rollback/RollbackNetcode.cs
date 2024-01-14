@@ -12,7 +12,7 @@ public class RollbackNetcode : MonoBehaviour
     public List<PlayerButtons> opponentsButtonsQueue;
 
     public List<PlayerButtons> delayQueue;
-    public List<PlayerButtons> onlineButtonsQueue;
+    public List<PlayerButtons> unprocessedOnlineButtonsQueue;
     public List<bool> confirmedOpponentsButtonsQueue;
     public int oldestFrameToRollbackTo;
     public PlayerButtons oldButtons;
@@ -24,7 +24,9 @@ public class RollbackNetcode : MonoBehaviour
 
     public List<string> logger;
 
+    // Maximum rollback frame
     private const int rollbackListSize = 200;
+    private const int delay = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class RollbackNetcode : MonoBehaviour
         opponentsButtonsQueue = new List<PlayerButtons>();
 
         delayQueue = new List<PlayerButtons>();
-        onlineButtonsQueue = new List<PlayerButtons>();
+        unprocessedOnlineButtonsQueue = new List<PlayerButtons>();
         confirmedOpponentsButtonsQueue = new List<bool>();
         oldestFrameToRollbackTo = -1;
         oldButtons = new PlayerButtons();
@@ -55,7 +57,7 @@ public class RollbackNetcode : MonoBehaviour
 
         confirmedOpponentsButtonsQueue.Add(false);
 
-        // Remove if over limit
+        // Remove oldest buttons if over rollback frame limit
         if (opponentsButtonsQueue.Count > rollbackListSize)
         {
             opponentsButtonsQueue.RemoveAt(0);
@@ -65,17 +67,19 @@ public class RollbackNetcode : MonoBehaviour
 
     public void ProcessOnlineInputs()
     {
-        for (int i = onlineButtonsQueue.Count - 1; i >= 0; i--)
+        // Start from end of list to have better performance with RemoveAt()
+        for (int i = unprocessedOnlineButtonsQueue.Count - 1; i >= 0; i--)
         {
-            if (onlineButtonsQueue[i].frameTime <= battleManager.gameState.frameTime)
+            // Check if not from the future
+            if (unprocessedOnlineButtonsQueue[i].frameTime <= battleManager.gameState.frameTime)
             {
-                AddOpponentInput(onlineButtonsQueue[i]);
-                onlineButtonsQueue.RemoveAt(i);
+                SetOpponentInput(unprocessedOnlineButtonsQueue[i]);
+                unprocessedOnlineButtonsQueue.RemoveAt(i);
             }
         }
     }
 
-    public void AddOpponentInput(PlayerButtons opponentsButtons)
+    public void SetOpponentInput(PlayerButtons opponentsButtons)
     {
         if (opponentsButtons == null)
         {
@@ -87,7 +91,7 @@ public class RollbackNetcode : MonoBehaviour
             return;
         }
 
-        // Discard if it's too old
+        // Discard if it's older than oldest kept buttons
         if (opponentsButtons.frameTime < opponentsButtonsQueue[0].frameTime)
         {
             return;
@@ -134,8 +138,8 @@ public class RollbackNetcode : MonoBehaviour
 
     public void ProcessLocalInputs()
     {
-        // Add the buttons to the delay queue
-        PlayerButtons tempPlayerButtons = AddLocalDelay(battleManager.playerInputManager.PollPlayer1Buttons());
+        // Add delay to the buttons and add it to the delay queue
+        PlayerButtons tempPlayerButtons = AddLocalDelay(battleManager.playerInputManager.GetPlayer1Buttons());
 
         if (localPlayer1)
         {

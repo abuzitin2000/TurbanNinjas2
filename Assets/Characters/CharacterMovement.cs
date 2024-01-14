@@ -6,12 +6,6 @@ public class CharacterMovement : MonoBehaviour
 {
     public BattleManager battleManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void CalculateCharactersMovement()
     {
         TurnCharacters(battleManager.gameState.player1, battleManager.gameState.player2);
@@ -128,7 +122,7 @@ public class CharacterMovement : MonoBehaviour
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
             // Right
-            if (playerButtons.GetRight())
+            if (playerButtons.GetRight(true))
             {
                 if (!characterState.mirrored)
                 {
@@ -153,7 +147,7 @@ public class CharacterMovement : MonoBehaviour
             }
 
             // Left
-            else if (playerButtons.GetLeft())
+            else if (playerButtons.GetLeft(true))
             {
                 if (!characterState.mirrored)
                 {
@@ -202,7 +196,7 @@ public class CharacterMovement : MonoBehaviour
         // Jump Start
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
-            if (playerButtons.GetUp())
+            if (playerButtons.GetUp(true))
             {
                 characterState.jumping = 2;
                 characterState.jumpWindow = battleManager.inputData.inputData.jumpingWindow;
@@ -214,7 +208,7 @@ public class CharacterMovement : MonoBehaviour
         // Jump Window
         if (characterState.stun == 0 && characterState.jumping != 0 && characterState.jumpWindow > 0)
         {
-            if (playerButtons.GetLeft())
+            if (playerButtons.GetLeft(true))
             {
                 if (!characterState.mirrored)
                 {
@@ -230,7 +224,7 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
 
-            if (playerButtons.GetRight())
+            if (playerButtons.GetRight(true))
             {
                 if (!characterState.mirrored)
                 {
@@ -259,7 +253,7 @@ public class CharacterMovement : MonoBehaviour
         // Player 1 Crouch
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
-            if (playerButtons.GetDown())
+            if (playerButtons.GetDown(true))
             {
                 characterState.crouching = true;
                 battleManager.characterAnimator.SetAnimation(characterState, characterData, "Crouch");

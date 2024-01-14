@@ -25,7 +25,7 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
             return;
         }
 
-        rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
+        rollbackNetcode.unprocessedOnlineButtonsQueue.Add(sendButtons.CreateCopy());
     }
 
     [Mirror.Command(channel = 1)]
@@ -46,7 +46,7 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
             return;
         }
 
-        rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
+        rollbackNetcode.unprocessedOnlineButtonsQueue.Add(sendButtons.CreateCopy());
     }
 
     [Mirror.ClientRpc(channel = 0)]
@@ -67,7 +67,7 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
             return;
         }
 
-        rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
+        rollbackNetcode.unprocessedOnlineButtonsQueue.Add(sendButtons.CreateCopy());
     }
 
     [Mirror.ClientRpc(channel = 1)]
@@ -88,6 +88,6 @@ public class OnlinePlayerInputs : Mirror.NetworkBehaviour
             return;
         }
 
-        rollbackNetcode.onlineButtonsQueue.Add(sendButtons.CreateCopy());
+        rollbackNetcode.unprocessedOnlineButtonsQueue.Add(sendButtons.CreateCopy());
     }
 }
