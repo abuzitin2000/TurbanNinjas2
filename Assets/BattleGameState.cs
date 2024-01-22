@@ -37,11 +37,6 @@ public class BattleGameState
         public int frame;
 
         public int jumpWindow;
-        public int specialWindow;
-
-        public byte specialInputQC;
-        public byte specialInputHC;
-        public byte specialInputDP;
     }
 
     public CharacterState player1;

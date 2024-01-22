@@ -697,7 +697,7 @@ MonoBehaviour:
       specialFunctions:
         m_PersistentCalls:
           m_Calls: []
-  - name: LP
+  - name: StLP
     loop: 0
     frames:
     - duration: 3
@@ -770,6 +770,430 @@ MonoBehaviour:
           m_Calls: []
     - duration: 5
       sprite: {fileID: 21300000, guid: d7314de24220ddb48b6db8036e03cf1e, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: CrLP
+    loop: 0
+    frames:
+    - duration: 3
+      sprite: {fileID: 21300000, guid: 28306dda9ccfe294baa1366ec80d4747, type: 3}
+      specialCancellable: 1
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 4
+      sprite: {fileID: 21300000, guid: 69429e28f69c1f94bbf8f313d0126341, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes:
+      - positionoffsetX: 132
+        positionoffsetY: 368
+        sizeX: 80
+        sizeY: 61
+        damage: 30
+        chipDamage: 5
+        hitStun: 20
+        blockStun: 15
+        type: 0
+        pushbackStrength: 10
+        pushbackDuration: 4
+        hitStop: 6
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      sprite: {fileID: 21300000, guid: 28306dda9ccfe294baa1366ec80d4747, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: StLPQCF
+    loop: 0
+    frames:
+    - duration: 15
+      sprite: {fileID: 21300000, guid: 9bbacf6b54dc5334882391e6bc53c044, type: 3}
+      specialCancellable: 1
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 1
+      sprite: {fileID: 21300000, guid: b40ed2a3b2cf9c648b4a31721d07dd33, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes:
+      - positionoffsetX: 132
+        positionoffsetY: 368
+        sizeX: 80
+        sizeY: 61
+        damage: 30
+        chipDamage: 5
+        hitStun: 20
+        blockStun: 15
+        type: 0
+        pushbackStrength: 10
+        pushbackDuration: 4
+        hitStop: 6
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 30
+      sprite: {fileID: 21300000, guid: b40ed2a3b2cf9c648b4a31721d07dd33, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: StLPQCB
+    loop: 0
+    frames:
+    - duration: 4
+      sprite: {fileID: 21300000, guid: 180183e03bf0806468725b9dde9d7b51, type: 3}
+      specialCancellable: 1
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 4
+      sprite: {fileID: 21300000, guid: 278b2c4e811b99d46aee78b2f32f190d, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 6
+      sprite: {fileID: 21300000, guid: b64453be20515c345a74ecd34c541d81, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes:
+      - positionoffsetX: 132
+        positionoffsetY: 368
+        sizeX: 80
+        sizeY: 61
+        damage: 30
+        chipDamage: 5
+        hitStun: 20
+        blockStun: 15
+        type: 0
+        pushbackStrength: 10
+        pushbackDuration: 4
+        hitStop: 6
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 20
+      sprite: {fileID: 21300000, guid: b64453be20515c345a74ecd34c541d81, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: StLPDPF
+    loop: 0
+    frames:
+    - duration: 6
+      sprite: {fileID: 21300000, guid: 23d8457623c8d88468b794090e74c615, type: 3}
+      specialCancellable: 1
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 6
+      sprite: {fileID: 21300000, guid: 92c3de7a18f606943bd3984e628130b4, type: 3}
+      specialCancellable: 1
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes:
+      - positionoffsetX: 132
+        positionoffsetY: 368
+        sizeX: 80
+        sizeY: 61
+        damage: 30
+        chipDamage: 5
+        hitStun: 20
+        blockStun: 15
+        type: 0
+        pushbackStrength: 10
+        pushbackDuration: 4
+        hitStop: 6
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 10
+      sprite: {fileID: 21300000, guid: 92c3de7a18f606943bd3984e628130b4, type: 3}
       specialCancellable: 1
       changeVelocity: 0
       velocityX: 0

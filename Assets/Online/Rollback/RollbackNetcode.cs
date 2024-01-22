@@ -17,14 +17,22 @@ public class RollbackNetcode : MonoBehaviour
     public List<bool> confirmedOpponentsButtonsQueue;
 
     // Inputs Delay
-    private int onlineDelay = 1;
+    private int onlineDelay = 5;
     public List<PlayerButtons> delayQueue;
 
     public int oldestFrameToRollbackTo;
     public PlayerButtons oldButtons;
 
+    // Desync
+    public BattleGameState recievedGameState;
+    public BattleGameState waitingGameState;
+    public int desyncTimer;
+
     public OnlinePlayerInputs onlinePlayer1;
     public OnlinePlayerInputs onlinePlayer2;
+
+    public DesyncManager desyncManagerPlayer1;
+    public DesyncManager desyncManagerPlayer2;
 
     public bool localPlayer1;
 
@@ -53,11 +61,19 @@ public class RollbackNetcode : MonoBehaviour
     {
         if (localPlayer1)
         {
-            opponentsButtonsQueue.Add(battleManager.player2Buttons.CreateCopy());
+            // Always predict as though buttons are held and not pressed again
+            PlayerButtons predictButtons = battleManager.player2Buttons.CreateCopy();
+            battleManager.playerInputManager.ResetPresses(predictButtons);
+
+            opponentsButtonsQueue.Add(predictButtons);
         }
         else
         {
-            opponentsButtonsQueue.Add(battleManager.player1Buttons.CreateCopy());
+            // Always predict as though buttons are held and not pressed again
+            PlayerButtons predictButtons = battleManager.player1Buttons.CreateCopy();
+            battleManager.playerInputManager.ResetPresses(predictButtons);
+
+            opponentsButtonsQueue.Add(predictButtons);
         }
 
         confirmedOpponentsButtonsQueue.Add(false);
@@ -180,6 +196,8 @@ public class RollbackNetcode : MonoBehaviour
                 opponentsButtonsQueue[i].frameTime = tempFrametime;
             }
 
+            logger.Add("ROLLBACK");
+
             if (localPlayer1)
             {
                 battleManager.player1Buttons = localButtonsQueue[i].CreateCopy();
@@ -239,7 +257,11 @@ public class RollbackNetcode : MonoBehaviour
             onlinePlayer2.CmdSendButtonsToServerUnReliable(localButtons);
         }
 
-        oldButtons = localButtons.CreateCopy();
+        // Reset Presses to prevent unnecessary network data usage
+        PlayerButtons oldSetter = localButtons.CreateCopy();
+        battleManager.playerInputManager.ResetPresses(oldSetter);
+
+        oldButtons = oldSetter;
     }
 
     public void SaveGameState()
@@ -255,6 +277,8 @@ public class RollbackNetcode : MonoBehaviour
 
     public void SaveLocalButtons()
     {
+        bool found = false;
+
         // Search for same frameTime
         for (int i = 0; i < delayQueue.Count; i++)
         {
@@ -263,8 +287,17 @@ public class RollbackNetcode : MonoBehaviour
             {
                 localButtonsQueue.Add(delayQueue[i].CreateCopy());
                 delayQueue.RemoveAt(i);
+                found = true;
                 break;
             }
+        }
+
+        // If Inputs were not found, Add empty inputs
+        if (!found)
+		{
+            PlayerButtons emptyButtons = new PlayerButtons();
+            emptyButtons.frameTime = battleManager.gameState.frameTime;
+            localButtonsQueue.Add(emptyButtons);
         }
 
         // Remove oldest buttons if over rollback frame limit
@@ -299,6 +332,46 @@ public class RollbackNetcode : MonoBehaviour
             {
                 battleManager.player1Buttons = opponentsButtonsQueue[opponentsButtonsQueue.Count - 1].CreateCopy();
             }
+        }
+    }
+
+    public void CheckDesync()
+    {
+        // Compare States If both ready
+        if (recievedGameState != null && waitingGameState != null)
+		{
+            if (recievedGameState.frameTime != waitingGameState.frameTime)
+			{
+                Debug.Log("Desync timer mismatch!!!");
+			}
+            else if (recievedGameState.player1.positionX != waitingGameState.player1.positionX)
+            {
+                Debug.Log("DESYNC AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            }
+
+            recievedGameState = null;
+            waitingGameState = null;
+        }
+
+        // Send Game State Interval
+        if (desyncTimer < 100)
+		{
+            desyncTimer += 1;
+		}
+		else
+		{
+            waitingGameState = battleManager.gameState.CreateCopy();
+
+            if (localPlayer1)
+            {
+                desyncManagerPlayer1.RpcSendGameStateToClientReliable(battleManager.gameState);
+            }
+            else
+            {
+                desyncManagerPlayer2.CmdSendGameStateToServerReliable(battleManager.gameState);
+            }
+
+            desyncTimer = 0;
         }
     }
 

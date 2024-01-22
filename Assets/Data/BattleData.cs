@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "GameData/Battle")]
+[System.Serializable]
 public class BattleData : ScriptableObject
 {
-    [System.Serializable]
-    public class battledata
-    {
-        public int groundLevel;
-        public int stageSize;
-        public int timer;
-    }
-
-    [SerializeField]
-    public battledata battleData;
+    public int groundLevel;
+    public int stageSize;
+    public int timer;
 }

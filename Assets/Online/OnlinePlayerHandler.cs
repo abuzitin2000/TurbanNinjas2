@@ -44,11 +44,13 @@ public class OnlinePlayerHandler : Mirror.NetworkBehaviour
             if (isServer)
             {
                 rollbackNetcode.onlinePlayer1 = gameObject.GetComponent<OnlinePlayerInputs>();
+                rollbackNetcode.desyncManagerPlayer1 = gameObject.GetComponent<DesyncManager>();
                 rollbackNetcode.localPlayer1 = true;
             }
             else
             {
                 rollbackNetcode.onlinePlayer2 = gameObject.GetComponent<OnlinePlayerInputs>();
+                rollbackNetcode.desyncManagerPlayer2 = gameObject.GetComponent<DesyncManager>();
                 rollbackNetcode.localPlayer1 = false;
             }
         }
@@ -57,10 +59,12 @@ public class OnlinePlayerHandler : Mirror.NetworkBehaviour
             if (isServer)
             {
                 rollbackNetcode.onlinePlayer2 = gameObject.GetComponent<OnlinePlayerInputs>();
+                rollbackNetcode.desyncManagerPlayer2 = gameObject.GetComponent<DesyncManager>();
             }
             else
             {
                 rollbackNetcode.onlinePlayer1 = gameObject.GetComponent<OnlinePlayerInputs>();
+                rollbackNetcode.desyncManagerPlayer1 = gameObject.GetComponent<DesyncManager>();
             }
         }
 
@@ -72,6 +76,15 @@ public class OnlinePlayerHandler : Mirror.NetworkBehaviour
         }
 
         onlinePlayerInputs.rollbackNetcode = rollbackNetcode;
+
+        DesyncManager desyncManager = GetComponent<DesyncManager>();
+
+        if (desyncManager == null)
+        {
+            return;
+        }
+
+        desyncManager.rollbackNetcode = rollbackNetcode;
 
         rollbackNetcode.battleManager.multiplayer = true;
         rollbackNetcode.battleManager.start = false;

@@ -324,7 +324,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &795085661
 GameObject:
@@ -543,7 +543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1056598641
 GameObject:
@@ -725,7 +725,7 @@ RectTransform:
   - {fileID: 152940026}
   - {fileID: 795085662}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -903,7 +903,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1882316912
 MonoBehaviour:
@@ -918,6 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleManager: {fileID: 1882316913}
+  delayedPlayer1Queue: []
+  delayedPlayer2Queue: []
 --- !u!114 &1882316913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,15 +943,18 @@ MonoBehaviour:
   start: 0
   gameState:
     frameTime: 0
+    hitStopTime: 0
     player1:
       positionX: 0
       positionY: 0
       health: 0
       mirrored: 0
       stun: 0
+      pushback: 0
       attacking: 0
       blocking: 0
       cancellable: 0
+      hit: 0
       jumping: 0
       crouching: 0
       grounded: 0
@@ -964,9 +969,11 @@ MonoBehaviour:
       health: 0
       mirrored: 0
       stun: 0
+      pushback: 0
       attacking: 0
       blocking: 0
       cancellable: 0
+      hit: 0
       jumping: 0
       crouching: 0
       grounded: 0
@@ -1032,10 +1039,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleManager: {fileID: 1882316913}
-  player1HurtBoxes: []
-  player2HurtBoxes: []
-  player1HitBoxes: []
-  player2HitBoxes: []
 --- !u!114 &1882316917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,12 +1095,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleManager: {fileID: 1882316913}
+  desyncManager: {fileID: 0}
+  unprocessedOnlineButtonsQueue: []
   stateQueue: []
   localButtonsQueue: []
   opponentsButtonsQueue: []
-  delayQueue: []
-  onlineButtonsQueue: []
   confirmedOpponentsButtonsQueue: 
+  delayQueue: []
   oldestFrameToRollbackTo: 0
   oldButtons:
     frameTime: 0
@@ -1119,5 +1123,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

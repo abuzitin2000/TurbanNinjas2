@@ -31,7 +31,18 @@ public class CharacterAttacks : MonoBehaviour
                 // Light Punch
                 if (playerButtons.GetLP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "LP");
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StLP");
+                    characterState.attacking = true;
+                }
+            }
+
+            // Crouching
+            if (characterState.crouching)
+            {
+                // Light Punch
+                if (playerButtons.GetLP(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrLP");
                     characterState.attacking = true;
                 }
             }
@@ -52,11 +63,11 @@ public class CharacterAttacks : MonoBehaviour
         // Standing or Jumping Specials
         if (characterState.jumping == 0)
         {
-            specialName += "Standing";
+            specialName += "St";
         }
 		else
 		{
-            specialName += "Jumping";
+            specialName += "Jmp";
         }
 
         // Light Punch
@@ -84,13 +95,20 @@ public class CharacterAttacks : MonoBehaviour
         }
 
         // Check if a buttons was pressed
-        if (specialName == "" || specialName == "Standing" || specialName == "Jumping")
+        if (specialName == "" || specialName == "St" || specialName == "Jmp")
 		{
             return;
 		}
 
         bool[] specialInputs = ProcessSpecialInputs(inputHistory, characterState);
         bool done = false;
+
+        // DP Forward
+        if (specialInputs[2] && !done)
+        {
+            specialName += "DPF";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
 
         // Quarter Circle Forward
         if (specialInputs[0] && !done)
@@ -106,12 +124,7 @@ public class CharacterAttacks : MonoBehaviour
             done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
         }
 
-        // DP Forward
-        if (specialInputs[1] && !done)
-        {
-            specialName += "DPF";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
-        }
+        Debug.Log(specialInputs[0] + " " + specialInputs[1] + " " + specialInputs[2]);
 
         if (done)
 		{
@@ -126,19 +139,30 @@ public class CharacterAttacks : MonoBehaviour
         bool[] specialInputs = new bool[8];
 
 		// Phases
-		int qcf = 0;
-        int qcb = 0;
-        int dpf = 0;
-        int dpb = 0;
-        int hcf = 0;
-        int hcb = 0;
-        int bf = 0;
-        int du = 0;
+		int QCF = 0;
+        int QCB = 0;
+        int DPF = 0;
+        int DPB = 0;
+        int HCF = 0;
+        int HCB = 0;
+        int BF = 0;
+        int DU = 0;
+
+        // Timers
+        int timerQCF = 0;
+        int timerQCB = 0;
+        int timerDPF = 0;
+        int timerDPB = 0;
+        int timerHCF = 0;
+        int timerHCB = 0;
+        int timerBF = 0;
+        int timerDU = 0;
 
         // Input History
         for (int i = 1; i < 60; i++)
         {
-            PlayerButtons input = inputHistory[battleManager.gameState.frameTime - i];
+            int inputFrame = battleManager.gameState.frameTime - i;
+            PlayerButtons input = inputHistory[inputFrame];
 
             // If input too old
             if (input == null)
@@ -150,20 +174,58 @@ public class CharacterAttacks : MonoBehaviour
             if ((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false)))
             {
                 // QCF
-                if (qcf == 0 && i < battleManager.inputData.inputData.qcfForwardWindow)
+                if (QCF == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcfForwardWindow)
 				{
-                    qcf = i;
+                    QCF = 1;
+                    timerQCF = inputFrame;
 				}
+
+                // DPF
+                if (DPF == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.dpfForwardSecondWindow)
+                {
+                    DPF = 1;
+                    timerDPF = inputFrame;
+                }
+                if (DPF == 2 && timerDPF - inputFrame < battleManager.inputData.dpfForwardFirstWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+                {
+                    DPF = 3;
+                    specialInputs[2] = true;
+                }
             }
 
             // Down
             if (input.GetDown(false))
             {
                 // QCF
-                if (qcf > 0 && i - qcf < battleManager.inputData.inputData.qcfForwardWindow)
+                if (QCF == 1 && timerQCF - inputFrame < battleManager.inputData.qcfDownWindow && timerQCF - inputFrame > battleManager.inputData.simultaneousWindow)
                 {
-                    qcf = -1;
+                    QCF = 2;
                     specialInputs[0] = true;
+                }
+
+                // QCB
+                if (QCB == 1 && timerQCB - inputFrame < battleManager.inputData.qcbDownWindow && timerQCB - inputFrame > battleManager.inputData.simultaneousWindow)
+                {
+                    QCB = 2;
+                    specialInputs[1] = true;
+                }
+
+                // DPF
+                if (DPF == 1 && timerDPF - inputFrame < battleManager.inputData.dpfDownWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+                {
+                    DPF = 2;
+                    timerDPF = inputFrame;
+                }
+            }
+
+            // Back
+            if ((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false)))
+            {
+                // QCB
+                if (QCB == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcbBackWindow)
+                {
+                    QCB = 1;
+                    timerQCB = inputFrame;
                 }
             }
         }

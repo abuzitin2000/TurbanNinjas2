@@ -67,19 +67,19 @@ public class CharacterMovement : MonoBehaviour
         characterState.positionY += characterState.velocityY;
 
         // Gravity
-        if (characterState.positionY > battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionY > battleManager.battleData.groundLevel)
         {
             characterState.velocityY -= characterData.stats.fallSpeed;
         }
 
         // If goes over limit
-        if (characterState.positionY < battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionY < battleManager.battleData.groundLevel)
         {
-            characterState.positionY = battleManager.battleData.battleData.groundLevel;
+            characterState.positionY = battleManager.battleData.groundLevel;
         }
 
         // Set Grounded
-        if (characterState.positionY == battleManager.battleData.battleData.groundLevel)
+        if (characterState.positionY == battleManager.battleData.groundLevel)
         {
             characterState.grounded = true;
             characterState.jumping = 0;
@@ -103,13 +103,13 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // If goes over limit
-        if (characterState.positionX < battleManager.battleData.battleData.stageSize * -1)
+        if (characterState.positionX < battleManager.battleData.stageSize * -1)
         {
-            characterState.positionX = battleManager.battleData.battleData.stageSize * -1;
+            characterState.positionX = battleManager.battleData.stageSize * -1;
         }
-        if (characterState.positionX > battleManager.battleData.battleData.stageSize)
+        if (characterState.positionX > battleManager.battleData.stageSize)
         {
-            characterState.positionX = battleManager.battleData.battleData.stageSize;
+            characterState.positionX = battleManager.battleData.stageSize;
         }
 
         // Handle character collisions
@@ -199,7 +199,7 @@ public class CharacterMovement : MonoBehaviour
             if (playerButtons.GetUp(true))
             {
                 characterState.jumping = 2;
-                characterState.jumpWindow = battleManager.inputData.inputData.jumpingWindow;
+                characterState.jumpWindow = battleManager.inputData.jumpingWindow;
                 characterState.velocityY = characterData.stats.jumpForce;
                 battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpNeutral");
             }

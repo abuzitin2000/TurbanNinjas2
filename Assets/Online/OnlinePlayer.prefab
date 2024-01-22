@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8326050126586768741}
   - component: {fileID: -6731159290177247385}
   - component: {fileID: 6047257964140546588}
+  - component: {fileID: -8898557674482031469}
   m_Layer: 0
   m_Name: OnlinePlayer
   m_TagString: Untagged
@@ -111,4 +112,105 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  done: 0
+  started: 0
+  startTime: 0
   battleManager: {fileID: 0}
+--- !u!114 &-8898557674482031469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199594118790068071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f89acebf3570cd4d860bf69a0c61929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  recievedGameState:
+    frameTime: 0
+    hitStopTime: 0
+    player1:
+      positionX: 0
+      positionY: 0
+      health: 0
+      mirrored: 0
+      stun: 0
+      pushback: 0
+      attacking: 0
+      blocking: 0
+      cancellable: 0
+      hit: 0
+      jumping: 0
+      crouching: 0
+      grounded: 0
+      velocityX: 0
+      velocityY: 0
+      animation: 0
+      frame: 0
+      jumpWindow: 0
+    player2:
+      positionX: 0
+      positionY: 0
+      health: 0
+      mirrored: 0
+      stun: 0
+      pushback: 0
+      attacking: 0
+      blocking: 0
+      cancellable: 0
+      hit: 0
+      jumping: 0
+      crouching: 0
+      grounded: 0
+      velocityX: 0
+      velocityY: 0
+      animation: 0
+      frame: 0
+      jumpWindow: 0
+  waitingGameState:
+    frameTime: 0
+    hitStopTime: 0
+    player1:
+      positionX: 0
+      positionY: 0
+      health: 0
+      mirrored: 0
+      stun: 0
+      pushback: 0
+      attacking: 0
+      blocking: 0
+      cancellable: 0
+      hit: 0
+      jumping: 0
+      crouching: 0
+      grounded: 0
+      velocityX: 0
+      velocityY: 0
+      animation: 0
+      frame: 0
+      jumpWindow: 0
+    player2:
+      positionX: 0
+      positionY: 0
+      health: 0
+      mirrored: 0
+      stun: 0
+      pushback: 0
+      attacking: 0
+      blocking: 0
+      cancellable: 0
+      hit: 0
+      jumping: 0
+      crouching: 0
+      grounded: 0
+      velocityX: 0
+      velocityY: 0
+      animation: 0
+      frame: 0
+      jumpWindow: 0
+  timer: 0

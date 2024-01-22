@@ -55,11 +55,11 @@ public class PlayerInputs : MonoBehaviour
     {
         PlayerButtons delayedButtons = GetPolledPlayer1Buttons();
 
-        delayedButtons.frameTime += battleManager.inputData.inputData.inputDelay;
+        delayedButtons.frameTime += battleManager.inputData.inputDelay;
         delayedPlayer1Queue.Add(delayedButtons);
 
         // Remove oldest if above delay time
-        if (delayedPlayer1Queue.Count > battleManager.inputData.inputData.inputDelay + 1)
+        if (delayedPlayer1Queue.Count > battleManager.inputData.inputDelay + 1)
         {
             delayedPlayer1Queue.RemoveAt(0);
         }
@@ -71,11 +71,11 @@ public class PlayerInputs : MonoBehaviour
     {
         PlayerButtons delayedButtons = GetPolledPlayer2Buttons();
 
-        delayedButtons.frameTime += battleManager.inputData.inputData.inputDelay;
+        delayedButtons.frameTime += battleManager.inputData.inputDelay;
         delayedPlayer2Queue.Add(delayedButtons);
 
         // Remove oldest if above delay time
-        if (delayedPlayer2Queue.Count > battleManager.inputData.inputData.inputDelay + 1)
+        if (delayedPlayer2Queue.Count > battleManager.inputData.inputDelay + 1)
         {
             delayedPlayer2Queue.RemoveAt(0);
         }
@@ -92,14 +92,7 @@ public class PlayerInputs : MonoBehaviour
         SOCD(newButtons);
 
         // Reset First Time Presses in case Fixedupdate runs more than once per Update
-        polledPlayer1Buttons.SetUpPress(false);
-        polledPlayer1Buttons.SetDownPress(false);
-        polledPlayer1Buttons.SetLeftPress(false);
-        polledPlayer1Buttons.SetRightPress(false);
-        polledPlayer1Buttons.SetLPPress(false);
-        polledPlayer1Buttons.SetHPPress(false);
-        polledPlayer1Buttons.SetLKPress(false);
-        polledPlayer1Buttons.SetHKPress(false);
+        ResetPresses(polledPlayer1Buttons);
 
         player1Reset = true;
 
@@ -115,14 +108,7 @@ public class PlayerInputs : MonoBehaviour
         SOCD(newButtons);
 
         // Reset First Time Presses in case Fixedupdate runs more than once per Update
-        polledPlayer2Buttons.SetUpPress(false);
-        polledPlayer2Buttons.SetDownPress(false);
-        polledPlayer2Buttons.SetLeftPress(false);
-        polledPlayer2Buttons.SetRightPress(false);
-        polledPlayer2Buttons.SetLPPress(false);
-        polledPlayer2Buttons.SetHPPress(false);
-        polledPlayer2Buttons.SetLKPress(false);
-        polledPlayer2Buttons.SetHKPress(false);
+        ResetPresses(polledPlayer2Buttons);
 
         player2Reset = true;
 
@@ -247,6 +233,18 @@ public class PlayerInputs : MonoBehaviour
         {
             polledPlayer2Buttons.SetLPHold(true);
         }
+    }
+
+    public void ResetPresses(PlayerButtons buttons)
+	{
+        buttons.SetUpPress(false);
+        buttons.SetDownPress(false);
+        buttons.SetLeftPress(false);
+        buttons.SetRightPress(false);
+        buttons.SetLPPress(false);
+        buttons.SetHPPress(false);
+        buttons.SetLKPress(false);
+        buttons.SetHKPress(false);
     }
 
     private void SOCD(PlayerButtons socdButtons)

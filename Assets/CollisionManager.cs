@@ -195,9 +195,9 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player1.positionX -= player1CollisionBoxes[0].sizeX - (player2CollisionBoxStartX - player1CollisionBoxStartX);
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX < battleManager.battleData.battleData.stageSize * -1)
+				if (battleManager.gameState.player1.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int offset = battleManager.battleData.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
+					int offset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
 					battleManager.gameState.player1.positionX += offset;
 					battleManager.gameState.player2.positionX += offset;
 				}
@@ -209,9 +209,9 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player1.positionX += player1CollisionBoxes[0].sizeX - (player1CollisionBoxEndX - player2CollisionBoxEndX);
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX > battleManager.battleData.battleData.stageSize)
+				if (battleManager.gameState.player1.positionX > battleManager.battleData.stageSize)
 				{
-					int offset = battleManager.gameState.player1.positionX - battleManager.battleData.battleData.stageSize;
+					int offset = battleManager.gameState.player1.positionX - battleManager.battleData.stageSize;
 					battleManager.gameState.player1.positionX -= offset;
 					battleManager.gameState.player2.positionX -= offset;
 				}
@@ -228,9 +228,9 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player2.positionX -= player2CollisionBoxes[0].sizeX - (player1CollisionBoxStartX - player2CollisionBoxStartX);
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX < battleManager.battleData.battleData.stageSize * -1)
+				if (battleManager.gameState.player2.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int offset = battleManager.battleData.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
+					int offset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
 					battleManager.gameState.player1.positionX += offset;
 					battleManager.gameState.player2.positionX += offset;
 				}
@@ -242,9 +242,9 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player2.positionX += player2CollisionBoxes[0].sizeX - (player2CollisionBoxEndX - player1CollisionBoxEndX);
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX > battleManager.battleData.battleData.stageSize)
+				if (battleManager.gameState.player2.positionX > battleManager.battleData.stageSize)
 				{
-					int offset = battleManager.gameState.player2.positionX - battleManager.battleData.battleData.stageSize;
+					int offset = battleManager.gameState.player2.positionX - battleManager.battleData.stageSize;
 					battleManager.gameState.player1.positionX -= offset;
 					battleManager.gameState.player2.positionX -= offset;
 				}
@@ -264,17 +264,17 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player2.positionX += offset / 2;
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX < battleManager.battleData.battleData.stageSize * -1)
+				if (battleManager.gameState.player1.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int walloffset = battleManager.battleData.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
+					int walloffset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
 					battleManager.gameState.player1.positionX += walloffset;
 					battleManager.gameState.player2.positionX += walloffset;
 				}
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX > battleManager.battleData.battleData.stageSize)
+				if (battleManager.gameState.player2.positionX > battleManager.battleData.stageSize)
 				{
-					int walloffset = battleManager.gameState.player2.positionX - battleManager.battleData.battleData.stageSize;
+					int walloffset = battleManager.gameState.player2.positionX - battleManager.battleData.stageSize;
 					battleManager.gameState.player1.positionX -= walloffset;
 					battleManager.gameState.player2.positionX -= walloffset;
 				}
@@ -289,17 +289,17 @@ public class CollisionManager : MonoBehaviour
 				battleManager.gameState.player2.positionX -= offset / 2;
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX > battleManager.battleData.battleData.stageSize)
+				if (battleManager.gameState.player1.positionX > battleManager.battleData.stageSize)
 				{
-					int walloffset = battleManager.gameState.player1.positionX - battleManager.battleData.battleData.stageSize;
+					int walloffset = battleManager.gameState.player1.positionX - battleManager.battleData.stageSize;
 					battleManager.gameState.player1.positionX -= walloffset;
 					battleManager.gameState.player2.positionX -= walloffset;
 				}
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX < battleManager.battleData.battleData.stageSize * -1)
+				if (battleManager.gameState.player2.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int walloffset = battleManager.battleData.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
+					int walloffset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
 					battleManager.gameState.player1.positionX += walloffset;
 					battleManager.gameState.player2.positionX += walloffset;
 				}
