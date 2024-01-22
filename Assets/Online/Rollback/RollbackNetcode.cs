@@ -7,14 +7,19 @@ public class RollbackNetcode : MonoBehaviour
 {
     public BattleManager battleManager;
 
+    // Recieved Inputs
+    public List<PlayerButtons> unprocessedOnlineButtonsQueue;
+
     // Rollback Queues
     public List<BattleGameState> stateQueue;
     public List<PlayerButtons> localButtonsQueue;
     public List<PlayerButtons> opponentsButtonsQueue;
-
-    public List<PlayerButtons> delayQueue;
-    public List<PlayerButtons> unprocessedOnlineButtonsQueue;
     public List<bool> confirmedOpponentsButtonsQueue;
+
+    // Inputs Delay
+    private int onlineDelay = 1;
+    public List<PlayerButtons> delayQueue;
+
     public int oldestFrameToRollbackTo;
     public PlayerButtons oldButtons;
 
@@ -23,12 +28,10 @@ public class RollbackNetcode : MonoBehaviour
 
     public bool localPlayer1;
 
-    public List<string> logger;
-
     // Maximum rollback frame
     private const int rollbackListSize = 200;
 
-    private int onlineDelay = 1;
+    public List<string> logger;
 
     // Start is called before the first frame update
     void Start()
