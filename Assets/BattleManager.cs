@@ -42,7 +42,7 @@ public class BattleManager : MonoBehaviour
     public TMPro.TMP_Text player1Health;
     public TMPro.TMP_Text player2Health;
 
-    // Start is called before the first frame update
+    // Setup Battle
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -61,7 +61,7 @@ public class BattleManager : MonoBehaviour
         gameState.frameTime = 0;
     }
 
-    // FixedUpdate is called once per 1/60 seconds
+    // Actual Gameplay Frame
     void FixedUpdate()
     {
         if (!start)
@@ -78,14 +78,15 @@ public class BattleManager : MonoBehaviour
 
         if (multiplayer)
         {
-            rollbackNetcode.PredictOpponentInput();
-            rollbackNetcode.ProcessOnlineInputs();
+            rollbackNetcode.PredictOpponentButtons();
+            rollbackNetcode.ProcessRecievedOnlineButtons();
 
-            rollbackNetcode.ProcessLocalInputs();
-            
-            rollbackNetcode.AddLocalButtons();
+            PlayerButtons send = playerInputManager.DelayPlayer1PolledButtons();
+            rollbackNetcode.AddOnlineInputDelay(send);
+            rollbackNetcode.SendLocalButtons(send);
 
-            rollbackNetcode.AddGameState();
+            rollbackNetcode.SaveLocalButtons();
+            rollbackNetcode.SaveGameState();
 
             rollbackNetcode.Rollback();
 
@@ -93,14 +94,17 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            player1Buttons = playerInputManager.GetPlayer1Buttons();
-            player2Buttons = playerInputManager.GetPlayer2Buttons();
+            playerInputManager.DelayPlayer1PolledButtons();
+            playerInputManager.DelayPlayer2PolledButtons();
+
+            player1Buttons = playerInputManager.GetPlayer1ProcessedButtons();
+            player2Buttons = playerInputManager.GetPlayer2ProcessedButtons();
         }
 
         AdvanceGame();
     }
 
-    // Update is called once per frame
+    // Normal Update used for Rendering and Input Polling
     void Update()
     {
         if (multiplayer)

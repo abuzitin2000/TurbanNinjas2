@@ -6,13 +6,84 @@ public class PlayerInputs : MonoBehaviour
 {
     public BattleManager battleManager;
 
+    public List<PlayerButtons> delayedPlayer1Queue = new List<PlayerButtons>();
+    public List<PlayerButtons> delayedPlayer2Queue = new List<PlayerButtons>();
+
     private PlayerButtons polledPlayer1Buttons = new PlayerButtons();
     private PlayerButtons polledPlayer2Buttons = new PlayerButtons();
 
     private bool player1Reset;
     private bool player2Reset;
 
-    public PlayerButtons GetPlayer1Buttons()
+    public PlayerButtons GetPlayer1ProcessedButtons()
+    {
+        PlayerButtons tempButtons = new PlayerButtons();
+
+        // Search for same frameTime
+        for (int i = 0; i < delayedPlayer1Queue.Count; i++)
+        {
+            // If frameTime in the queue is the same as the given frame
+            if (delayedPlayer1Queue[i].frameTime == battleManager.gameState.frameTime)
+            {
+                tempButtons = delayedPlayer1Queue[i].CreateCopy();
+                delayedPlayer1Queue.RemoveAt(i);
+            }
+        }
+
+        return tempButtons;
+    }
+
+    public PlayerButtons GetPlayer2ProcessedButtons()
+    {
+        PlayerButtons tempButtons = new PlayerButtons();
+
+        // Search for same frameTime
+        for (int i = 0; i < delayedPlayer2Queue.Count; i++)
+        {
+            // If frameTime in the queue is the same as the given frame
+            if (delayedPlayer2Queue[i].frameTime == battleManager.gameState.frameTime)
+            {
+                tempButtons = delayedPlayer2Queue[i].CreateCopy();
+                delayedPlayer2Queue.RemoveAt(i);
+            }
+        }
+
+        return tempButtons;
+    }
+
+    public PlayerButtons DelayPlayer1PolledButtons()
+    {
+        PlayerButtons delayedButtons = GetPolledPlayer1Buttons();
+
+        delayedButtons.frameTime += battleManager.inputData.inputData.inputDelay;
+        delayedPlayer1Queue.Add(delayedButtons);
+
+        // Remove oldest if above delay time
+        if (delayedPlayer1Queue.Count > battleManager.inputData.inputData.inputDelay + 1)
+        {
+            delayedPlayer1Queue.RemoveAt(0);
+        }
+
+        return delayedButtons;
+    }
+
+    public PlayerButtons DelayPlayer2PolledButtons()
+    {
+        PlayerButtons delayedButtons = GetPolledPlayer2Buttons();
+
+        delayedButtons.frameTime += battleManager.inputData.inputData.inputDelay;
+        delayedPlayer2Queue.Add(delayedButtons);
+
+        // Remove oldest if above delay time
+        if (delayedPlayer2Queue.Count > battleManager.inputData.inputData.inputDelay + 1)
+        {
+            delayedPlayer2Queue.RemoveAt(0);
+        }
+
+        return delayedButtons;
+    }
+
+    private PlayerButtons GetPolledPlayer1Buttons()
 	{
         PlayerButtons newButtons = polledPlayer1Buttons.CreateCopy();
 
@@ -35,7 +106,7 @@ public class PlayerInputs : MonoBehaviour
         return newButtons;
     }
 
-    public PlayerButtons GetPlayer2Buttons()
+    private PlayerButtons GetPolledPlayer2Buttons()
     {
         PlayerButtons newButtons = polledPlayer2Buttons.CreateCopy();
 

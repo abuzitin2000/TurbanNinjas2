@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Inputs
   m_EditorClassIdentifier: 
   inputData:
+    inputDelay: 1
     jumpingWindow: 3
     qcfForwardWindow: 10
     qcfDownWindow: 10
