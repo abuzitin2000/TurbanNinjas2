@@ -27,6 +27,7 @@ public class RollbackNetcode : MonoBehaviour
     public BattleGameState recievedGameState;
     public BattleGameState waitingGameState;
     public int desyncTimer;
+    public bool desyncError;
 
     public OnlinePlayerInputs onlinePlayer1;
     public OnlinePlayerInputs onlinePlayer2;
@@ -344,8 +345,9 @@ public class RollbackNetcode : MonoBehaviour
 			{
                 Debug.Log("Desync timer mismatch!!!");
 			}
-            else if (recievedGameState.player1.positionX != waitingGameState.player1.positionX)
+            else if (!recievedGameState.CompareStates(waitingGameState))
             {
+                desyncError = true;
                 Debug.Log("DESYNC AAAAAAAAAAAAAAAAAAAAAAAAAAA");
             }
 

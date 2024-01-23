@@ -118,4 +118,65 @@ public class BattleGameState
 
         return tempBattleGameState;
     }
+
+    public bool CompareStates(BattleGameState gameState)
+    {
+        bool answer = true;
+
+        answer = answer && (gameState.player1.positionX == player1.positionX);
+        answer = answer && (gameState.player2.positionX == player2.positionX);
+
+        answer = answer && (gameState.player1.positionY == player1.positionY);
+        answer = answer && (gameState.player2.positionY == player2.positionY);
+
+        answer = answer && (gameState.player1.health == player1.health);
+        answer = answer && (gameState.player2.health == player2.health);
+
+        answer = answer && (gameState.player1.mirrored == player1.mirrored);
+        answer = answer && (gameState.player2.mirrored == player2.mirrored);
+
+        answer = answer && (gameState.player1.stun == player1.stun);
+        answer = answer && (gameState.player2.stun == player2.stun);
+
+        answer = answer && (gameState.player1.pushback == player1.pushback);
+        answer = answer && (gameState.player2.pushback == player2.pushback);
+
+        answer = answer && (gameState.player1.attacking == player1.attacking);
+        answer = answer && (gameState.player2.attacking == player2.attacking);
+
+        answer = answer && (gameState.player1.blocking == player1.blocking);
+        answer = answer && (gameState.player2.blocking == player2.blocking);
+
+        answer = answer && (gameState.player1.cancellable == player1.cancellable);
+        answer = answer && (gameState.player2.cancellable == player2.cancellable);
+
+        answer = answer && (gameState.player1.hit == player1.hit);
+        answer = answer && (gameState.player2.hit == player2.hit);
+
+        answer = answer && (gameState.player1.jumping == player1.jumping);
+        answer = answer && (gameState.player2.jumping == player2.jumping);
+
+        answer = answer && (gameState.player1.crouching == player1.crouching);
+        answer = answer && (gameState.player2.crouching == player2.crouching);
+
+        answer = answer && (gameState.player1.grounded == player1.grounded);
+        answer = answer && (gameState.player2.grounded == player2.grounded);
+
+        answer = answer && (gameState.player1.velocityX == player1.velocityX);
+        answer = answer && (gameState.player2.velocityX == player2.velocityX);
+
+        answer = answer && (gameState.player1.velocityY == player1.velocityY);
+        answer = answer && (gameState.player2.velocityY == player2.velocityY);
+
+        answer = answer && (gameState.player1.animation == player1.animation);
+        answer = answer && (gameState.player2.animation == player2.animation);
+
+        answer = answer && (gameState.player1.frame == player1.frame);
+        answer = answer && (gameState.player2.frame == player2.frame);
+
+        answer = answer && (gameState.player1.jumpWindow == player1.jumpWindow);
+        answer = answer && (gameState.player2.jumpWindow == player2.jumpWindow);
+
+        return answer;
+    }
 }

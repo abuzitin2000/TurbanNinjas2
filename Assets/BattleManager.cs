@@ -41,6 +41,7 @@ public class BattleManager : MonoBehaviour
     public const float renderRatio = 100;
     public TMPro.TMP_Text player1Health;
     public TMPro.TMP_Text player2Health;
+    public TMPro.TMP_Text desnycText;
 
     // Setup Battle
     void Start()
@@ -161,6 +162,9 @@ public class BattleManager : MonoBehaviour
 
         player1Health.text = gameState.player1.health.ToString();
         player2Health.text = gameState.player2.health.ToString();
+
+        if (rollbackNetcode.desyncError)
+            desnycText.text = "ANNENI SIKEYIM DESYNC OLDU";
     }
 
     public void StartGame()
