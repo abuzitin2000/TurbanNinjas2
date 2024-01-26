@@ -9,13 +9,14 @@ public class CharacterMovement : MonoBehaviour
     public void CalculateCharactersMovement()
     {
         TurnCharacters(battleManager.gameState.player1, battleManager.gameState.player2);
-        CalculateCharacterMovement(battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data);
-        CalculateCharacterMovement(battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data);
+        CalculateCharacterMovement(battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data, battleManager.player1InputHistory);
+        CalculateCharacterMovement(battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data, battleManager.player2InputHistory);
     }
 
-    private void CalculateCharacterMovement(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CalculateCharacterMovement(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData, Dictionary<int, PlayerButtons> inputHistory)
     {
         CharacterCrouch(playerButtons, characterState, characterData);
+        CharacterDash(playerButtons, characterState, characterData, inputHistory);
         CharacterWalk(playerButtons, characterState, characterData);
         CharacterJump(playerButtons, characterState, characterData);
     }
@@ -187,6 +188,101 @@ public class CharacterMovement : MonoBehaviour
             if (characterState.crouching)
 			{
                 characterState.velocityX = 0;
+            }
+        }
+    }
+
+    private void CharacterDash(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData, Dictionary<int, PlayerButtons> inputHistory)
+	{
+        // Dash
+        if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0 && !characterState.crouching)
+        {
+            // Right
+            if (playerButtons.GetRight(false))
+            {
+                bool dashInput = false;
+
+                // Input History
+                for (int i = 1; i < battleManager.inputData.dashWindow; i++)
+                {
+                    int inputFrame = battleManager.gameState.frameTime - i;
+                    PlayerButtons input = inputHistory[inputFrame];
+
+                    // If input doesn't exist
+                    if (input == null)
+                    {
+                        break;
+                    }
+
+                    if (input.GetRight(false))
+					{
+                        dashInput = true;
+                        break;
+					}
+
+                    if (input.GetLeft(false) || input.GetDown(false))
+                    {
+                        break;
+                    }
+                }
+
+                if (dashInput)
+				{
+                    if (!characterState.mirrored)
+                    {
+                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                    }
+                    else
+                    {
+                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                    }
+                }
+            }
+
+            // Left
+            if (playerButtons.GetLeft(false))
+            {
+                bool dashInput = false;
+
+                // Input History
+                for (int i = 1; i < battleManager.inputData.dashWindow; i++)
+                {
+                    int inputFrame = battleManager.gameState.frameTime - i;
+                    PlayerButtons input = inputHistory[inputFrame];
+
+                    // If input doesn't exist
+                    if (input == null)
+                    {
+                        break;
+                    }
+
+                    if (input.GetLeft(false))
+                    {
+                        dashInput = true;
+                        break;
+                    }
+
+                    if (input.GetRight(false) || input.GetDown(false))
+                    {
+                        break;
+                    }
+                }
+
+                if (dashInput)
+                {
+                    if (!characterState.mirrored)
+                    {
+                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                    }
+                    else
+                    {
+                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                    }
+                }
             }
         }
     }

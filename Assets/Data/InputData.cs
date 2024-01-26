@@ -11,6 +11,7 @@ public class InputData : ScriptableObject
     public int simultaneousWindow;
 
     public int jumpingWindow;
+    public int dashWindow;
 
     public int qcfForwardWindow;
     public int qcfDownForwardWindow;
