@@ -28,23 +28,86 @@ public class CharacterAttacks : MonoBehaviour
             // Standing
             if (!characterState.crouching)
             {
+                // Heavy Punch
+                if (playerButtons.GetHP(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StHP");
+                    characterState.attacking = true;
+                }
+                // Heavy Kick
+                else if (playerButtons.GetHK(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StHK");
+                    characterState.attacking = true;
+                }
                 // Light Punch
-                if (playerButtons.GetLP(false))
+                else if (playerButtons.GetLP(false))
                 {
                     battleManager.characterAnimator.SetAnimation(characterState, characterData, "StLP");
                     characterState.attacking = true;
                 }
+                // Light Kick
+                else if (playerButtons.GetLK(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StLK");
+                    characterState.attacking = true;
+                }
             }
-
             // Crouching
-            if (characterState.crouching)
+            else
             {
+                // Heavy Punch
+                if (playerButtons.GetHP(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrHP");
+                    characterState.attacking = true;
+                }
+                // Heavy Kick
+                else if (playerButtons.GetHK(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrHK");
+                    characterState.attacking = true;
+                }
                 // Light Punch
-                if (playerButtons.GetLP(false))
+                else if (playerButtons.GetLP(false))
                 {
                     battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrLP");
                     characterState.attacking = true;
                 }
+                // Light Kick
+                else if (playerButtons.GetLK(false))
+                {
+                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrLK");
+                    characterState.attacking = true;
+                }
+            }
+        }
+		// Jumping Normals
+		else
+		{
+            // Heavy Punch
+            if (playerButtons.GetHP(false))
+            {
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpHP");
+                characterState.attacking = true;
+            }
+            // Heavy Kick
+            else if (playerButtons.GetHK(false))
+            {
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpHK");
+                characterState.attacking = true;
+            }
+            // Light Punch
+            else if (playerButtons.GetLP(false))
+            {
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpLP");
+                characterState.attacking = true;
+            }
+            // Light Kick
+            else if (playerButtons.GetLK(false))
+            {
+                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpLK");
+                characterState.attacking = true;
             }
         }
     }
@@ -70,25 +133,25 @@ public class CharacterAttacks : MonoBehaviour
             specialName += "Jmp";
         }
 
+        // Heeavy Punch
+        if (playerButtons.GetHP(false))
+        {
+            specialName += "HP";
+        }
         // Light Punch
-        if (playerButtons.GetLP(false))
+        else if (playerButtons.GetLP(false))
         {
             specialName += "LP";
         }
-        // Heeavy Punch
-        else if (playerButtons.GetHP(false))
+        // Heavy Kick
+        else if (playerButtons.GetHK(false))
         {
-            specialName += "HP";
+            specialName += "HK";
         }
         // Light Kick
         else if (playerButtons.GetLK(false))
         {
             specialName += "LK";
-        }
-        // Heeavy Kick
-        else if (playerButtons.GetHK(false))
-        {
-            specialName += "HK";
         }
 
         // Check if a buttons was pressed
