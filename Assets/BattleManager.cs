@@ -146,7 +146,7 @@ public class BattleManager : MonoBehaviour
         player1InputHistory[gameState.frameTime] = player1Buttons.CreateCopy();
         player2InputHistory[gameState.frameTime] = player2Buttons.CreateCopy();
 
-        rollbackNetcode.logger.Add(gameState.frameTime + " B1" + player1Buttons.buttons + " B2" + player2Buttons.buttons + " X1" + gameState.player1.positionX + " X2" + gameState.player2.positionX);
+        //rollbackNetcode.logger.Add(gameState.frameTime + " B1" + player1Buttons.buttons + " B2" + player2Buttons.buttons + " X1" + gameState.player1.positionX + " X2" + gameState.player2.positionX);
 
         gameState.frameTime++;
         player1Buttons.frameTime = gameState.frameTime;
@@ -164,7 +164,7 @@ public class BattleManager : MonoBehaviour
         player2Health.text = gameState.player2.health.ToString();
 
         if (rollbackNetcode.desyncError)
-            desnycText.text = "ANNENI SIKEYIM DESYNC OLDU";
+            desnycText.text = "DESYNC";
     }
 
     public void StartGame()

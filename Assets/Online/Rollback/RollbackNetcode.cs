@@ -17,7 +17,7 @@ public class RollbackNetcode : MonoBehaviour
     public List<bool> confirmedOpponentsButtonsQueue;
 
     // Inputs Delay
-    private int onlineDelay = 5;
+    private int onlineDelay = 0;
     public List<PlayerButtons> delayQueue;
 
     public int oldestFrameToRollbackTo;
@@ -197,7 +197,7 @@ public class RollbackNetcode : MonoBehaviour
                 opponentsButtonsQueue[i].frameTime = tempFrametime;
             }
 
-            logger.Add("ROLLBACK");
+            //logger.Add("ROLLBACK");
 
             if (localPlayer1)
             {
@@ -348,7 +348,7 @@ public class RollbackNetcode : MonoBehaviour
             else if (!recievedGameState.CompareStates(waitingGameState))
             {
                 desyncError = true;
-                Debug.Log("DESYNC AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                Debug.Log("DESYNC!!!");
             }
 
             recievedGameState = null;

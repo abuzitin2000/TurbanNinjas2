@@ -13,30 +13,34 @@ public class InputData : ScriptableObject
     public int jumpingWindow;
 
     public int qcfForwardWindow;
+    public int qcfDownForwardWindow;
     public int qcfDownWindow;
         
     public int qcbBackWindow;
+    public int qcbDownBackWindow;
     public int qcbDownWindow;
 
-    public int dpfForwardSecondWindow;
+    public int dpfDownForwardWindow;
     public int dpfDownWindow;
-    public int dpfForwardFirstWindow;
+    public int dpfForwardWindow;
 
-    public int dpbForwardSecondWindow;
+    public int dpbDownBackWindow;
     public int dpbDownWindow;
-    public int dpbForwardFirstWindow;
+    public int dpbBackWindow;
 
     public int hcfForwardWindow;
     public int hcfDownWindow;
-    public int hcfBackwardWindow;
+    public int hcfBackWindow;
 
-    public int hcbBackwardWindow;
+    public int hcbBackWindow;
     public int hcbDownWindow;
     public int hcbForwardWindow;
 
     public int bfForwardWindow;
     public int bfBackChargeWindow;
+    public int bfBackChargeRequired;
 
     public int duUpWindow;
     public int duDownChargeWindow;
+    public int duDownChargeRequired;
 }

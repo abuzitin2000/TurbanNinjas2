@@ -12,26 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce639946a2439c489f0bdf21e6d61dd, type: 3}
   m_Name: Inputs
   m_EditorClassIdentifier: 
-  inputDelay: 5
-  simultaneousWindow: 2
+  inputDelay: 1
+  simultaneousWindow: 0
   jumpingWindow: 3
   qcfForwardWindow: 10
+  qcfDownForwardWindow: 10
   qcfDownWindow: 10
   qcbBackWindow: 10
+  qcbDownBackWindow: 10
   qcbDownWindow: 10
-  dpfForwardSecondWindow: 10
+  dpfDownForwardWindow: 10
   dpfDownWindow: 10
-  dpfForwardFirstWindow: 10
-  dpbForwardSecondWindow: 0
-  dpbDownWindow: 0
-  dpbForwardFirstWindow: 0
-  hcfForwardWindow: 0
-  hcfDownWindow: 0
-  hcfBackwardWindow: 0
-  hcbBackwardWindow: 0
-  hcbDownWindow: 0
-  hcbForwardWindow: 0
-  bfForwardWindow: 0
-  bfBackChargeWindow: 0
-  duUpWindow: 0
-  duDownChargeWindow: 0
+  dpfForwardWindow: 10
+  dpbDownBackWindow: 10
+  dpbDownWindow: 10
+  dpbBackWindow: 10
+  hcfForwardWindow: 10
+  hcfDownWindow: 10
+  hcfBackWindow: 10
+  hcbBackWindow: 10
+  hcbDownWindow: 10
+  hcbForwardWindow: 10
+  bfForwardWindow: 10
+  bfBackChargeWindow: 50
+  bfBackChargeRequired: 30
+  duUpWindow: 10
+  duDownChargeWindow: 50
+  duDownChargeRequired: 30

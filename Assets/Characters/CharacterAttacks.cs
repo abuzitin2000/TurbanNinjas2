@@ -75,21 +75,18 @@ public class CharacterAttacks : MonoBehaviour
         {
             specialName += "LP";
         }
-
         // Heeavy Punch
-        if (playerButtons.GetHP(false))
+        else if (playerButtons.GetHP(false))
         {
             specialName += "HP";
         }
-
         // Light Kick
-        if (playerButtons.GetLK(false))
+        else if (playerButtons.GetLK(false))
         {
             specialName += "LK";
         }
-
         // Heeavy Kick
-        if (playerButtons.GetHK(false))
+        else if (playerButtons.GetHK(false))
         {
             specialName += "HK";
         }
@@ -103,10 +100,45 @@ public class CharacterAttacks : MonoBehaviour
         bool[] specialInputs = ProcessSpecialInputs(inputHistory, characterState);
         bool done = false;
 
+        // Down Up Charge
+        if (specialInputs[7] && !done)
+        {
+            specialName += "DU";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
+
+        // Back Forward Charge
+        if (specialInputs[6] && !done)
+        {
+            specialName += "BF";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
+
         // DP Forward
         if (specialInputs[2] && !done)
         {
             specialName += "DPF";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
+
+        // DP Back
+        if (specialInputs[3] && !done)
+        {
+            specialName += "DPB";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
+
+        // Half Circle Forward
+        if (specialInputs[4] && !done)
+        {
+            specialName += "HCF";
+            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+        }
+
+        // Half Circle Back
+        if (specialInputs[3] && !done)
+        {
+            specialName += "HCB";
             done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
         }
 
@@ -123,8 +155,6 @@ public class CharacterAttacks : MonoBehaviour
             specialName += "QCB";
             done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
         }
-
-        Debug.Log(specialInputs[0] + " " + specialInputs[1] + " " + specialInputs[2]);
 
         if (done)
 		{
@@ -164,68 +194,295 @@ public class CharacterAttacks : MonoBehaviour
             int inputFrame = battleManager.gameState.frameTime - i;
             PlayerButtons input = inputHistory[inputFrame];
 
-            // If input too old
+            // If input doesn't exist
             if (input == null)
 			{
                 break;
 			}
 
-            // Forward
-            if ((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false)))
+            // Quarter Circle Forward
+            if (QCF == 2)
             {
-                // QCF
-                if (QCF == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcfForwardWindow)
-				{
-                    QCF = 1;
-                    timerQCF = inputFrame;
+                // Down (2)
+                if (input.GetDown(false) && !(input.GetLeft(true) || input.GetRight(true)))
+                {
+                    if (timerQCF - inputFrame < battleManager.inputData.qcfDownWindow && timerQCF - inputFrame > battleManager.inputData.simultaneousWindow)
+					{
+                        QCF = 3;
+                        specialInputs[0] = true;
+					}
+                }
+            }
+            else if (QCF == 1)
+            {
+                // Down Forward (3)
+                if (((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false))) && input.GetDown(true))
+                {
+                    if (timerQCF - inputFrame < battleManager.inputData.qcfDownForwardWindow && timerQCF - inputFrame > battleManager.inputData.simultaneousWindow)
+				    {
+                        QCF = 2;
+                        timerQCF = inputFrame;
+					}
 				}
+            }
+            else if (QCF == 0)
+            {
+                // Forward (6)
+                if (((!characterState.mirrored && input.GetRight(true)) || (characterState.mirrored && input.GetLeft(true))) && !input.GetDown(true))
+				{
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcfForwardWindow)
+				    {
+                        QCF = 1;
+                        timerQCF = inputFrame;
+				    }
+				}
+            }
 
-                // DPF
-                if (DPF == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.dpfForwardSecondWindow)
+            // Quarter Circle Back
+            if (QCB == 2)
+            {
+                // Down (2)
+                if (input.GetDown(false) && !(input.GetLeft(true) || input.GetRight(true)))
                 {
-                    DPF = 1;
-                    timerDPF = inputFrame;
+                    if (timerQCB - inputFrame < battleManager.inputData.qcbDownWindow && timerQCB - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        QCB = 3;
+                        specialInputs[1] = true;
+                    }
                 }
-                if (DPF == 2 && timerDPF - inputFrame < battleManager.inputData.dpfForwardFirstWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+            }
+            else if (QCB == 1)
+            {
+                // Down Back (1)
+                if (((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false))) && input.GetDown(true))
                 {
-                    DPF = 3;
-                    specialInputs[2] = true;
+                    if (timerQCB - inputFrame < battleManager.inputData.qcbDownBackWindow && timerQCB - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        QCB = 2;
+                        timerQCB = inputFrame;
+                    }
+                }
+            }
+            else if (QCB == 0)
+            {
+                // Back (4)
+                if (((!characterState.mirrored && input.GetLeft(true)) || (characterState.mirrored && input.GetRight(true))) && !input.GetDown(true))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcbBackWindow)
+					{
+                        QCB = 1;
+                        timerQCB = inputFrame;
+                    }
                 }
             }
 
-            // Down
-            if (input.GetDown(false))
+            // Dragon Punch Forward
+            if (DPF == 2)
             {
-                // QCF
-                if (QCF == 1 && timerQCF - inputFrame < battleManager.inputData.qcfDownWindow && timerQCF - inputFrame > battleManager.inputData.simultaneousWindow)
+                // Forward (6)
+                if (((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false))) && !input.GetDown(true))
                 {
-                    QCF = 2;
-                    specialInputs[0] = true;
+                    if (timerDPF - inputFrame < battleManager.inputData.dpfForwardWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+					{
+                        DPF = 3;
+                        specialInputs[2] = true;
+					}
                 }
-
-                // QCB
-                if (QCB == 1 && timerQCB - inputFrame < battleManager.inputData.qcbDownWindow && timerQCB - inputFrame > battleManager.inputData.simultaneousWindow)
+            }
+            else if (DPF == 1)
+            {
+                // Down (2)
+                if (input.GetDown(false) && !(input.GetLeft(true) || input.GetRight(true)))
                 {
-                    QCB = 2;
-                    specialInputs[1] = true;
+                    if (timerDPF - inputFrame < battleManager.inputData.dpfDownWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        DPF = 2;
+                        timerDPF = inputFrame;
+                    }
                 }
-
-                // DPF
-                if (DPF == 1 && timerDPF - inputFrame < battleManager.inputData.dpfDownWindow && timerDPF - inputFrame > battleManager.inputData.simultaneousWindow)
+            }
+            else if (DPF == 0)
+            {
+                // Down Forward (3)
+                if (((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false))) && input.GetDown(true))
                 {
-                    DPF = 2;
-                    timerDPF = inputFrame;
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.dpfDownForwardWindow)
+                    {
+                        DPF = 1;
+                        timerDPF = inputFrame;
+                    }
                 }
             }
 
-            // Back
-            if ((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false)))
+            // Dragon Punch Back
+            if (DPB == 2)
             {
-                // QCB
-                if (QCB == 0 && battleManager.gameState.frameTime - inputFrame < battleManager.inputData.qcbBackWindow)
+                // Back (4)
+                if (((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false))) && !input.GetDown(true))
                 {
-                    QCB = 1;
-                    timerQCB = inputFrame;
+                    if (timerDPB - inputFrame < battleManager.inputData.dpbBackWindow && timerDPB - inputFrame > battleManager.inputData.simultaneousWindow)
+					{
+                        DPB = 3;
+                        specialInputs[3] = true;
+					}
+                }
+            }
+            else if (DPB == 1)
+            {
+                // Down (2)
+                if (input.GetDown(false) && !(input.GetLeft(true) || input.GetRight(true)))
+                {
+                    if (timerDPB - inputFrame < battleManager.inputData.dpbDownWindow && timerDPB - inputFrame > battleManager.inputData.simultaneousWindow)
+					{
+                        DPB = 2;
+                        timerDPB = inputFrame;
+                    }
+                }
+            }
+            else if (DPB == 0)
+            {
+                // Down Back (1)
+                if (((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false))) && input.GetDown(true))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.dpbDownBackWindow)
+					{
+                        DPB = 1;
+                        timerDPB = inputFrame;
+                    }
+                }
+            }
+
+            // Half Circle Forward
+            if (HCF == 2)
+            {
+                // Back (4)
+                if (((!characterState.mirrored && input.GetLeft(false)) || (characterState.mirrored && input.GetRight(false))) && !input.GetDown(true))
+                {
+                    if (timerHCF - inputFrame < battleManager.inputData.hcfBackWindow && timerHCF - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        HCF = 3;
+                        specialInputs[4] = true;
+                    }
+                }
+            }
+            else if (HCF == 1)
+            {
+                // Down (2)
+                if (input.GetDown(false) && !((!characterState.mirrored && input.GetRight(true)) || (characterState.mirrored && input.GetLeft(true))))
+                {
+                    if (timerHCF - inputFrame < battleManager.inputData.hcfDownWindow && timerHCF - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        HCF = 2;
+                        timerHCF = inputFrame;
+                    }
+                }
+            }
+            else if (HCF == 0)
+            {
+                // Forward (6)
+                if (((!characterState.mirrored && input.GetRight(true)) || (characterState.mirrored && input.GetLeft(true))) && !input.GetDown(true))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.hcfForwardWindow)
+                    {
+                        HCF = 1;
+                        timerHCF = inputFrame;
+                    }
+                }
+            }
+
+            // Half Circle Back
+            if (HCB == 2)
+            {
+                // Forward (6)
+                if (((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false))) && !input.GetDown(true))
+                {
+                    if (timerHCB - inputFrame < battleManager.inputData.hcbForwardWindow && timerHCB - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        HCB = 3;
+                        specialInputs[5] = true;
+                    }
+                }
+            }
+            else if (HCB == 1)
+            {
+                // Down (2)
+                if (input.GetDown(false) && !((!characterState.mirrored && input.GetLeft(true)) || (characterState.mirrored && input.GetRight(true))))
+                {
+                    if (timerHCB - inputFrame < battleManager.inputData.hcbDownWindow && timerHCB - inputFrame > battleManager.inputData.simultaneousWindow)
+                    {
+                        HCB = 2;
+                        timerHCB = inputFrame;
+                    }
+                }
+            }
+            else if (HCB == 0)
+            {
+                // Back (4)
+                if (((!characterState.mirrored && input.GetLeft(true)) || (characterState.mirrored && input.GetRight(true))) && !input.GetDown(true))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.hcbBackWindow)
+                    {
+                        HCB = 1;
+                        timerHCB = inputFrame;
+                    }
+                }
+            }
+
+            // Back Forward Charge
+            if (BF > battleManager.inputData.bfBackChargeRequired)
+			{
+                specialInputs[6] = true;
+            }
+            else if (BF > 0)
+            {
+                // Back (4)
+                if ((!characterState.mirrored && input.GetLeft(true)) || (characterState.mirrored && input.GetRight(true)))
+                {
+                    if (timerBF - inputFrame < battleManager.inputData.bfBackChargeWindow)
+                    {
+                        BF += 1;
+                    }
+                }
+            }
+            else if (BF == 0)
+			{
+                // Forward (6)
+                if ((!characterState.mirrored && input.GetRight(false)) || (characterState.mirrored && input.GetLeft(false)))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.bfForwardWindow)
+                    {
+                        BF = 1;
+                        timerBF = inputFrame;
+                    }
+                }
+            }
+
+            // Down Up Charge
+            if (DU > battleManager.inputData.duDownChargeRequired)
+            {
+                specialInputs[7] = true;
+            }
+            else if (DU > 0)
+            {
+                // Down (2)
+                if (input.GetDown(true))
+                {
+                    if (timerDU - inputFrame < battleManager.inputData.duDownChargeWindow)
+                    {
+                        DU += 1;
+                    }
+                }
+            }
+            else if (DU == 0)
+            {
+                // Up (8)
+                if (input.GetUp(false))
+                {
+                    if (battleManager.gameState.frameTime - inputFrame < battleManager.inputData.duUpWindow)
+                    {
+                        DU = 1;
+                        timerDU = inputFrame;
+                    }
                 }
             }
         }
