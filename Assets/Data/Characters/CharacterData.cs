@@ -15,6 +15,8 @@ public class CharacterData : ScriptableObject
         public int jumpForce;
         public int jumpHorizontalSpeed;
         public int fallSpeed;
+        public int forwardDashSpeed;
+        public int backwardDashSpeed;
     }
 
     [System.Serializable]

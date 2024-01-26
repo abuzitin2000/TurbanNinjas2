@@ -230,13 +230,13 @@ public class CharacterMovement : MonoBehaviour
 				{
                     if (!characterState.mirrored)
                     {
-                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                        characterState.velocityX = characterData.stats.forwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
                     }
                     else
                     {
-                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                        characterState.velocityX = characterData.stats.backwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
                     }
                 }
             }
@@ -274,13 +274,13 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.mirrored)
                     {
-                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                        characterState.velocityX = characterData.stats.backwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
                     }
                     else
                     {
-                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                        characterState.velocityX = characterData.stats.forwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
                     }
                 }
             }
