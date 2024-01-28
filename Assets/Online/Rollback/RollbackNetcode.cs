@@ -64,7 +64,8 @@ public class RollbackNetcode : MonoBehaviour
         {
             // Always predict as though buttons are held and not pressed again
             PlayerButtons predictButtons = battleManager.player2Buttons.CreateCopy();
-            battleManager.playerInputManager.ResetPresses(predictButtons);
+            predictButtons.frameTime = battleManager.gameState.frameTime;
+            predictButtons.ResetPresses();
 
             opponentsButtonsQueue.Add(predictButtons);
         }
@@ -72,7 +73,8 @@ public class RollbackNetcode : MonoBehaviour
         {
             // Always predict as though buttons are held and not pressed again
             PlayerButtons predictButtons = battleManager.player1Buttons.CreateCopy();
-            battleManager.playerInputManager.ResetPresses(predictButtons);
+            predictButtons.frameTime = battleManager.gameState.frameTime;
+            predictButtons.ResetPresses();
 
             opponentsButtonsQueue.Add(predictButtons);
         }
@@ -260,7 +262,7 @@ public class RollbackNetcode : MonoBehaviour
 
         // Reset Presses to prevent unnecessary network data usage
         PlayerButtons oldSetter = localButtons.CreateCopy();
-        battleManager.playerInputManager.ResetPresses(oldSetter);
+        oldSetter.ResetPresses();
 
         oldButtons = oldSetter;
     }

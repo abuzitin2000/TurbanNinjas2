@@ -23,6 +23,18 @@ public class PlayerButtons
         return compareButtons.buttons == this.buttons;
     }
 
+    public void ResetPresses()
+    {
+        SetUpPress(false);
+        SetDownPress(false);
+        SetLeftPress(false);
+        SetRightPress(false);
+        SetLPPress(false);
+        SetHPPress(false);
+        SetLKPress(false);
+        SetHKPress(false);
+    }
+
     // SETTERS
 
     public void SetUpPress(bool up)

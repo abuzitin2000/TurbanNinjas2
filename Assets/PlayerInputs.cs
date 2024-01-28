@@ -92,7 +92,7 @@ public class PlayerInputs : MonoBehaviour
         SOCD(newButtons);
 
         // Reset First Time Presses in case Fixedupdate runs more than once per Update
-        ResetPresses(polledPlayer1Buttons);
+        polledPlayer1Buttons.ResetPresses();
 
         player1Reset = true;
 
@@ -108,7 +108,7 @@ public class PlayerInputs : MonoBehaviour
         SOCD(newButtons);
 
         // Reset First Time Presses in case Fixedupdate runs more than once per Update
-        ResetPresses(polledPlayer2Buttons);
+        polledPlayer2Buttons.ResetPresses();
 
         player2Reset = true;
 
@@ -233,18 +233,6 @@ public class PlayerInputs : MonoBehaviour
         {
             polledPlayer2Buttons.SetLPHold(true);
         }
-    }
-
-    public void ResetPresses(PlayerButtons buttons)
-	{
-        buttons.SetUpPress(false);
-        buttons.SetDownPress(false);
-        buttons.SetLeftPress(false);
-        buttons.SetRightPress(false);
-        buttons.SetLPPress(false);
-        buttons.SetHPPress(false);
-        buttons.SetLKPress(false);
-        buttons.SetHKPress(false);
     }
 
     private void SOCD(PlayerButtons socdButtons)
