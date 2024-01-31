@@ -702,35 +702,11 @@ MonoBehaviour:
   - name: Lose
     loop: 0
     frames:
-    - duration: 1
+    - duration: 2
       sprite: {fileID: 21300000, guid: 3547d8f14bec9054bbac1b4e6d6b39d6, type: 3}
       specialCancellable: 0
-      changeVelocity: 1
-      velocityX: 30
-      velocityY: 100
-      hurtBoxes: []
-      hitBoxes: []
-      collisionBoxes: []
-      specialFunctions:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
-            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_MethodName: 
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - duration: 6
-      sprite: {fileID: 21300000, guid: 3547d8f14bec9054bbac1b4e6d6b39d6, type: 3}
-      specialCancellable: 0
-      changeVelocity: 1
-      velocityX: 30
+      changeVelocity: 0
+      velocityX: 0
       velocityY: 0
       hurtBoxes: []
       hitBoxes: []
@@ -738,10 +714,10 @@ MonoBehaviour:
       specialFunctions:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
-            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_MethodName: 
-            m_Mode: 1
+          - m_Target: {fileID: 4125928589003055102, guid: e1e5f55c095cd1947956168b0fe27205, type: 3}
+            m_TargetAssemblyTypeName: GenericSpecials, Assembly-CSharp
+            m_MethodName: LoseAnimation
+            m_Mode: 0
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -761,19 +737,7 @@ MonoBehaviour:
       collisionBoxes: []
       specialFunctions:
         m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
-            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_MethodName: 
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+          m_Calls: []
   - name: StLP
     loop: 0
     frames:

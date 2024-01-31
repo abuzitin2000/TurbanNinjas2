@@ -141,6 +141,8 @@ public class BattleManager : MonoBehaviour
 
             characterAttacker.AttackCharacters();
 
+            characterAnimator.CallSpecialFunctions();
+
             collisionManager.CalculateCollisions();
 
             characterMovement.MoveCharacters();

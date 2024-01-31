@@ -116,6 +116,17 @@ public class CharacterAnimation : MonoBehaviour
         return spriteSearch;
     }
 
+    public void CallSpecialFunctions()
+	{
+        // Player 1 Special Function
+        int player1FramePhase = FindSprite(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame);
+        battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].frames[player1FramePhase].specialFunctions.Invoke(true, battleManager.gameState);
+
+        // Player 2 Special Function
+        int player2FramePhase = FindSprite(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame);
+        battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].frames[player2FramePhase].specialFunctions.Invoke(false, battleManager.gameState);
+    }
+
     private void OnDrawGizmos()
     {
         // Player 1 Hurtbox

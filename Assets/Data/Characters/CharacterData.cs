@@ -39,7 +39,7 @@ public class CharacterData : ScriptableObject
         public List<hurtboxdata> hurtBoxes;
         public List<hitboxdata> hitBoxes;
         public List<collisionboxdata> collisionBoxes;
-        public UnityEvent specialFunctions;
+        public SpecialEvent specialFunctions;
     }
 
     [System.Serializable]

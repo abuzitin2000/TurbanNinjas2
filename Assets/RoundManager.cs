@@ -64,34 +64,16 @@ public class RoundManager : MonoBehaviour
 		{
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Win");
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Lose");
-			battleManager.gameState.player1.stun = 0;
-			battleManager.gameState.player2.stun = 0;
-			battleManager.gameState.player1.pushback = 0;
-			battleManager.gameState.player2.pushback = 0;
-			battleManager.gameState.player1.attacking = true;
-			battleManager.gameState.player2.attacking = true;
 		}
 		else if (battleManager.gameState.player2.health > 0)
 		{
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Lose");
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Win");
-			battleManager.gameState.player1.stun = 0;
-			battleManager.gameState.player2.stun = 0;
-			battleManager.gameState.player1.pushback = 0;
-			battleManager.gameState.player2.pushback = 0;
-			battleManager.gameState.player1.attacking = true;
-			battleManager.gameState.player2.attacking = true;
 		}
 		else
 		{
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Lose");
 			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Lose");
-			battleManager.gameState.player1.stun = 0;
-			battleManager.gameState.player2.stun = 0;
-			battleManager.gameState.player1.pushback = 0;
-			battleManager.gameState.player2.pushback = 0;
-			battleManager.gameState.player1.attacking = true;
-			battleManager.gameState.player2.attacking = true;
 		}
 	}
 
