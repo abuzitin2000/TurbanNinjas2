@@ -15,6 +15,7 @@ MonoBehaviour:
   inputDelay: 1
   simultaneousWindow: 0
   jumpingWindow: 3
+  dashWindow: 15
   qcfForwardWindow: 10
   qcfDownForwardWindow: 10
   qcfDownWindow: 10

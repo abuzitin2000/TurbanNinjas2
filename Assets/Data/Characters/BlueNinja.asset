@@ -19,8 +19,8 @@ MonoBehaviour:
     jumpForce: 25
     jumpHorizontalSpeed: 10
     fallSpeed: 1
-    forwardDashSpeed: 0
-    backwardDashSpeed: 0
+    forwardDashSpeed: 18
+    backwardDashSpeed: 12
   characterAnimations:
   - name: Idle
     loop: 1
@@ -572,6 +572,180 @@ MonoBehaviour:
         positionoffsetY: 345
         sizeX: 234
         sizeY: 339
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: DashForward
+    loop: 0
+    frames:
+    - duration: 3
+      sprite: {fileID: 21300000, guid: d447540475c72454e938f16f658e1fa5, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 7
+      sprite: {fileID: 21300000, guid: abc81d4da510c544894c2ed7d39a8f36, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 3
+      sprite: {fileID: 21300000, guid: 95221cbc79847f3448dce98034125c69, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: DashBackward
+    loop: 0
+    frames:
+    - duration: 3
+      sprite: {fileID: 21300000, guid: 6b0fbb5812f2aba4fbd9683d32c2c196, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 8
+      sprite: {fileID: 21300000, guid: 0f49a6dc513e38e43a83bfe093d139c3, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 3
+      sprite: {fileID: 21300000, guid: 0ee0261865eb5fc4ba3b894f28cc2727, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes:
+      - positionoffsetX: -133
+        positionoffsetY: 445
+        sizeX: 263
+        sizeY: 438
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      - positionoffsetX: -133
+        positionoffsetY: 444
+        sizeX: 263
+        sizeY: 437
+      hitBoxes: []
+      collisionBoxes:
+      - positionoffsetX: -99
+        positionoffsetY: 430
+        sizeX: 207
+        sizeY: 425
       specialFunctions:
         m_PersistentCalls:
           m_Calls: []

@@ -232,11 +232,13 @@ public class CharacterMovement : MonoBehaviour
                     {
                         characterState.velocityX = characterData.stats.forwardDashSpeed;
                         battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
+                        characterState.attacking = true;
                     }
                     else
                     {
                         characterState.velocityX = characterData.stats.backwardDashSpeed;
                         battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
+                        characterState.attacking = true;
                     }
                 }
             }
@@ -274,13 +276,15 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.mirrored)
                     {
-                        characterState.velocityX = characterData.stats.backwardDashSpeed;
+                        characterState.velocityX = characterData.stats.backwardDashSpeed * -1;
                         battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
+                        characterState.attacking = true;
                     }
                     else
                     {
-                        characterState.velocityX = characterData.stats.forwardDashSpeed;
+                        characterState.velocityX = characterData.stats.forwardDashSpeed * -1;
                         battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
+                        characterState.attacking = true;
                     }
                 }
             }
