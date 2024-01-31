@@ -6,12 +6,6 @@ public class StunManager : MonoBehaviour
 {
     public BattleManager battleManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void ReduceStuns()
 	{
         ReduceStun(battleManager.gameState.player1, battleManager.player1Data);

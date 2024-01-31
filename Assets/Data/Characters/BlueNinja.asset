@@ -19,6 +19,8 @@ MonoBehaviour:
     jumpForce: 25
     jumpHorizontalSpeed: 10
     fallSpeed: 1
+    forwardDashSpeed: 0
+    backwardDashSpeed: 0
   characterAnimations:
   - name: Idle
     loop: 1
@@ -697,6 +699,81 @@ MonoBehaviour:
       specialFunctions:
         m_PersistentCalls:
           m_Calls: []
+  - name: Lose
+    loop: 0
+    frames:
+    - duration: 1
+      sprite: {fileID: 21300000, guid: 3547d8f14bec9054bbac1b4e6d6b39d6, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 30
+      velocityY: 100
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
+            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - duration: 6
+      sprite: {fileID: 21300000, guid: 3547d8f14bec9054bbac1b4e6d6b39d6, type: 3}
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 30
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
+            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - duration: 1000
+      sprite: {fileID: 21300000, guid: 3547d8f14bec9054bbac1b4e6d6b39d6, type: 3}
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 11500000, guid: a7de6895cce600c4eb758c117e22c5ff, type: 3}
+            m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
   - name: StLP
     loop: 0
     frames:
@@ -752,14 +829,14 @@ MonoBehaviour:
         positionoffsetY: 368
         sizeX: 80
         sizeY: 61
-        damage: 30
+        damage: 300
         chipDamage: 5
         hitStun: 20
         blockStun: 15
         type: 0
         pushbackStrength: 10
         pushbackDuration: 4
-        hitStop: 6
+        hitStop: 5
       collisionBoxes:
       - positionoffsetX: -99
         positionoffsetY: 430

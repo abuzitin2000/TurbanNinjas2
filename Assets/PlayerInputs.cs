@@ -235,6 +235,12 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
+    public void SaveButtons()
+	{
+        battleManager.player1InputHistory[battleManager.gameState.frameTime] = battleManager.player1Buttons.CreateCopy();
+        battleManager.player2InputHistory[battleManager.gameState.frameTime] = battleManager.player2Buttons.CreateCopy();
+    }
+
     private void SOCD(PlayerButtons socdButtons)
     {
         if (socdButtons.GetUp(true) && socdButtons.GetDown(true))

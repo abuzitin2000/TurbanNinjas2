@@ -9,4 +9,5 @@ public class BattleData : ScriptableObject
     public int groundLevel;
     public int stageSize;
     public int timer;
+    public int startPosition;
 }

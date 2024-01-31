@@ -10,12 +10,6 @@ public class CharacterAnimation : MonoBehaviour
     public SpriteRenderer player1SpriteRenderer;
     public SpriteRenderer player2SpriteRenderer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void AnimateCharacters()
     {
         player1SpriteRenderer.sprite = battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].frames[FindSprite(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].sprite;
@@ -112,7 +106,7 @@ public class CharacterAnimation : MonoBehaviour
             frame -= characterData.characterAnimations[anim].frames[spriteSearch].duration;
             spriteSearch++;
 
-            // If the frame is higher than enire animation length
+            // If the frame is higher than enire animation length therefore finished
             if (spriteSearch > characterData.characterAnimations[anim].frames.Count - 1)
             {
                 return -1;

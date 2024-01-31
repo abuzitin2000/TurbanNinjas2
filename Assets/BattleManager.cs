@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     public CharacterAttacks characterAttacker;
     public CollisionManager collisionManager;
     public StunManager stunManager;
+    public RoundManager roundManager;
 
     // Game Starters
     public bool multiplayer;
@@ -42,6 +43,8 @@ public class BattleManager : MonoBehaviour
     public TMPro.TMP_Text player1Health;
     public TMPro.TMP_Text player2Health;
     public TMPro.TMP_Text desnycText;
+    public TMPro.TMP_Text player1Wins;
+    public TMPro.TMP_Text player2Wins;
 
     // Setup Battle
     void Start()
@@ -124,8 +127,12 @@ public class BattleManager : MonoBehaviour
 
     public void AdvanceGame()
     {
+        playerInputManager.SaveButtons();
+
         if (gameState.hitStopTime <= 0)
-		{
+        {
+            roundManager.CheckRoundOver();
+
             characterAnimator.AdvanceFrames();
 
             stunManager.ReduceStuns();
@@ -138,19 +145,14 @@ public class BattleManager : MonoBehaviour
 
             characterMovement.MoveCharacters();
         }
-		else
-		{
+        else
+        {
             gameState.hitStopTime -= 1;
-		}
-
-        player1InputHistory[gameState.frameTime] = player1Buttons.CreateCopy();
-        player2InputHistory[gameState.frameTime] = player2Buttons.CreateCopy();
+        }
 
         //rollbackNetcode.logger.Add(gameState.frameTime + " B1" + player1Buttons.buttons + " B2" + player2Buttons.buttons + " X1" + gameState.player1.positionX + " X2" + gameState.player2.positionX);
 
         gameState.frameTime++;
-        player1Buttons.frameTime = gameState.frameTime;
-        player2Buttons.frameTime = gameState.frameTime;
     }
 
     public void RenderGame()
@@ -163,6 +165,9 @@ public class BattleManager : MonoBehaviour
         player1Health.text = gameState.player1.health.ToString();
         player2Health.text = gameState.player2.health.ToString();
 
+        player1Wins.text = "WINS " + roundManager.player1Wins.ToString();
+        player2Wins.text = roundManager.player2Wins.ToString() + " WINS";
+
         if (rollbackNetcode.desyncError)
             desnycText.text = "DESYNC";
     }
@@ -171,6 +176,11 @@ public class BattleManager : MonoBehaviour
 	{
         gameState.player1.health = player1Data.stats.health;
         gameState.player2.health = player2Data.stats.health;
+
+        gameState.player1.positionX = battleData.startPosition * -1;
+        gameState.player2.positionX = battleData.startPosition;
+        gameState.player1.positionY = battleData.groundLevel;
+        gameState.player2.positionY = battleData.groundLevel;
 
         start = true;
 	}
