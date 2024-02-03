@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -8898557674482031469}
   m_Layer: 0
   m_Name: OnlinePlayer
-  m_TagString: Untagged
+  m_TagString: OnlinePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,86 +131,4 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  recievedGameState:
-    frameTime: 0
-    hitStopTime: 0
-    player1:
-      positionX: 0
-      positionY: 0
-      health: 0
-      mirrored: 0
-      stun: 0
-      pushback: 0
-      attacking: 0
-      blocking: 0
-      cancellable: 0
-      hit: 0
-      jumping: 0
-      crouching: 0
-      grounded: 0
-      velocityX: 0
-      velocityY: 0
-      animation: 0
-      frame: 0
-      jumpWindow: 0
-    player2:
-      positionX: 0
-      positionY: 0
-      health: 0
-      mirrored: 0
-      stun: 0
-      pushback: 0
-      attacking: 0
-      blocking: 0
-      cancellable: 0
-      hit: 0
-      jumping: 0
-      crouching: 0
-      grounded: 0
-      velocityX: 0
-      velocityY: 0
-      animation: 0
-      frame: 0
-      jumpWindow: 0
-  waitingGameState:
-    frameTime: 0
-    hitStopTime: 0
-    player1:
-      positionX: 0
-      positionY: 0
-      health: 0
-      mirrored: 0
-      stun: 0
-      pushback: 0
-      attacking: 0
-      blocking: 0
-      cancellable: 0
-      hit: 0
-      jumping: 0
-      crouching: 0
-      grounded: 0
-      velocityX: 0
-      velocityY: 0
-      animation: 0
-      frame: 0
-      jumpWindow: 0
-    player2:
-      positionX: 0
-      positionY: 0
-      health: 0
-      mirrored: 0
-      stun: 0
-      pushback: 0
-      attacking: 0
-      blocking: 0
-      cancellable: 0
-      hit: 0
-      jumping: 0
-      crouching: 0
-      grounded: 0
-      velocityX: 0
-      velocityY: 0
-      animation: 0
-      frame: 0
-      jumpWindow: 0
-  timer: 0
+  rollbackNetcode: {fileID: 0}

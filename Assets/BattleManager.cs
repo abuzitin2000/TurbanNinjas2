@@ -45,6 +45,7 @@ public class BattleManager : MonoBehaviour
     public TMPro.TMP_Text desnycText;
     public TMPro.TMP_Text player1Wins;
     public TMPro.TMP_Text player2Wins;
+    public TMPro.TMP_Text koText;
 
     // Setup Battle
     void Start()
@@ -152,7 +153,9 @@ public class BattleManager : MonoBehaviour
             gameState.hitStopTime -= 1;
         }
 
-        //rollbackNetcode.logger.Add(gameState.frameTime + " B1" + player1Buttons.buttons + " B2" + player2Buttons.buttons + " X1" + gameState.player1.positionX + " X2" + gameState.player2.positionX);
+        if (rollbackNetcode.desyncError)
+            rollbackNetcode.logger.Add("DESYNC");
+        //rollbackNetcode.logger.Add(gameState.frameTime + " B1:" + player1Buttons.buttons + " B2:" + player2Buttons.buttons + " X1:" + gameState.player1.positionX + " X2:" + gameState.player2.positionX);
 
         gameState.frameTime++;
     }
@@ -172,6 +175,8 @@ public class BattleManager : MonoBehaviour
 
         if (rollbackNetcode.desyncError)
             desnycText.text = "DESYNC";
+
+        koText.enabled = roundManager.endTimer > -1 ? true : false;
     }
 
     public void StartGame()

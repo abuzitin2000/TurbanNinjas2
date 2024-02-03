@@ -98,6 +98,7 @@ public class RollbackNetcode : MonoBehaviour
             if (unprocessedOnlineButtonsQueue[i].frameTime <= battleManager.gameState.frameTime)
             {
                 ConfirmOpponentButtons(unprocessedOnlineButtonsQueue[i]);
+                logger.Add("INCOMENING BUTTONS: B:" + unprocessedOnlineButtonsQueue[i].buttons + " F:" + unprocessedOnlineButtonsQueue[i].frameTime);
                 unprocessedOnlineButtonsQueue.RemoveAt(i);
             }
         }
@@ -157,7 +158,7 @@ public class RollbackNetcode : MonoBehaviour
             }
         }
 
-        Debug.LogError("FRAME COULDN'T BE FOUND!");
+        Debug.LogError("FRAME COULDN'T BE FOUND! BUTTON FRAME: " + opponentsButtons.frameTime + " CURRENT FRAME: " + battleManager.gameState.frameTime);
     }
 
     public void Rollback()
@@ -194,12 +195,16 @@ public class RollbackNetcode : MonoBehaviour
             // Predict same buttons if not already confirmed
             if (!confirmedOpponentsButtonsQueue[i])
             {
+                // Reset presses to prevent from predicting presses as holds
+                PlayerButtons previousButtons = opponentsButtonsQueue[i - 1].CreateCopy();
+                previousButtons.ResetPresses();
+
                 int tempFrametime = opponentsButtonsQueue[i].frameTime;
-                opponentsButtonsQueue[i] = opponentsButtonsQueue[i - 1].CreateCopy();
+                opponentsButtonsQueue[i] = previousButtons;
                 opponentsButtonsQueue[i].frameTime = tempFrametime;
             }
 
-            //logger.Add("ROLLBACK");
+            logger.Add("ROLLBACK");
 
             if (localPlayer1)
             {
@@ -224,11 +229,19 @@ public class RollbackNetcode : MonoBehaviour
         {
             if (localPlayer1)
             {
-                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = battleManager.player2Buttons;
+                // Reset presses to prevent from predicting presses as holds
+                PlayerButtons currentButtons = battleManager.player2Buttons.CreateCopy();
+                currentButtons.ResetPresses();
+
+                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = currentButtons;
             }
             else
             {
-                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = battleManager.player1Buttons;
+                // Reset presses to prevent from predicting presses as holds
+                PlayerButtons currentButtons = battleManager.player1Buttons.CreateCopy();
+                currentButtons.ResetPresses();
+
+                opponentsButtonsQueue[opponentsButtonsQueue.Count - 1] = currentButtons;
             }
         }
 
@@ -248,6 +261,8 @@ public class RollbackNetcode : MonoBehaviour
         {
             return;
         }
+
+        logger.Add("SENDING BUTTONS B:" + localButtons.buttons + " F:" + localButtons.frameTime);
 
         if (localPlayer1)
         {

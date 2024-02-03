@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RollbackManager
   - BattleManager
+  - OnlinePlayer
   layers:
   - Default
   - TransparentFX

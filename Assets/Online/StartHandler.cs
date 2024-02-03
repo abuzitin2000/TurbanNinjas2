@@ -127,4 +127,18 @@ public class StartHandler : Mirror.NetworkBehaviour
 
         startTime = Mirror.NetworkTime.localTime + cmdStartTime;
     }
+
+    public void HandleRoundStart()
+	{
+        if (Mirror.NetworkTime.localTime > startTime)
+		{
+            done = false;
+            started = false;
+            startTime = -1;
+        }
+		else
+		{
+            started = false;
+		}
+	}
 }

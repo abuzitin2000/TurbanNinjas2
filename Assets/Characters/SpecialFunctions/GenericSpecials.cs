@@ -6,20 +6,28 @@ public class GenericSpecials : MonoBehaviour
 {
     public void LoseAnimation(bool player1, BattleGameState gameState)
     {
-        if (player1)
-		{
-            gameState.player1.stun = 1000;
-            gameState.player1.pushback = 20;
-            gameState.player1.positionY += 150;
+        BattleGameState.CharacterState characterState;
 
-            if (!gameState.player1.mirrored)
-			{
-                gameState.player1.velocityX = -15;
-            }
-			else
-			{
-                gameState.player1.velocityX = 15;
-            }
+        if (player1)
+        {
+            characterState = gameState.player1;
+        }
+		else
+		{
+            characterState = gameState.player2;
+        }
+
+        characterState.stun = 1000;
+        characterState.pushback = 20;
+        characterState.positionY += 150;
+
+        if (!characterState.mirrored)
+		{
+            characterState.velocityX = -15;
+        }
+		else
+		{
+            characterState.velocityX = 15;
         }
     }
 }
