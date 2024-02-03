@@ -135,6 +135,7 @@ public class CollisionManager : MonoBehaviour
 		defender.health -= hitbox.damage;
 		defender.stun = hitbox.hitStun;
 		defender.pushback = hitbox.pushbackDuration;
+		defender.velocityY += hitbox.juggleStrength;
 
 		if (defender.mirrored)
 		{

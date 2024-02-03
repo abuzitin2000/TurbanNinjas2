@@ -66,6 +66,7 @@ public class CharacterData : ScriptableObject
         public int pushbackStrength;
         public int pushbackDuration;
         public int hitStop;
+        public int juggleStrength;
     }
 
     [System.Serializable]
