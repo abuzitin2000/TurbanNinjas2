@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
 
     private List<UnityEngine.UI.Button> buttons;
     private int selectedItem;
+    private int selectedMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class MainMenuManager : MonoBehaviour
         
         stand.sprite = stands[Random.Range(0, stands.Length)];
 
-        ChangeMenuItems(0, true);
+        ChangeMenuItems(0, 0);
     }
 
     // Update is called once per frame
@@ -77,12 +78,12 @@ public class MainMenuManager : MonoBehaviour
             case "ButtonRebindsType":
                 rebinds.type -= 1;
                 rebinds.SwitchType();
-                ChangeMenuItems(5, false);
+                ChangeMenuItems(5, -1);
                 break;
             case "ButtonRebindsController":
                 rebinds.controller -= 1;
                 rebinds.SwitchController();
-                ChangeMenuItems(5, false);
+                ChangeMenuItems(5, -1);
                 break;
 		}
 	}
@@ -99,12 +100,12 @@ public class MainMenuManager : MonoBehaviour
             case "ButtonRebindsType":
                 rebinds.type += 1;
                 rebinds.SwitchType();
-                ChangeMenuItems(5, false);
+                ChangeMenuItems(5, -1);
                 break;
             case "ButtonRebindsController":
                 rebinds.controller += 1;
                 rebinds.SwitchController();
-                ChangeMenuItems(5, false);
+                ChangeMenuItems(5, -1);
                 break;
         }
     }
@@ -117,6 +118,21 @@ public class MainMenuManager : MonoBehaviour
         }
 
         buttons[selectedItem].onClick.Invoke();
+    }
+
+    public void MenuBack(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+
+        if (selectedMenu == 5)
+		{
+            return;
+		}
+
+        SelectBack();
     }
 
     public void SelectStory()
@@ -132,16 +148,45 @@ public class MainMenuManager : MonoBehaviour
 
     public void SelectOffline()
     {
-        ChangeMenuItems(3, true);
+        ChangeMenuItems(3, 0);
     }
 
     public void SelectSettings()
     {
-        ChangeMenuItems(4, true);
+        ChangeMenuItems(4, 0);
     }
+
     public void SelectBack()
     {
-        ChangeMenuItems(0, true);
+		switch (selectedMenu)
+		{
+            // Main
+            case 0:
+                break;
+            // Story
+            case 1:
+                ChangeMenuItems(0, 0);
+                break;
+            // Online
+            case 2:
+                ChangeMenuItems(0, 1);
+                break;
+            // Offline
+            case 3:
+                ChangeMenuItems(0, 2);
+                break;
+            // Settings
+            case 4:
+                ChangeMenuItems(0, 3);
+                break;
+            // Rebinds
+            case 5:
+                ChangeMenuItems(4, 3);
+                break;
+            default:
+                ChangeMenuItems(0, 0);
+                break;
+		}
     }
 
     public void SelectQuit()
@@ -151,11 +196,15 @@ public class MainMenuManager : MonoBehaviour
 
     public void SelectRebind()
 	{
-        ChangeMenuItems(5, true);
+        rebinds.SwitchType();
+        rebinds.SwitchController();
+        ChangeMenuItems(5, 0);
     }
 
-    private void ChangeMenuItems(int selectedMenu, bool resetSelected)
+    private void ChangeMenuItems(int selectedMenu, int selectButton)
 	{
+        this.selectedMenu = selectedMenu;
+
         // Change Enabled Menu
         foreach (GameObject menu in menus)
         {
@@ -173,9 +222,9 @@ public class MainMenuManager : MonoBehaviour
 		}
 
         // Select First Button as Default
-        if (resetSelected)
+        if (selectButton != -1)
 		{
-            selectedItem = 0;
+            selectedItem = selectButton;
             buttons[selectedItem].Select();
         }
 	}
