@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RebindsMenu : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class RebindsMenu : MonoBehaviour
 	public int controller;
 
 	public List<GameObject> rebindMenus;
+	public GameObject rebindTest;
 
 	private void Start()
 	{
@@ -81,5 +83,29 @@ public class RebindsMenu : MonoBehaviour
 
 		// Enable current menu
 		rebindMenus[type * 2 + controller].SetActive(true);
+	}
+
+	public void TestButtons()
+	{
+		if (!rebindTest.activeSelf)
+		{
+			PlayerInput[] playerInputs = GameObject.FindWithTag("InputManager").GetComponentsInChildren<PlayerInput>(false);
+			foreach (PlayerInput playerInput in playerInputs)
+			{
+				playerInput.SwitchCurrentActionMap("BattleControls");
+			}
+
+            rebindTest.SetActive(true);
+        }
+		else
+		{
+            PlayerInput[] playerInputs = GameObject.FindWithTag("InputManager").GetComponentsInChildren<PlayerInput>(false);
+            foreach (PlayerInput playerInput in playerInputs)
+            {
+                playerInput.SwitchCurrentActionMap("MenuControls");
+            }
+
+            rebindTest.SetActive(false);
+        }
 	}
 }

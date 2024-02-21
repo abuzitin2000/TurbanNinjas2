@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
+using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
     public BattleManager battleManager;
+
+    public PlayerButtons rawPlayer1Buttons = new PlayerButtons();
+    public PlayerButtons rawPlayer2Buttons = new PlayerButtons();
 
     public List<PlayerButtons> delayedPlayer1Queue = new List<PlayerButtons>();
     public List<PlayerButtons> delayedPlayer2Queue = new List<PlayerButtons>();
@@ -115,6 +120,12 @@ public class PlayerInputs : MonoBehaviour
         return newButtons;
     }
 
+    public void SaveButtons()
+    {
+        battleManager.player1InputHistory[battleManager.gameState.frameTime] = battleManager.player1Buttons.CreateCopy();
+        battleManager.player2InputHistory[battleManager.gameState.frameTime] = battleManager.player2Buttons.CreateCopy();
+    }
+
     public void PollPlayer1Buttons()
     {
         if (player1Reset)
@@ -124,55 +135,87 @@ public class PlayerInputs : MonoBehaviour
         
         player1Reset = false;
 
-        if (Input.GetKeyDown("w"))
+        if (rawPlayer1Buttons.GetUp(false))
         {
             polledPlayer1Buttons.SetUpPress(true);
         }
 
-        if (Input.GetKey("w"))
+        if (rawPlayer1Buttons.GetUp(true))
         {
             polledPlayer1Buttons.SetUpHold(true);
         }
 
-        if (Input.GetKeyDown("s"))
+        if (rawPlayer1Buttons.GetDown(false))
         {
             polledPlayer1Buttons.SetDownPress(true);
         }
 
-        if (Input.GetKey("s"))
+        if (rawPlayer1Buttons.GetDown(true))
         {
             polledPlayer1Buttons.SetDownHold(true);
         }
 
-        if (Input.GetKeyDown("a"))
+        if (rawPlayer1Buttons.GetLeft(false))
         {
             polledPlayer1Buttons.SetLeftPress(true);
         }
 
-        if (Input.GetKey("a"))
+        if (rawPlayer1Buttons.GetLeft(true))
         {
             polledPlayer1Buttons.SetLeftHold(true);
         }
 
-        if (Input.GetKeyDown("d"))
+        if (rawPlayer1Buttons.GetRight(false))
         {
             polledPlayer1Buttons.SetRightPress(true);
         }
 
-        if (Input.GetKey("d"))
+        if (rawPlayer1Buttons.GetRight(true))
         {
             polledPlayer1Buttons.SetRightHold(true);
         }
 
-        if (Input.GetKeyDown("o"))
+        if (rawPlayer1Buttons.GetLP(false))
         {
             polledPlayer1Buttons.SetLPPress(true);
         }
 
-        if (Input.GetKey("o"))
+        if (rawPlayer1Buttons.GetLP(true))
         {
             polledPlayer1Buttons.SetLPHold(true);
         }
+
+        if (rawPlayer1Buttons.GetHP(false))
+        {
+            polledPlayer1Buttons.SetHPPress(true);
+        }
+
+        if (rawPlayer1Buttons.GetHP(true))
+        {
+            polledPlayer1Buttons.SetHPHold(true);
+        }
+
+        if (rawPlayer1Buttons.GetLK(false))
+        {
+            polledPlayer1Buttons.SetLKPress(true);
+        }
+
+        if (rawPlayer1Buttons.GetLK(true))
+        {
+            polledPlayer1Buttons.SetLKHold(true);
+        }
+
+        if (rawPlayer1Buttons.GetHK(false))
+        {
+            polledPlayer1Buttons.SetHKPress(true);
+        }
+
+        if (rawPlayer1Buttons.GetHK(true))
+        {
+            polledPlayer1Buttons.SetHKHold(true);
+        }
+
+        rawPlayer1Buttons.ResetPresses();
     }
 
     public void PollPlayer2Buttons()
@@ -184,61 +227,87 @@ public class PlayerInputs : MonoBehaviour
 
         player2Reset = false;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (rawPlayer2Buttons.GetUp(false))
         {
             polledPlayer2Buttons.SetUpPress(true);
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (rawPlayer2Buttons.GetUp(true))
         {
             polledPlayer2Buttons.SetUpHold(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (rawPlayer2Buttons.GetDown(false))
         {
             polledPlayer2Buttons.SetDownPress(true);
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (rawPlayer2Buttons.GetDown(true))
         {
             polledPlayer2Buttons.SetDownHold(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (rawPlayer2Buttons.GetLeft(false))
         {
             polledPlayer2Buttons.SetLeftPress(true);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (rawPlayer2Buttons.GetLeft(true))
         {
             polledPlayer2Buttons.SetLeftHold(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (rawPlayer2Buttons.GetRight(false))
         {
             polledPlayer2Buttons.SetRightPress(true);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (rawPlayer2Buttons.GetRight(true))
         {
             polledPlayer2Buttons.SetRightHold(true);
         }
 
-        if (Input.GetKeyDown("b"))
+        if (rawPlayer2Buttons.GetLP(false))
         {
             polledPlayer2Buttons.SetLPPress(true);
         }
 
-        if (Input.GetKey("b"))
+        if (rawPlayer2Buttons.GetLP(true))
         {
             polledPlayer2Buttons.SetLPHold(true);
         }
-    }
 
-    public void SaveButtons()
-	{
-        battleManager.player1InputHistory[battleManager.gameState.frameTime] = battleManager.player1Buttons.CreateCopy();
-        battleManager.player2InputHistory[battleManager.gameState.frameTime] = battleManager.player2Buttons.CreateCopy();
+        if (rawPlayer2Buttons.GetHP(false))
+        {
+            polledPlayer2Buttons.SetHPPress(true);
+        }
+
+        if (rawPlayer2Buttons.GetHP(true))
+        {
+            polledPlayer2Buttons.SetHPHold(true);
+        }
+
+        if (rawPlayer2Buttons.GetLK(false))
+        {
+            polledPlayer2Buttons.SetLKPress(true);
+        }
+
+        if (rawPlayer2Buttons.GetLK(true))
+        {
+            polledPlayer2Buttons.SetLKHold(true);
+        }
+
+        if (rawPlayer2Buttons.GetHK(false))
+        {
+            polledPlayer2Buttons.SetHKPress(true);
+        }
+
+        if (rawPlayer2Buttons.GetHK(true))
+        {
+            polledPlayer2Buttons.SetHKHold(true);
+        }
+
+        rawPlayer2Buttons.ResetPresses();
     }
 
     private void SOCD(PlayerButtons socdButtons)
@@ -261,4 +330,120 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
+    // Raw Input Functions
+    // ----------------------------------------------------
+    // ----------------------------------------------------
+    // ----------------------------------------------------
+
+    public void InputLeft(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetLeftPress(active);
+            rawPlayer1Buttons.SetLeftHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetLeftPress(active);
+            rawPlayer2Buttons.SetLeftHold(active);
+        }
+    }
+
+    public void InputRight(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetRightPress(active);
+            rawPlayer1Buttons.SetRightHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetRightPress(active);
+            rawPlayer2Buttons.SetRightHold(active);
+        }
+    }
+
+    public void InputUp(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetUpPress(active);
+            rawPlayer1Buttons.SetUpHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetUpPress(active);
+            rawPlayer2Buttons.SetUpHold(active);
+        }
+    }
+
+    public void InputDown(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetDownPress(active);
+            rawPlayer1Buttons.SetDownHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetDownPress(active);
+            rawPlayer2Buttons.SetDownHold(active);
+        }
+    }
+
+    public void InputLP(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetLPPress(active);
+            rawPlayer1Buttons.SetLPHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetLPPress(active);
+            rawPlayer2Buttons.SetLPHold(active);
+        }
+    }
+
+    public void InputHP(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetHPPress(active);
+            rawPlayer1Buttons.SetHPHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetHPPress(active);
+            rawPlayer2Buttons.SetHPHold(active);
+        }
+    }
+
+    public void InputLK(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetLKPress(active);
+            rawPlayer1Buttons.SetLKHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetLKPress(active);
+            rawPlayer2Buttons.SetLKHold(active);
+        }
+    }
+
+    public void InputHK(bool player1, bool active)
+    {
+        if (player1)
+        {
+            rawPlayer1Buttons.SetHKPress(active);
+            rawPlayer1Buttons.SetHKHold(active);
+        }
+        else
+        {
+            rawPlayer2Buttons.SetHKPress(active);
+            rawPlayer2Buttons.SetHKHold(active);
+        }
+    }
 }

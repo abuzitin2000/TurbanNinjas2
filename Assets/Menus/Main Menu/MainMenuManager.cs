@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
@@ -32,13 +31,8 @@ public class MainMenuManager : MonoBehaviour
         
 	}
 
-    public void MenuUp(InputAction.CallbackContext context)
-	{
-        if (!context.performed)
-		{
-            return;
-		}
-
+    public void MenuUp()
+    {
         selectedItem -= 1;
 
         if (selectedItem < 0)
@@ -49,13 +43,8 @@ public class MainMenuManager : MonoBehaviour
         buttons[selectedItem].Select();
     }
 
-    public void MenuDown(InputAction.CallbackContext context)
+    public void MenuDown()
     {
-        if (!context.performed)
-        {
-            return;
-        }
-
         selectedItem += 1;
 
         if (selectedItem > buttons.Count - 1)
@@ -66,15 +55,10 @@ public class MainMenuManager : MonoBehaviour
         buttons[selectedItem].Select();
     }
 
-    public void MenuLeft(InputAction.CallbackContext context)
+    public void MenuLeft()
     {
-        if (!context.performed)
+        switch (buttons[selectedItem].name)
         {
-            return;
-        }
-
-		switch (buttons[selectedItem].name)
-		{
             case "ButtonRebindsType":
                 rebinds.type -= 1;
                 rebinds.SwitchType();
@@ -85,16 +69,11 @@ public class MainMenuManager : MonoBehaviour
                 rebinds.SwitchController();
                 ChangeMenuItems(5, -1);
                 break;
-		}
-	}
-
-    public void MenuRight(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-        {
-            return;
         }
+    }
 
+    public void MenuRight()
+    {
         switch (buttons[selectedItem].name)
         {
             case "ButtonRebindsType":
@@ -110,27 +89,17 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void MenuSelect(InputAction.CallbackContext context)
+    public void MenuSelect()
     {
-        if (!context.performed)
-        {
-            return;
-        }
-
         buttons[selectedItem].onClick.Invoke();
     }
 
-    public void MenuBack(InputAction.CallbackContext context)
+    public void MenuBack()
     {
-        if (!context.performed)
+        if (selectedMenu == 5)
         {
             return;
         }
-
-        if (selectedMenu == 5)
-		{
-            return;
-		}
 
         SelectBack();
     }
@@ -142,8 +111,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void SelectOnline()
     {
-        //ChangeMenuItems(2);
-        SceneManager.LoadScene("ConnectionScene");
+        ChangeMenuItems(2, 0);
     }
 
     public void SelectOffline()
@@ -156,10 +124,32 @@ public class MainMenuManager : MonoBehaviour
         ChangeMenuItems(4, 0);
     }
 
+    public void SelectQuit()
+    {
+        Application.Quit();
+    }
+
+    public void SelectLobby()
+	{
+        SceneManager.LoadScene("ConnectionScene");
+    }
+
+    public void SelectVersus()
+	{
+        SceneManager.LoadScene("BattleScene");
+    }
+
+    public void SelectRebind()
+	{
+        rebinds.SwitchType();
+        rebinds.SwitchController();
+        ChangeMenuItems(5, 0);
+    }
+
     public void SelectBack()
     {
-		switch (selectedMenu)
-		{
+        switch (selectedMenu)
+        {
             // Main
             case 0:
                 break;
@@ -186,19 +176,7 @@ public class MainMenuManager : MonoBehaviour
             default:
                 ChangeMenuItems(0, 0);
                 break;
-		}
-    }
-
-    public void SelectQuit()
-    {
-        Application.Quit();
-    }
-
-    public void SelectRebind()
-	{
-        rebinds.SwitchType();
-        rebinds.SwitchController();
-        ChangeMenuItems(5, 0);
+        }
     }
 
     private void ChangeMenuItems(int selectedMenu, int selectButton)
