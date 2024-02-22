@@ -15,6 +15,7 @@ public class PlayerInputPairing : MonoBehaviour
     void Start()
     {
         SceneManager.activeSceneChanged += ChangedActiveScene;
+        ChangedActiveScene(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
         PairDevices();
     }
@@ -55,21 +56,54 @@ public class PlayerInputPairing : MonoBehaviour
         }
     }
 
+    public void ChangeActionMaps(bool[] maps)
+    {
+        if (maps[0])
+        {
+            gamepad1.SwitchCurrentActionMap("BattleControls");
+        }
+        else
+        {
+            gamepad1.SwitchCurrentActionMap("MenuControls");
+        }
+
+        if (maps[1])
+        {
+            gamepad2.SwitchCurrentActionMap("BattleControls");
+        }
+        else
+        {
+            gamepad2.SwitchCurrentActionMap("MenuControls");
+        }
+
+        if (maps[2])
+        {
+            keyboard1.SwitchCurrentActionMap("BattleControls");
+        }
+        else
+        {
+            keyboard1.SwitchCurrentActionMap("MenuControls");
+        }
+
+        if (maps[3])
+        {
+            keyboard2.SwitchCurrentActionMap("BattleControls");
+        }
+        else
+        {
+            keyboard2.SwitchCurrentActionMap("MenuControls");
+        }
+    }
+
     private void ChangedActiveScene(Scene current, Scene next)
     {
         if (next.name == "BattleScene" || next.name == "3D Test Scene")
         {
-            gamepad1.SwitchCurrentActionMap("BattleControls");
-            gamepad2.SwitchCurrentActionMap("BattleControls");
-            keyboard1.SwitchCurrentActionMap("BattleControls");
-            keyboard2.SwitchCurrentActionMap("BattleControls");
+            ChangeActionMaps(new bool[] { true, true, true, true });
         }
 		else
 		{
-            gamepad1.SwitchCurrentActionMap("MenuControls");
-            gamepad2.SwitchCurrentActionMap("MenuControls");
-            keyboard1.SwitchCurrentActionMap("MenuControls");
-            keyboard2.SwitchCurrentActionMap("MenuControls");
+            ChangeActionMaps(new bool[] { false, false, false, false });
         }
     }
 }
