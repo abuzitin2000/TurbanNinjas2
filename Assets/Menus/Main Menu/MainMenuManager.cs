@@ -136,7 +136,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void SelectVersus()
 	{
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene("3D Test Scene");
     }
 
     public void SelectRebind()

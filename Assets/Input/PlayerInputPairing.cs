@@ -57,7 +57,7 @@ public class PlayerInputPairing : MonoBehaviour
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
-        if (next.name == "BattleScene")
+        if (next.name == "BattleScene" || next.name == "3D Test Scene")
         {
             gamepad1.SwitchCurrentActionMap("BattleControls");
             gamepad2.SwitchCurrentActionMap("BattleControls");

@@ -50,6 +50,8 @@ public class PlayerInputBattle : MonoBehaviour
         {
             battleInputsAsMenu.Left(player1, context.performed, context.control.device is Gamepad);
         }
+
+        Debug.Log("sex");
     }
 
     public void Right(InputAction.CallbackContext context)

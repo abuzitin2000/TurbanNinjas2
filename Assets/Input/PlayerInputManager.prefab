@@ -1,0 +1,1792 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000465364170835582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4730423779019961420}
+  - component: {fileID: 2745352179308551689}
+  - component: {fileID: 1799153465855450637}
+  m_Layer: 0
+  m_Name: Keyboard1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4730423779019961420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000465364170835582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8587573069674251994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2745352179308551689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000465364170835582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: dfca7a63ffd8c3f43bf477ded456b840, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05345674-b20f-4518-b5a9-ed4c8235c891
+    m_ActionName: MenuControls/Up[/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2563c685-a0de-4b5b-8e93-23a10cfec60a
+    m_ActionName: MenuControls/Down[/Keyboard/downArrow,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b875d94a-df4a-4fef-9940-245cf2470859
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91c15ae6-c5ac-4259-b6e5-f68131ad3b47
+    m_ActionName: MenuControls/Right[/Keyboard/rightArrow,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuSelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b68076f5-0055-40f9-9873-ccbc9151943a
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6587ea17-2113-4b03-95e6-9b67e8579c83
+    m_ActionName: MenuControls/Back[/Keyboard/escape,/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Left
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ea30cc57-0403-4c20-aab7-fbf4d489264c
+    m_ActionName: BattleControls/Left[/Keyboard/a,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Right
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bc082b2-568d-440d-834f-787e9949cc60
+    m_ActionName: BattleControls/Right[/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Up
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d03d56d8-c4a1-491c-bf79-acbf103d2369
+    m_ActionName: BattleControls/Up[/Keyboard/w,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ce8798a7-36a5-4abf-b00f-ae5a87ec5161
+    m_ActionName: BattleControls/Down[/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f1d9021-2af7-45ec-9e30-c73e24ed6567
+    m_ActionName: BattleControls/LP[/Keyboard/u,/Keyboard/numpad4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0866b0b5-41db-4f6e-b08f-23e66786ce9f
+    m_ActionName: BattleControls/HP[/Keyboard/i,/Keyboard/numpad5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dea9e5d2-f2a3-4df4-803a-21587827fe9a
+    m_ActionName: BattleControls/LK[/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e6798d51-5d27-42ee-ae35-ee5d55d59360
+    m_ActionName: BattleControls/HK[/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dd8a2fd8-c45a-4e1a-9989-14e81c25b572
+    m_ActionName: BattleControls/Macro1[/Keyboard/o,/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ba07f271-4b19-4695-8dbf-4adfed4b405a
+    m_ActionName: BattleControls/Macro2[/Keyboard/l,/Keyboard/numpad3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7530d3ab-5baf-4115-a04d-4383b6e951a8
+    m_ActionName: BattleControls/Macro3[/Keyboard/p,/Keyboard/numpad7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5cc29cb-7c28-4d5d-9eca-6e972b39a411
+    m_ActionName: BattleControls/Macro4[/Keyboard/semicolon,/Keyboard/numpad8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24ee1749-209b-4f6e-a1cd-bf63e5b901e1
+    m_ActionName: BattleControls/Left2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8180419f-0eeb-423b-8812-d1ca995fd016
+    m_ActionName: BattleControls/Right2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f179e35-1f2c-4638-aea3-5857e5905374
+    m_ActionName: BattleControls/Up2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eecf52e9-9f6a-4dd3-a2c1-a1baeccbe6d0
+    m_ActionName: BattleControls/Down2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 80b3a793-b790-4aaf-a09b-fad27af2d436
+    m_ActionName: BattleControls/LP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79d1b657-c551-48d2-916a-784d12ad606d
+    m_ActionName: BattleControls/HP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be0877b2-3d6e-40aa-8e9c-3813cab965bb
+    m_ActionName: BattleControls/LK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5782d7e1-ae03-46ef-a556-a37ef165244c
+    m_ActionName: BattleControls/HK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 198a096c-b28f-49ae-abe8-7ee84e01addc
+    m_ActionName: BattleControls/Macro12
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 539cadd1-a3eb-44d3-b206-5cc9f798f502
+    m_ActionName: BattleControls/Macro22
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f03fed62-1be4-442b-99d0-7efe19a3999f
+    m_ActionName: BattleControls/Macro32
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8c10b4b-35fe-44f8-a683-264061ee3dc7
+    m_ActionName: BattleControls/Macro42
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1799153465855450637}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Menu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b98f2416-8c80-4207-82b2-f71b88995b27
+    m_ActionName: BattleControls/Menu[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard1
+  m_DefaultActionMap: MenuControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1799153465855450637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000465364170835582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5cef4ee3c1cd24a824117a85f20ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: 1
+--- !u!1 &1248888785780511246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9168979406341337516}
+  - component: {fileID: 7329356905657208607}
+  - component: {fileID: 6946660955239921508}
+  m_Layer: 0
+  m_Name: Keyboard2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9168979406341337516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248888785780511246}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8587573069674251994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7329356905657208607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248888785780511246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: dfca7a63ffd8c3f43bf477ded456b840, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05345674-b20f-4518-b5a9-ed4c8235c891
+    m_ActionName: MenuControls/Up[/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2563c685-a0de-4b5b-8e93-23a10cfec60a
+    m_ActionName: MenuControls/Down[/Keyboard/downArrow,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b875d94a-df4a-4fef-9940-245cf2470859
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91c15ae6-c5ac-4259-b6e5-f68131ad3b47
+    m_ActionName: MenuControls/Right[/Keyboard/rightArrow,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b68076f5-0055-40f9-9873-ccbc9151943a
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6587ea17-2113-4b03-95e6-9b67e8579c83
+    m_ActionName: MenuControls/Back[/Keyboard/escape,/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Left
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ea30cc57-0403-4c20-aab7-fbf4d489264c
+    m_ActionName: BattleControls/Left[/Keyboard/a,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Right
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bc082b2-568d-440d-834f-787e9949cc60
+    m_ActionName: BattleControls/Right[/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Up
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d03d56d8-c4a1-491c-bf79-acbf103d2369
+    m_ActionName: BattleControls/Up[/Keyboard/w,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ce8798a7-36a5-4abf-b00f-ae5a87ec5161
+    m_ActionName: BattleControls/Down[/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f1d9021-2af7-45ec-9e30-c73e24ed6567
+    m_ActionName: BattleControls/LP[/Keyboard/u,/Keyboard/numpad4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0866b0b5-41db-4f6e-b08f-23e66786ce9f
+    m_ActionName: BattleControls/HP[/Keyboard/i,/Keyboard/numpad5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dea9e5d2-f2a3-4df4-803a-21587827fe9a
+    m_ActionName: BattleControls/LK[/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e6798d51-5d27-42ee-ae35-ee5d55d59360
+    m_ActionName: BattleControls/HK[/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dd8a2fd8-c45a-4e1a-9989-14e81c25b572
+    m_ActionName: BattleControls/Macro1[/Keyboard/o,/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ba07f271-4b19-4695-8dbf-4adfed4b405a
+    m_ActionName: BattleControls/Macro2[/Keyboard/l,/Keyboard/numpad3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7530d3ab-5baf-4115-a04d-4383b6e951a8
+    m_ActionName: BattleControls/Macro3[/Keyboard/p,/Keyboard/numpad7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5cc29cb-7c28-4d5d-9eca-6e972b39a411
+    m_ActionName: BattleControls/Macro4[/Keyboard/semicolon,/Keyboard/numpad8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24ee1749-209b-4f6e-a1cd-bf63e5b901e1
+    m_ActionName: BattleControls/Left2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8180419f-0eeb-423b-8812-d1ca995fd016
+    m_ActionName: BattleControls/Right2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f179e35-1f2c-4638-aea3-5857e5905374
+    m_ActionName: BattleControls/Up2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eecf52e9-9f6a-4dd3-a2c1-a1baeccbe6d0
+    m_ActionName: BattleControls/Down2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 80b3a793-b790-4aaf-a09b-fad27af2d436
+    m_ActionName: BattleControls/LP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79d1b657-c551-48d2-916a-784d12ad606d
+    m_ActionName: BattleControls/HP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be0877b2-3d6e-40aa-8e9c-3813cab965bb
+    m_ActionName: BattleControls/LK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5782d7e1-ae03-46ef-a556-a37ef165244c
+    m_ActionName: BattleControls/HK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 198a096c-b28f-49ae-abe8-7ee84e01addc
+    m_ActionName: BattleControls/Macro12
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 539cadd1-a3eb-44d3-b206-5cc9f798f502
+    m_ActionName: BattleControls/Macro22
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f03fed62-1be4-442b-99d0-7efe19a3999f
+    m_ActionName: BattleControls/Macro32
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8c10b4b-35fe-44f8-a683-264061ee3dc7
+    m_ActionName: BattleControls/Macro42
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6946660955239921508}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Menu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b98f2416-8c80-4207-82b2-f71b88995b27
+    m_ActionName: BattleControls/Menu[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard2
+  m_DefaultActionMap: MenuControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &6946660955239921508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248888785780511246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5cef4ee3c1cd24a824117a85f20ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: 0
+--- !u!1 &1905606565147098634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3022849446851360003}
+  - component: {fileID: 7741644577903863091}
+  - component: {fileID: 3460378550396172123}
+  m_Layer: 0
+  m_Name: Gamepad1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3022849446851360003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905606565147098634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8587573069674251994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7741644577903863091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905606565147098634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: dfca7a63ffd8c3f43bf477ded456b840, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05345674-b20f-4518-b5a9-ed4c8235c891
+    m_ActionName: MenuControls/Up[/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2563c685-a0de-4b5b-8e93-23a10cfec60a
+    m_ActionName: MenuControls/Down[/Keyboard/downArrow,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b875d94a-df4a-4fef-9940-245cf2470859
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91c15ae6-c5ac-4259-b6e5-f68131ad3b47
+    m_ActionName: MenuControls/Right[/Keyboard/rightArrow,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuSelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b68076f5-0055-40f9-9873-ccbc9151943a
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536894837320545654}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: MenuBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6587ea17-2113-4b03-95e6-9b67e8579c83
+    m_ActionName: MenuControls/Back[/Keyboard/escape,/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Left
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ea30cc57-0403-4c20-aab7-fbf4d489264c
+    m_ActionName: BattleControls/Left[/Keyboard/a,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Right
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bc082b2-568d-440d-834f-787e9949cc60
+    m_ActionName: BattleControls/Right[/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Up
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d03d56d8-c4a1-491c-bf79-acbf103d2369
+    m_ActionName: BattleControls/Up[/Keyboard/w,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ce8798a7-36a5-4abf-b00f-ae5a87ec5161
+    m_ActionName: BattleControls/Down[/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f1d9021-2af7-45ec-9e30-c73e24ed6567
+    m_ActionName: BattleControls/LP[/Keyboard/u,/Keyboard/numpad4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0866b0b5-41db-4f6e-b08f-23e66786ce9f
+    m_ActionName: BattleControls/HP[/Keyboard/i,/Keyboard/numpad5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dea9e5d2-f2a3-4df4-803a-21587827fe9a
+    m_ActionName: BattleControls/LK[/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HK
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e6798d51-5d27-42ee-ae35-ee5d55d59360
+    m_ActionName: BattleControls/HK[/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dd8a2fd8-c45a-4e1a-9989-14e81c25b572
+    m_ActionName: BattleControls/Macro1[/Keyboard/o,/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ba07f271-4b19-4695-8dbf-4adfed4b405a
+    m_ActionName: BattleControls/Macro2[/Keyboard/l,/Keyboard/numpad3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7530d3ab-5baf-4115-a04d-4383b6e951a8
+    m_ActionName: BattleControls/Macro3[/Keyboard/p,/Keyboard/numpad7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5cc29cb-7c28-4d5d-9eca-6e972b39a411
+    m_ActionName: BattleControls/Macro4[/Keyboard/semicolon,/Keyboard/numpad8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24ee1749-209b-4f6e-a1cd-bf63e5b901e1
+    m_ActionName: BattleControls/Left2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8180419f-0eeb-423b-8812-d1ca995fd016
+    m_ActionName: BattleControls/Right2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f179e35-1f2c-4638-aea3-5857e5905374
+    m_ActionName: BattleControls/Up2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eecf52e9-9f6a-4dd3-a2c1-a1baeccbe6d0
+    m_ActionName: BattleControls/Down2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 80b3a793-b790-4aaf-a09b-fad27af2d436
+    m_ActionName: BattleControls/LP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79d1b657-c551-48d2-916a-784d12ad606d
+    m_ActionName: BattleControls/HP2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be0877b2-3d6e-40aa-8e9c-3813cab965bb
+    m_ActionName: BattleControls/LK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5782d7e1-ae03-46ef-a556-a37ef165244c
+    m_ActionName: BattleControls/HK2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 198a096c-b28f-49ae-abe8-7ee84e01addc
+    m_ActionName: BattleControls/Macro12
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 539cadd1-a3eb-44d3-b206-5cc9f798f502
+    m_ActionName: BattleControls/Macro22
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f03fed62-1be4-442b-99d0-7efe19a3999f
+    m_ActionName: BattleControls/Macro32
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8c10b4b-35fe-44f8-a683-264061ee3dc7
+    m_ActionName: BattleControls/Macro42
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3460378550396172123}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Menu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b98f2416-8c80-4207-82b2-f71b88995b27
+    m_ActionName: BattleControls/Menu[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad1
+  m_DefaultActionMap: MenuControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &3460378550396172123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905606565147098634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5cef4ee3c1cd24a824117a85f20ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: 1
+--- !u!1 &4143611269631252992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7524051884675939178}
+  - component: {fileID: 1231187236628696}
+  - component: {fileID: 2547487499404111240}
+  m_Layer: 0
+  m_Name: Gamepad2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7524051884675939178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143611269631252992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8587573069674251994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1231187236628696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143611269631252992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: dfca7a63ffd8c3f43bf477ded456b840, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05345674-b20f-4518-b5a9-ed4c8235c891
+    m_ActionName: MenuControls/Up[/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2563c685-a0de-4b5b-8e93-23a10cfec60a
+    m_ActionName: MenuControls/Down[/Keyboard/downArrow,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b875d94a-df4a-4fef-9940-245cf2470859
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91c15ae6-c5ac-4259-b6e5-f68131ad3b47
+    m_ActionName: MenuControls/Right[/Keyboard/rightArrow,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b68076f5-0055-40f9-9873-ccbc9151943a
+    m_ActionName: MenuControls/Select[/Keyboard/enter,/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6587ea17-2113-4b03-95e6-9b67e8579c83
+    m_ActionName: MenuControls/Back[/Keyboard/escape,/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ea30cc57-0403-4c20-aab7-fbf4d489264c
+    m_ActionName: BattleControls/Left[/Keyboard/a,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8bc082b2-568d-440d-834f-787e9949cc60
+    m_ActionName: BattleControls/Right[/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d03d56d8-c4a1-491c-bf79-acbf103d2369
+    m_ActionName: BattleControls/Up[/Keyboard/w,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce8798a7-36a5-4abf-b00f-ae5a87ec5161
+    m_ActionName: BattleControls/Down[/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1f1d9021-2af7-45ec-9e30-c73e24ed6567
+    m_ActionName: BattleControls/LP[/Keyboard/u,/Keyboard/numpad4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0866b0b5-41db-4f6e-b08f-23e66786ce9f
+    m_ActionName: BattleControls/HP[/Keyboard/i,/Keyboard/numpad5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dea9e5d2-f2a3-4df4-803a-21587827fe9a
+    m_ActionName: BattleControls/LK[/Keyboard/j,/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6798d51-5d27-42ee-ae35-ee5d55d59360
+    m_ActionName: BattleControls/HK[/Keyboard/k,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dd8a2fd8-c45a-4e1a-9989-14e81c25b572
+    m_ActionName: BattleControls/Macro1[/Keyboard/o,/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ba07f271-4b19-4695-8dbf-4adfed4b405a
+    m_ActionName: BattleControls/Macro2[/Keyboard/l,/Keyboard/numpad3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7530d3ab-5baf-4115-a04d-4383b6e951a8
+    m_ActionName: BattleControls/Macro3[/Keyboard/p,/Keyboard/numpad7]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a5cc29cb-7c28-4d5d-9eca-6e972b39a411
+    m_ActionName: BattleControls/Macro4[/Keyboard/semicolon,/Keyboard/numpad8]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Left2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 24ee1749-209b-4f6e-a1cd-bf63e5b901e1
+    m_ActionName: BattleControls/Left2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Right2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8180419f-0eeb-423b-8812-d1ca995fd016
+    m_ActionName: BattleControls/Right2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Up2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4f179e35-1f2c-4638-aea3-5857e5905374
+    m_ActionName: BattleControls/Up2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Down2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eecf52e9-9f6a-4dd3-a2c1-a1baeccbe6d0
+    m_ActionName: BattleControls/Down2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 80b3a793-b790-4aaf-a09b-fad27af2d436
+    m_ActionName: BattleControls/LP2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79d1b657-c551-48d2-916a-784d12ad606d
+    m_ActionName: BattleControls/HP2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: LK2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: be0877b2-3d6e-40aa-8e9c-3813cab965bb
+    m_ActionName: BattleControls/LK2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: HK2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5782d7e1-ae03-46ef-a556-a37ef165244c
+    m_ActionName: BattleControls/HK2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro12
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 198a096c-b28f-49ae-abe8-7ee84e01addc
+    m_ActionName: BattleControls/Macro12
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro22
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 539cadd1-a3eb-44d3-b206-5cc9f798f502
+    m_ActionName: BattleControls/Macro22
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro32
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f03fed62-1be4-442b-99d0-7efe19a3999f
+    m_ActionName: BattleControls/Macro32
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Macro42
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e8c10b4b-35fe-44f8-a683-264061ee3dc7
+    m_ActionName: BattleControls/Macro42
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2547487499404111240}
+        m_TargetAssemblyTypeName: PlayerInputBattle, Assembly-CSharp
+        m_MethodName: Menu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b98f2416-8c80-4207-82b2-f71b88995b27
+    m_ActionName: BattleControls/Menu[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad2
+  m_DefaultActionMap: MenuControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &2547487499404111240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143611269631252992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5cef4ee3c1cd24a824117a85f20ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: 0
+--- !u!1 &4354167988705213260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8587573069674251994}
+  - component: {fileID: 7564126929793783765}
+  - component: {fileID: 2333204021950969266}
+  - component: {fileID: 1536894837320545654}
+  m_Layer: 0
+  m_Name: PlayerInputManager
+  m_TagString: InputManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8587573069674251994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354167988705213260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2608455, y: -0.008557007, z: 0.011239418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3022849446851360003}
+  - {fileID: 7524051884675939178}
+  - {fileID: 4730423779019961420}
+  - {fileID: 9168979406341337516}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7564126929793783765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354167988705213260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be41e79996b3a8d4482edfba72f98f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2333204021950969266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354167988705213260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb751c6e27dd6a64899d7938769dd13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepad1: {fileID: 7741644577903863091}
+  gamepad2: {fileID: 1231187236628696}
+  keyboard1: {fileID: 2745352179308551689}
+  keyboard2: {fileID: 7329356905657208607}
+--- !u!114 &1536894837320545654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354167988705213260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb84d4b04efe334bbdff2d532053970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

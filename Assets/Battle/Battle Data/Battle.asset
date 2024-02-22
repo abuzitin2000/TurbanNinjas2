@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d358fff18c13c854a97238e6b25f02b2, type: 3}
   m_Name: Battle
   m_EditorClassIdentifier: 
-  groundLevel: -300
+  groundLevel: 0
   stageSize: 500
   timer: 0
   startPosition: 200
