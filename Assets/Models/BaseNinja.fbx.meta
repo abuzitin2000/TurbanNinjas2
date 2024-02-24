@@ -18,7 +18,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NinjaColor
-    second: {fileID: 2100000, guid: 5a50463376f15d546ab2419862acef7b, type: 2}
+    second: {fileID: 2100000, guid: 7ff18fa6a9e8d754386b2c0a96e4cd65, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
