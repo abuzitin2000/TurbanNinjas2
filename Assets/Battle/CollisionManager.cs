@@ -9,10 +9,10 @@ public class CollisionManager : MonoBehaviour
 	public void CalculateCollisions()
 	{
 		// Player 1 Hitboxes
-		foreach (CharacterData.hitboxdata hitbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hitBoxes)
+		foreach (CharacterData.hitboxdata hitbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hitBoxes)
 		{
 			// Player 2 Hurtboxes
-			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hurtBoxes)
+			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hurtBoxes)
 			{
 				if (CheckCollision(battleManager.gameState.player1.positionX, battleManager.gameState.player1.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, battleManager.gameState.player1.mirrored, battleManager.gameState.player2.positionX, battleManager.gameState.player2.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, battleManager.gameState.player2.mirrored))
 				{
@@ -22,10 +22,10 @@ public class CollisionManager : MonoBehaviour
 		}
 
 		// Player 2 Hitboxes
-		foreach (CharacterData.hitboxdata hitbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hitBoxes)
+		foreach (CharacterData.hitboxdata hitbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hitBoxes)
 		{
 			// Player 1 Hurtboxes
-			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hurtBoxes)
+			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hurtBoxes)
 			{
 				if (CheckCollision(battleManager.gameState.player2.positionX, battleManager.gameState.player2.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, battleManager.gameState.player2.mirrored, battleManager.gameState.player1.positionX, battleManager.gameState.player1.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, battleManager.gameState.player1.mirrored))
 				{
@@ -173,8 +173,8 @@ public class CollisionManager : MonoBehaviour
 
 	public void HandleCollisionBoxes()
 	{
-		List<CharacterData.collisionboxdata> player1CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].collisionBoxes;
-		List<CharacterData.collisionboxdata> player2CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player2.animation].frames[battleManager.characterAnimator.FindSprite(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].collisionBoxes;
+		List<CharacterData.collisionboxdata> player1CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].collisionBoxes;
+		List<CharacterData.collisionboxdata> player2CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].collisionBoxes;
 
 		if (player1CollisionBoxes.Count == 0 || player2CollisionBoxes.Count == 0)
 		{

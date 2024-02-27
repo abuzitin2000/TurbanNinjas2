@@ -56,8 +56,8 @@ public class BattleManager : MonoBehaviour
         character1 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         character2 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
-        characterAnimator.player1SpriteRenderer = character1.GetComponent<SpriteRenderer>();
-        characterAnimator.player2SpriteRenderer = character2.GetComponent<SpriteRenderer>();
+        characterAnimator.player1Animator = character1.GetComponentInChildren<Animator>();
+        characterAnimator.player2Animator = character2.GetComponentInChildren<Animator>();
 
         gameState = new BattleGameState();
         player1InputHistory = new Dictionary<int, PlayerButtons>();
@@ -166,9 +166,6 @@ public class BattleManager : MonoBehaviour
 
         character1.transform.position = transform.position + new Vector3(gameState.player1.positionX / renderRatio, gameState.player1.positionY / renderRatio, 0);
         character2.transform.position = transform.position + new Vector3(gameState.player2.positionX / renderRatio, gameState.player2.positionY / renderRatio, 0);
-
-        character1.transform.eulerAngles = new Vector3(character1.transform.eulerAngles.x, -270f, character1.transform.eulerAngles.z);
-        character2.transform.eulerAngles = new Vector3(character2.transform.eulerAngles.x, 270f, character2.transform.eulerAngles.z);
 
         player1Health.text = gameState.player1.health.ToString();
         player2Health.text = gameState.player2.health.ToString();

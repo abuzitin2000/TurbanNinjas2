@@ -23,15 +23,17 @@ public class CharacterData : ScriptableObject
     public class characteranimation
     {
         public string name;
+        public string animationFileName;
         public bool loop;
-        public List<characteranimationframe> frames;
+        public List<characteranimationphase> phases;
     }
 
     [System.Serializable]
-    public class characteranimationframe
+    public class characteranimationphase
     {
         public int duration;
-        public Sprite sprite;
+        public int animStartFrame;
+        public int animEndFrame;
         public bool specialCancellable;
         public bool changeVelocity;
         public int velocityX;
