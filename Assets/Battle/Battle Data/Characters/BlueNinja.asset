@@ -16,7 +16,7 @@ MonoBehaviour:
     health: 1000
     forwardMoveSpeed: 5
     backwardMoveSpeed: 5
-    jumpForce: 25
+    jumpForce: 15
     jumpHorizontalSpeed: 10
     fallSpeed: 1
     forwardDashSpeed: 18
@@ -27,8 +27,8 @@ MonoBehaviour:
     loop: 1
     phases:
     - duration: 60
-      animStartFrame: 0
-      animEndFrame: 60
+      animStartTime: 0
+      animEndTime: 1
       specialCancellable: 0
       changeVelocity: 0
       velocityX: 0
@@ -57,8 +57,8 @@ MonoBehaviour:
     loop: 1
     phases:
     - duration: 50
-      animStartFrame: 0
-      animEndFrame: 50
+      animStartTime: 0
+      animEndTime: 1
       specialCancellable: 0
       changeVelocity: 0
       velocityX: 0
@@ -74,8 +74,8 @@ MonoBehaviour:
     loop: 1
     phases:
     - duration: 50
-      animStartFrame: 0
-      animEndFrame: 50
+      animStartTime: 0
+      animEndTime: 1
       specialCancellable: 0
       changeVelocity: 0
       velocityX: 0
@@ -87,12 +87,12 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   - name: JumpNeutral
-    animationFileName: JumpInPlace
+    animationFileName: Jump In Place
     loop: 0
     phases:
-    - duration: 50
-      animStartFrame: 0
-      animEndFrame: 50
+    - duration: 35
+      animStartTime: 0
+      animEndTime: 1
       specialCancellable: 0
       changeVelocity: 0
       velocityX: 0
@@ -104,13 +104,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   - name: JumpForward
-    animationFileName: 
+    animationFileName: JumpForward
     loop: 0
-    phases: []
+    phases:
+    - duration: 30
+      animStartTime: 0
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: JumpBackward
-    animationFileName: 
+    animationFileName: Jump Backward
     loop: 0
-    phases: []
+    phases:
+    - duration: 30
+      animStartTime: 0
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: Crouch
     animationFileName: 
     loop: 1

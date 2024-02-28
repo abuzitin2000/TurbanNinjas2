@@ -150,15 +150,20 @@ public class CharacterAnimation : MonoBehaviour
 
         float percentage = (float)(frame - lowerCount) / (float)(upperCount - lowerCount);
 
-        // Find Animation Frame
-        float animationFrame = Mathf.Lerp(characterData.characterAnimations[anim].phases[phase].animStartFrame, characterData.characterAnimations[anim].phases[phase].animEndFrame, percentage);
-    
-        if (animationFrame < 0f)
+        // Find Animation Time
+        float animationTime = Mathf.Lerp(characterData.characterAnimations[anim].phases[phase].animStartTime, characterData.characterAnimations[anim].phases[phase].animEndTime, percentage);
+
+        if (animationTime < 0f)
         {
-            animationFrame = 0f;
+            animationTime = 0f;
         }
 
-        return animationFrame;
+        if (animationTime > 1f)
+        {
+            animationTime = 1f;
+        }
+
+        return animationTime;
     }
 
     private int GetTotalFrameCount(CharacterData characterData, int anim)

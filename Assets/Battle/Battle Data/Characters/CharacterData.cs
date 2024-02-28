@@ -32,8 +32,8 @@ public class CharacterData : ScriptableObject
     public class characteranimationphase
     {
         public int duration;
-        public int animStartFrame;
-        public int animEndFrame;
+        public float animStartTime;
+        public float animEndTime;
         public bool specialCancellable;
         public bool changeVelocity;
         public int velocityX;
