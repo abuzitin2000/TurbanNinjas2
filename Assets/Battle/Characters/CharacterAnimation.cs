@@ -21,6 +21,7 @@ public class CharacterAnimation : MonoBehaviour
         battleManager.character1.transform.eulerAngles = new Vector3(battleManager.character1.transform.eulerAngles.x, battleManager.gameState.player1.mirrored ? 270f : -270f, battleManager.character1.transform.eulerAngles.z);
         battleManager.character2.transform.eulerAngles = new Vector3(battleManager.character2.transform.eulerAngles.x, battleManager.gameState.player2.mirrored ? 270f : -270f, battleManager.character2.transform.eulerAngles.z);
     }
+
     public bool SetAnimation(BattleGameState.CharacterState characterState, CharacterData characterData, string name)
     {
         int anim = characterData.characterAnimations.FindIndex(x => x.name == name);
