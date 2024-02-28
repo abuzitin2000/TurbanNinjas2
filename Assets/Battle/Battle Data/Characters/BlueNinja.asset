@@ -74,9 +74,22 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   - name: JumpNeutral
-    animationFileName: 
+    animationFileName: JumpInPlace
     loop: 0
-    phases: []
+    phases:
+    - duration: 50
+      animStartFrame: 0
+      animEndFrame: 50
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: JumpForward
     animationFileName: 
     loop: 0
