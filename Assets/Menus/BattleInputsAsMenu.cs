@@ -22,6 +22,15 @@ public class BattleInputsAsMenu : MonoBehaviour
         }
     }
 
+    public void Menu(bool player1, bool active, bool gamepad)
+    {
+        // Device Selection
+        if (deviceAssigner != null)
+        {
+            deviceAssigner.Select();
+        }
+    }
+
     public void Left(bool player1, bool active, bool gamepad)
     {
         // Test Inputs

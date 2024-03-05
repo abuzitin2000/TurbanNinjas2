@@ -34,7 +34,15 @@ public class PlayerInputBattle : MonoBehaviour
             return;
         }
 
-        EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+        // Menu Inputs
+        if (battleInputsAsMenu != null)
+        {
+            battleInputsAsMenu.Menu(player1, context.performed, context.control.device is Gamepad);
+        }
+        else
+        {
+            EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+        }
     }
 
     public void Left(InputAction.CallbackContext context)
@@ -50,8 +58,6 @@ public class PlayerInputBattle : MonoBehaviour
         {
             battleInputsAsMenu.Left(player1, context.performed, context.control.device is Gamepad);
         }
-
-        Debug.Log("sex");
     }
 
     public void Right(InputAction.CallbackContext context)

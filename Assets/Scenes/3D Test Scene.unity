@@ -8244,7 +8244,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -8259,7 +8259,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -10289,6 +10289,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1228233377990287520, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446232224120954198, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 759686688}
+    - target: {fileID: 2446232224120954198, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446232224120954198, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446232224120954198, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446232224120954198, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8314591358516676150, guid: 05764c84845e5cb48a36e13e7f4becd0, type: 3}

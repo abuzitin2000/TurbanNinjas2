@@ -138,9 +138,22 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   - name: Crouch
-    animationFileName: 
+    animationFileName: Crouch Idle
     loop: 1
-    phases: []
+    phases:
+    - duration: 60
+      animStartTime: 0
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: Win
     animationFileName: 
     loop: 0

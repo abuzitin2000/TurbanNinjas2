@@ -1055,8 +1055,30 @@
                 },
                 {
                     "name": "",
+                    "id": "31f1ec84-b8db-4429-b089-dbb5b9726876",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1;Keyboard2",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "31d5ae56-7b76-4945-bd53-99fdf81af8d3",
                     "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad1;Gamepad2",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "001048d1-fb49-4d76-ab8a-9efb6cd3892e",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad1;Gamepad2",

@@ -266,10 +266,21 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
-                .WithCancelingThrough("*/{Cancel}")
                 .WithControlsExcluding("<Keyboard>/enter")
                 .WithControlsExcluding("<keyboard>/anyKey")
                 .WithControlsExcluding("<Gamepad>/start")
+                .OnPotentialMatch(
+                    operation =>
+                    {
+                        if (operation.selectedControl.path == "/Keyboard/escape" || operation.selectedControl.path == "/Gamepad/select")
+                        {
+                            action.Enable();
+                            m_RebindStopEvent?.Invoke(this, operation);
+                            m_RebindOverlay?.SetActive(false);
+                            UpdateBindingDisplay();
+                            CleanUp();
+                        }
+                    })
                 .OnCancel(
                     operation =>
                     {

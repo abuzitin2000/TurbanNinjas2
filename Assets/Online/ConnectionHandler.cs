@@ -36,7 +36,7 @@ public class ConnectionHandler : Mirror.NetworkBehaviour
     {
         if (!isServer)
         {
-            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("3D Test Scene", LoadSceneMode.Single);
             CmdServerStartGame();
         }
     }
@@ -46,7 +46,7 @@ public class ConnectionHandler : Mirror.NetworkBehaviour
     {
         if (isServer)
         {
-            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("3D Test Scene", LoadSceneMode.Single);
         }
     }
 

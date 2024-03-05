@@ -97,7 +97,7 @@ public class PlayerInputPairing : MonoBehaviour
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
-        if (next.name == "BattleScene" || next.name == "3D Test Scene")
+        if (next.name == "BattleScene" || next.name == "3D Test Scene" || next.name == "CharacterSelectScene")
         {
             ChangeActionMaps(new bool[] { true, true, true, true });
         }
