@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NinjaFace
+  m_Name: Ninjaface
   m_Shader: {fileID: -6465566751694194690, guid: 8a7e59e2e938b204a8e90885aabd71d4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -65,5 +65,5 @@ Material:
     m_Colors:
     - _EyeColor: {r: 0.5320754, g: 0.19797575, b: 0, a: 0}
     - _NinjaColor: {r: 0.8301887, g: 0.4298707, b: 0.09789959, a: 0}
-    - _Skin_Tone: {r: 1, g: 1, b: 1, a: 0}
+    - _Skin_Tone: {r: 0.9169811, g: 0.77337843, b: 0.77337843, a: 0}
   m_BuildTextureStacks: []
