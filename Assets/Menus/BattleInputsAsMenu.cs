@@ -7,6 +7,7 @@ public class BattleInputsAsMenu : MonoBehaviour
 {
     private RebindTester inputTester;
     private DeviceSelection deviceAssigner;
+    private CharacterSelector characterSelector;
 
     void Update()
     {
@@ -19,6 +20,11 @@ public class BattleInputsAsMenu : MonoBehaviour
         if (inputTester == null && deviceAssigner == null)
         {
             deviceAssigner = FindAnyObjectByType<DeviceSelection>();
+        }
+
+        if (inputTester == null && deviceAssigner == null && characterSelector == null)
+        {
+            characterSelector = FindAnyObjectByType<CharacterSelector>();
         }
     }
 
@@ -44,6 +50,12 @@ public class BattleInputsAsMenu : MonoBehaviour
         {
             deviceAssigner.Left(player1, active, gamepad);
         }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Left(player1, active, gamepad);
+        }
     }
 
     public void Right(bool player1, bool active, bool gamepad)
@@ -59,6 +71,12 @@ public class BattleInputsAsMenu : MonoBehaviour
         {
             deviceAssigner.Right(player1, active, gamepad);
         }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Right(player1, active, gamepad);
+        }
     }
 
     public void Up(bool player1, bool active, bool gamepad)
@@ -68,6 +86,12 @@ public class BattleInputsAsMenu : MonoBehaviour
         {
             inputTester.Up(player1, active);
         }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Up(player1, active, gamepad);
+        }
     }
 
     public void Down(bool player1, bool active, bool gamepad)
@@ -76,6 +100,12 @@ public class BattleInputsAsMenu : MonoBehaviour
         if (inputTester != null)
         {
             inputTester.Down(player1, active);
+        }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Down(player1, active, gamepad);
         }
     }
 
