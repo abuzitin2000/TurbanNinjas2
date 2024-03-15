@@ -12,18 +12,46 @@ public class PlayerInputPairing : MonoBehaviour
     public PlayerInput keyboard1;
     public PlayerInput keyboard2;
 
+    public int lastPlayer1Device;
+    public int lastPlayer2Device;
+
     void Start()
     {
         SceneManager.activeSceneChanged += ChangedActiveScene;
         ChangedActiveScene(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
+        ++InputUser.listenForUnpairedDeviceActivity;
+        InputUser.onUnpairedDeviceUsed += (ctx, event_ptr) =>
+        {
+            var device = ctx.device;
+
+            if ((device is Keyboard) || (device is Gamepad))
+            {
+                //DeviceAdded(device);
+            }
+        };
+
         PairDevices();
     }
 
-    public void DeviceAdded()
+    public void DeviceAdded(InputDevice device)
 	{
-        
-	}
+        PairDevices();
+        Debug.Log("Device Added " + device.name);
+    }
+
+    public void ChangePairings(bool gamepad1Player1, bool gamepad2Player1, bool keyboard1Player1, bool keyboard2Player1)
+    {
+        if (gamepad1 == null || gamepad2 == null || keyboard1 == null || keyboard2 == null)
+        {
+            return;
+        }
+
+        gamepad1.GetComponent<PlayerInputBattle>().player1 = gamepad1Player1;
+        gamepad2.GetComponent<PlayerInputBattle>().player1 = gamepad2Player1;
+        keyboard1.GetComponent<PlayerInputBattle>().player1 = keyboard1Player1;
+        keyboard2.GetComponent<PlayerInputBattle>().player1 = keyboard2Player1;
+    }
 
     private void PairDevices()
 	{
@@ -51,13 +79,22 @@ public class PlayerInputPairing : MonoBehaviour
         }
         if (gamepadCount > 1)
         {
-            InputUser.PerformPairingWithDevice(Gamepad.all[1], user: gamepad2.user);
+            for (int i = 1; i < Gamepad.all.Count; i++)
+            {
+                InputUser.PerformPairingWithDevice(Gamepad.all[i], user: gamepad2.user);
+            }
+            
             gamepad2.user.ActivateControlScheme("Gamepad2");
         }
     }
 
-    public void ChangeActionMaps(bool[] maps)
+    private void ChangeActionMaps(bool[] maps)
     {
+        if (gamepad1 == null || gamepad2 == null || keyboard1 == null || keyboard2 == null)
+        {
+            return;
+        }
+
         if (maps[0])
         {
             gamepad1.SwitchCurrentActionMap("BattleControls");
@@ -97,13 +134,21 @@ public class PlayerInputPairing : MonoBehaviour
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
-        if (next.name == "BattleScene" || next.name == "3D Test Scene" || next.name == "CharacterSelectScene")
+        // Action Maps
+        if (next.name == "StageSakura" || next.name == "BattleScene" || next.name == "3D Test Scene" || next.name == "CharacterSelectScene")
         {
             ChangeActionMaps(new bool[] { true, true, true, true });
         }
 		else
 		{
             ChangeActionMaps(new bool[] { false, false, false, false });
+        }
+
+        // Pairings
+        if (next.name == "MainMenuScene")
+        {
+            // Reset Device Pairings
+            ChangePairings(true, false, true, false);
         }
     }
 }

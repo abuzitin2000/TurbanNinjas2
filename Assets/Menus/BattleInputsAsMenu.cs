@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,19 @@ using UnityEngine.InputSystem;
 
 public class BattleInputsAsMenu : MonoBehaviour
 {
+    [SerializeField]
     private RebindTester inputTester;
+    [SerializeField]
     private DeviceSelection deviceAssigner;
+    [SerializeField]
     private CharacterSelector characterSelector;
 
     void Update()
     {
-        if (inputTester == null)
-        {
-            inputTester = FindAnyObjectByType<RebindTester>();
+        inputTester = FindAnyObjectByType<RebindTester>();
+
+        if (inputTester != null)
+        {    
             deviceAssigner = null;
         }
 
@@ -28,12 +33,39 @@ public class BattleInputsAsMenu : MonoBehaviour
         }
     }
 
-    public void Menu(bool player1, bool active, bool gamepad)
+    public void Select(bool player1, bool active, bool gamepad)
     {
         // Device Selection
         if (deviceAssigner != null)
         {
-            deviceAssigner.Select();
+            deviceAssigner.Select(player1, active, gamepad);
+        }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Select(player1, active, gamepad);
+        }
+    }
+
+    public void Back(bool player1, bool active, bool gamepad)
+    {
+        // Test Inputs
+        if (inputTester != null)
+        {
+            inputTester.Back(active);
+        }
+
+        // Device Selection
+        if (deviceAssigner != null)
+        {
+            deviceAssigner.Back(player1, active, gamepad);
+        }
+
+        // Character Select
+        if (characterSelector != null)
+        {
+            characterSelector.Back(player1, active, gamepad);
         }
     }
 
@@ -134,6 +166,18 @@ public class BattleInputsAsMenu : MonoBehaviour
         {
             inputTester.LK(player1, active);
         }
+
+        // Device Selection
+        if (deviceAssigner != null && !gamepad)
+        {
+            deviceAssigner.Select(player1, active, gamepad);
+        }
+
+        // Character Select
+        if (characterSelector != null && !gamepad)
+        {
+            characterSelector.Select(player1, active, gamepad);
+        }
     }
 
     public void HK(bool player1, bool active, bool gamepad)
@@ -142,6 +186,18 @@ public class BattleInputsAsMenu : MonoBehaviour
         if (inputTester != null)
         {
             inputTester.HK(player1, active);
+        }
+
+        // Device Selection
+        if (deviceAssigner != null && !gamepad)
+        {
+            deviceAssigner.Back(player1, active, gamepad);
+        }
+
+        // Character Select
+        if (characterSelector != null && !gamepad)
+        {
+            characterSelector.Back(player1, active, gamepad);
         }
     }
 }

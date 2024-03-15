@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputMenu : MonoBehaviour
 {
+    [SerializeField]
     private MainMenuManager menuManager;
+    [SerializeField]
+    private PlayerInputPairing pairing;
+
+    private float holdUp = -1f;
+    private float holdDown = -1f;
+    private const float holdSpeed = 0.1f;
 
     void Update()
     {
@@ -13,6 +21,33 @@ public class PlayerInputMenu : MonoBehaviour
 		{
             menuManager = FindAnyObjectByType<MainMenuManager>();
 		}
+
+        if (pairing == null)
+        {
+            pairing = FindAnyObjectByType<PlayerInputPairing>();
+        }
+
+        if (holdUp > 0f)
+        {
+            holdUp -= Time.deltaTime;
+
+            if (holdUp <= 0f)
+            {
+                menuManager.MenuUp();
+                holdUp = holdSpeed;
+            }
+        }
+
+        if (holdDown > 0f)
+        {
+            holdDown -= Time.deltaTime;
+
+            if (holdDown <= 0f)
+            {
+                menuManager.MenuDown();
+                holdDown = holdSpeed;
+            }
+        }
     }
 
     public void MenuUp(InputAction.CallbackContext context)
@@ -22,12 +57,34 @@ public class PlayerInputMenu : MonoBehaviour
             return;
 		}
 
-        if (!context.performed)
+        if (pairing != null)
         {
-            return;
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
         }
 
-        menuManager.MenuUp();
+        if (context.started)
+        {
+            menuManager.MenuUp();
+        }
+
+        if (context.performed)
+        {
+            holdUp = holdSpeed;
+        }
+
+        if (context.canceled)
+        {
+            holdUp = -1f;
+        }
     }
 
     public void MenuDown(InputAction.CallbackContext context)
@@ -37,12 +94,34 @@ public class PlayerInputMenu : MonoBehaviour
             return;
         }
 
-        if (!context.performed)
+        if (pairing != null)
         {
-            return;
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
         }
 
-        menuManager.MenuDown();
+        if (context.started)
+        {
+            menuManager.MenuDown();
+        }
+
+        if (context.performed)
+        {
+            holdDown = holdSpeed;
+        }
+
+        if (context.canceled)
+        {
+            holdDown = -1f;
+        }
     }
 
     public void MenuLeft(InputAction.CallbackContext context)
@@ -55,6 +134,20 @@ public class PlayerInputMenu : MonoBehaviour
         if (!context.performed)
         {
             return;
+        }
+
+        if (pairing != null)
+        {
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
         }
 
         menuManager.MenuLeft();
@@ -72,6 +165,20 @@ public class PlayerInputMenu : MonoBehaviour
             return;
         }
 
+        if (pairing != null)
+        {
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
+        }
+
         menuManager.MenuRight();
     }
 
@@ -87,6 +194,20 @@ public class PlayerInputMenu : MonoBehaviour
             return;
         }
 
+        if (pairing != null)
+        {
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
+        }
+
         menuManager.MenuSelect();
     }
 
@@ -100,6 +221,20 @@ public class PlayerInputMenu : MonoBehaviour
         if (!context.performed)
         {
             return;
+        }
+
+        if (pairing != null)
+        {
+            if (context.control.device is Keyboard)
+            {
+                pairing.lastPlayer1Device = 2;
+                pairing.lastPlayer2Device = 3;
+            }
+            else
+            {
+                pairing.lastPlayer1Device = 0;
+                pairing.lastPlayer2Device = 1;
+            }
         }
 
         menuManager.MenuBack();

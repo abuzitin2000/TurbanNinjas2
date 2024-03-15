@@ -13,8 +13,8 @@ public class CharacterAnimation : MonoBehaviour
 
     public void AnimateCharacters()
     {
-        player1Animator.Play(battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName, 0, GetAnimationPercentage(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame));
-        player2Animator.Play(battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName, 0, GetAnimationPercentage(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame));
+        player1Animator.CrossFade(battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName, 0.05f, 0, GetAnimationPercentage(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame));
+        player2Animator.CrossFade(battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName, 0.05f, 0, GetAnimationPercentage(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame));
 
         battleManager.character1.transform.localScale = new Vector3(battleManager.gameState.player1.mirrored ? -1f : 1f, 1f, 1f);
         battleManager.character2.transform.localScale = new Vector3(battleManager.gameState.player2.mirrored ? -1f : 1f, 1f, 1f);

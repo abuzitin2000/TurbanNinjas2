@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RebindsMenu : MonoBehaviour
 {
-	public TMPro.TextMeshProUGUI typeText;
+	public InputActionAsset inputActions1;
+    public InputActionAsset inputActions2;
+
+    public TMPro.TextMeshProUGUI typeText;
 	public TMPro.TextMeshProUGUI controllerText;
 
 	public int type;
@@ -84,6 +89,40 @@ public class RebindsMenu : MonoBehaviour
 		// Enable current menu
 		rebindMenus[type * 2 + controller].SetActive(true);
 	}
+
+	public void Rebind()
+	{
+
+	}
+
+	public void ResetBinds()
+	{
+		string actionMapName = (type == 0) ? "MenuControls" : "BattleControls";
+        string controlSchemeName = (controller == 0) ? "Gamepad" : "Keyboard";
+
+        InputActionMap actionMap;
+
+        if (type == 2)
+		{
+            controlSchemeName += "2";
+            actionMap = inputActions2.FindActionMap(actionMapName);
+        }
+		else
+		{
+            controlSchemeName += "1";
+            actionMap = inputActions1.FindActionMap(actionMapName);
+        }
+
+        foreach (var action in actionMap.actions)
+        {
+            var index = action.GetBindingIndex(group: controlSchemeName);
+            
+			if (index >= 0)
+			{
+                action.RemoveBindingOverride(index);
+            }
+        }
+    }
 
 	public void TestButtons()
 	{

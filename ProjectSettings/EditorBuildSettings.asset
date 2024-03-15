@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterSelectScene.unity
     guid: c246e26de18b6074291ebb5ac7e52ce2
+  - enabled: 1
+    path: Assets/Scenes/StageSakura.unity
+    guid: 9e50bd8c354a7144ca719f5d42b8b0cf
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f7c7cee5063b0ed418c3571bc6b704bd, type: 2}

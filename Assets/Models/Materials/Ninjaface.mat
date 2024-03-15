@@ -64,6 +64,6 @@ Material:
     - _UseOnOutfit: 0
     m_Colors:
     - _EyeColor: {r: 0.5320754, g: 0.19797575, b: 0, a: 0}
-    - _NinjaColor: {r: 0.8018868, g: 0.2004717, b: 0.7993164, a: 0}
+    - _NinjaColor: {r: 0.05660379, g: 0.05153081, b: 0.05153081, a: 0}
     - _Skin_Tone: {r: 0.9169811, g: 0.77337843, b: 0.77337843, a: 0}
   m_BuildTextureStacks: []

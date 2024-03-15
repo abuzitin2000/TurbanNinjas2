@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dce049adc78c50429ac9cfb93c54bbc, type: 3}
+  m_Name: IconsData
+  m_EditorClassIdentifier: 
+  xbox:
+    buttonSouth: {fileID: 21300000, guid: f609c9b3b1675f947a865ec558b5ad90, type: 3}
+    buttonNorth: {fileID: 21300000, guid: 17fd7d74524d4cc4ea612a100880d012, type: 3}
+    buttonEast: {fileID: 21300000, guid: d08c52c09554ca8418a86627f4bd14e1, type: 3}
+    buttonWest: {fileID: 21300000, guid: cde7469096582e04897fae80dfc34fbe, type: 3}
+    startButton: {fileID: 21300000, guid: 5c1e24bea89729e4a8ed25e26a432f84, type: 3}
+    selectButton: {fileID: 21300000, guid: 4273c283a5e145a468dc60af5dcb46e7, type: 3}
+    leftTrigger: {fileID: 21300000, guid: d29819659aa175a459d7c519a30d70aa, type: 3}
+    rightTrigger: {fileID: 21300000, guid: 0ae60af4bd5e539409acc10ec4300105, type: 3}
+    leftShoulder: {fileID: 21300000, guid: 672696fcd6aec9d4c84945fa59765f64, type: 3}
+    rightShoulder: {fileID: 21300000, guid: ed60ff0de79971e468ae179e077d66ca, type: 3}
+    dpad: {fileID: 21300000, guid: d1610599218d48042bffac0712c379a6, type: 3}
+    dpadUp: {fileID: 21300000, guid: 4cc6aa9aa8107734da22c80d289cff98, type: 3}
+    dpadDown: {fileID: 21300000, guid: d544feb63b186dd45b32d12cfc6762bf, type: 3}
+    dpadLeft: {fileID: 21300000, guid: 44d8f279ef345c442ae875caa0c26731, type: 3}
+    dpadRight: {fileID: 21300000, guid: cfa9b832ea5877745a96e61e8ffaeca2, type: 3}
+    leftStick: {fileID: 21300000, guid: 139b83464b859cd429d0370dc816028c, type: 3}
+    rightStick: {fileID: 21300000, guid: 9c61f7c9d0b7b8b4f9d2350b73289e23, type: 3}
+    leftStickPress: {fileID: 21300000, guid: 139b83464b859cd429d0370dc816028c, type: 3}
+    rightStickPress: {fileID: 21300000, guid: 9c61f7c9d0b7b8b4f9d2350b73289e23, type: 3}
+  ps4:
+    buttonSouth: {fileID: 21300000, guid: 2da2d15ce082e12448ac493c55a33f0f, type: 3}
+    buttonNorth: {fileID: 21300000, guid: 47b0c8cbcd450124abdb1b62fb7f5806, type: 3}
+    buttonEast: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
+    buttonWest: {fileID: 21300000, guid: 428de70370df69d45bd4c0025b7ba36e, type: 3}
+    startButton: {fileID: 21300000, guid: 3e20a6306ae08e34f970de090c3a1cd1, type: 3}
+    selectButton: {fileID: 21300000, guid: a521d4effb3d3c64b9329370383eb640, type: 3}
+    leftTrigger: {fileID: 21300000, guid: f920addac480add4c99e64df920b61a3, type: 3}
+    rightTrigger: {fileID: 21300000, guid: 87dce22414624c74d90f8bfc4bf3582f, type: 3}
+    leftShoulder: {fileID: 21300000, guid: 7eaab648006558044a9680311037b8f9, type: 3}
+    rightShoulder: {fileID: 21300000, guid: 22b97dfa5af0d1947a62312c31e633e5, type: 3}
+    dpad: {fileID: 21300000, guid: bff5253ebc5a14f43b4bd8aa1d207855, type: 3}
+    dpadUp: {fileID: 21300000, guid: f375a935d0c38f84d94844236012f26c, type: 3}
+    dpadDown: {fileID: 21300000, guid: 5fc2490d4f2941f4ca46f33e329cf3d7, type: 3}
+    dpadLeft: {fileID: 21300000, guid: 4cb9b89846007d142a4a78a190c2d6fe, type: 3}
+    dpadRight: {fileID: 21300000, guid: be71706bc979d5240bf156bfdfee0ae6, type: 3}
+    leftStick: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6, type: 3}
+    rightStick: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de, type: 3}
+    leftStickPress: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6, type: 3}
+    rightStickPress: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de, type: 3}
+  keyboard:
+    a: {fileID: 21300000, guid: ca61df1ac38db4d41878a55da2fe345d, type: 3}
+    b: {fileID: 21300000, guid: de9cd4ba98f13fe468ecfdba5835590c, type: 3}
+    c: {fileID: 21300000, guid: 8b0db5c40fcdcc04285def257de46eb0, type: 3}
+    d: {fileID: 21300000, guid: 53efdd3e606ac7e45879f4e367a464ad, type: 3}
+    e: {fileID: 21300000, guid: 84332e2f4694cfb4aa9ccc6d321fba53, type: 3}
+    f: {fileID: 21300000, guid: 797d97ac51aaeae4cb319b729a882229, type: 3}
+    g: {fileID: 21300000, guid: 04fc9175bd5f960499649b23db00cc91, type: 3}
+    h: {fileID: 21300000, guid: 161a6ff28eecfbc429845815347e2d1f, type: 3}
+    i: {fileID: 21300000, guid: 2f1bbdf351e39d84790e1b6517847bcc, type: 3}
+    j: {fileID: 21300000, guid: 5bacdc4814a2ad7409ad54601b4e1888, type: 3}
+    k: {fileID: 21300000, guid: 8b5e486bc78c0854a8c67103f3fd9165, type: 3}
+    l: {fileID: 21300000, guid: a136a3526454b3745972b4ed1f40988e, type: 3}
+    m: {fileID: 21300000, guid: 646f61762decab943ba0e005d665e40b, type: 3}
+    n: {fileID: 21300000, guid: 465f138aae6920649ba7449ab3a9e1e0, type: 3}
+    o: {fileID: 21300000, guid: 563c566db5815a942acf78094e000a99, type: 3}
+    p: {fileID: 21300000, guid: d0216b2c1ab18ff4cbbb271600b432a9, type: 3}
+    q: {fileID: 21300000, guid: e9de263f77b016f469b28335978bd037, type: 3}
+    r: {fileID: 21300000, guid: 80418b25e9293894197e917300a3fc36, type: 3}
+    s: {fileID: 21300000, guid: 44543702a8684b746b731293f2634c6a, type: 3}
+    t: {fileID: 21300000, guid: fe142ae4a8054584aa413447468cb62c, type: 3}
+    u: {fileID: 21300000, guid: 71a9850a200b0c547aa5b6eca80bbebf, type: 3}
+    v: {fileID: 21300000, guid: ce8cc449321792843938501fbc8f2c8d, type: 3}
+    w: {fileID: 21300000, guid: 50272a2693dc3b54db770a0b1e860ac9, type: 3}
+    x: {fileID: 21300000, guid: 5e68d76c790ed9c4aa322e65de73a0cd, type: 3}
+    y: {fileID: 21300000, guid: adb2c221c7f11ff4b8a88c4e973efa14, type: 3}
+    z: {fileID: 21300000, guid: 108bd558dcaf0374688931096e0b8492, type: 3}
+    zero: {fileID: 21300000, guid: 45639008d51f59a48aa0d0dc38481161, type: 3}
+    one: {fileID: 21300000, guid: 0fac1bb05f70bd4478bb82afc2285945, type: 3}
+    two: {fileID: 21300000, guid: e257391da40e7114295c1c3b7b69542b, type: 3}
+    three: {fileID: 21300000, guid: ba605c6ce1caf384399c0b1de096f6d7, type: 3}
+    four: {fileID: 21300000, guid: 33d9ca939509af94195aced4a39e7523, type: 3}
+    five: {fileID: 21300000, guid: 11e9a4f209c73d44ea7ee7a302e3787b, type: 3}
+    six: {fileID: 21300000, guid: ddb60aa1d1509df4a978ce11d66fe200, type: 3}
+    seven: {fileID: 21300000, guid: b0188b64cef6b9c45a16ac10b0a4d86c, type: 3}
+    eight: {fileID: 21300000, guid: bb80080ec5726bd4181a2511a0dd1a3e, type: 3}
+    nine: {fileID: 21300000, guid: 0710b7a8e63799247a70ed1ae2df6b4b, type: 3}
+    asterisk: {fileID: 21300000, guid: 16bbe81cbad6b054395a8c42ae526b11, type: 3}
+    bracketleft: {fileID: 21300000, guid: 711aea31cc993fb4599efae1f5e59290, type: 3}
+    bracketright: {fileID: 21300000, guid: 0263bc1f6983466489df3191ce05a5df, type: 3}
+    markleft: {fileID: 21300000, guid: 16ae666efcea28d47ba5c8ac4e6af184, type: 3}
+    markright: {fileID: 21300000, guid: e5b1abc7da20ab646944df1de01ca7fe, type: 3}
+    minus: {fileID: 21300000, guid: 7440a35f8ed2fe744a2043a6928fb49b, type: 3}
+    plus: {fileID: 21300000, guid: 68b5fd70a348e0f449c77761c3ade1f9, type: 3}
+    question: {fileID: 21300000, guid: 91774f775b148c54c92dd9da1cc8fe90, type: 3}
+    quote: {fileID: 21300000, guid: 4413f0431b7657346bc7bb7aea97458b, type: 3}
+    semicolon: {fileID: 21300000, guid: 7f4e21af883b39e47a20adba930d2a62, type: 3}
+    slash: {fileID: 21300000, guid: 6a4f1a0f47bbaca43b09fc73401888c0, type: 3}
+    tilda: {fileID: 21300000, guid: 92de676a1540e1a43881436f747ffc25, type: 3}
+    f1: {fileID: 21300000, guid: 9f54cee80442e17468f30ca373439ad3, type: 3}
+    f2: {fileID: 21300000, guid: 24109db294cb7984abdc3694f180da40, type: 3}
+    f3: {fileID: 21300000, guid: ad95e2c0a6b9e5c4abc1c10358519165, type: 3}
+    f4: {fileID: 21300000, guid: 776e14501b0cd794abd68994f21aaf01, type: 3}
+    f5: {fileID: 21300000, guid: 3b04e938a2f0de74aa884c38e062ae60, type: 3}
+    f6: {fileID: 21300000, guid: c6dfe3b87a6bb5940a031dea7c589e93, type: 3}
+    f7: {fileID: 21300000, guid: db3459883720b134694a3472abe628f7, type: 3}
+    f8: {fileID: 21300000, guid: 423c8cbc66e87a54394bd0c476bce7ae, type: 3}
+    f9: {fileID: 21300000, guid: 411715615594c0e41b3ac53cd2d23cde, type: 3}
+    f10: {fileID: 21300000, guid: 663755b9b0a82bc4baf58c167bbd68f0, type: 3}
+    f11: {fileID: 21300000, guid: 89a3132518c0c9642b10d98637278430, type: 3}
+    f12: {fileID: 21300000, guid: 3bea51a11a7a90d4bba0d6ccc9b836d1, type: 3}
+    space: {fileID: 21300000, guid: 0f0c2c5ec0131634b87e1bda3e288370, type: 3}
+    ctrl: {fileID: 21300000, guid: 20bcd640840d2434b96911a3d6e87ffe, type: 3}
+    alt: {fileID: 21300000, guid: 593d3d722a9fa4745be1c5df9a790d1f, type: 3}
+    shift: {fileID: 21300000, guid: 8f174ce9e5e9f944ca38726e7cd930e0, type: 3}
+    cmd: {fileID: 21300000, guid: 5ddac5f840f1e8f43942638ecf846d6c, type: 3}
+    win: {fileID: 21300000, guid: ef98978cd93ad0e4890909b48d6ba9b5, type: 3}
+    tab: {fileID: 21300000, guid: 4c7663182080be7448363219f0789ac0, type: 3}
+    enter: {fileID: 21300000, guid: 8c9cfa7e9c5922e4d8729b2aab30c9c2, type: 3}
+    esc: {fileID: 21300000, guid: 139ec9a185236bd40b5ff86c4892cf7b, type: 3}
+    backspace: {fileID: 21300000, guid: a42973e59656ddc4f942595e24d238c6, type: 3}
+    capslock: {fileID: 21300000, guid: 14c08befc38ed32409a686bffc0d894a, type: 3}
+    numlock: {fileID: 21300000, guid: a9d94d507c5ac8145a26ec1ec67a39a1, type: 3}
+    insert: {fileID: 21300000, guid: 62d3c82f7d2678b4a98fef8ea39a74be, type: 3}
+    del: {fileID: 21300000, guid: 2b16e3787499be2489f587ef878e7b85, type: 3}
+    home: {fileID: 21300000, guid: a756e47d9285e8c47a2b67951b173e3c, type: 3}
+    end: {fileID: 21300000, guid: 5bb3bd497bdbffc4e80dbc1bff2a6ccf, type: 3}
+    pageup: {fileID: 21300000, guid: 9f337753e65e3ad4db8482bd7d502c18, type: 3}
+    pagedown: {fileID: 21300000, guid: 140f819d01ba4914aaeea531eb2d3e14, type: 3}
+    print: {fileID: 21300000, guid: f7b9ced880d4ec2479ffa28fac0e287e, type: 3}
+    up: {fileID: 21300000, guid: a7bc1f0feaf8bd946bd03eb570a20b22, type: 3}
+    down: {fileID: 21300000, guid: 7675d0d9391b4f84782fff294df1aa81, type: 3}
+    left: {fileID: 21300000, guid: f6836a07f6a868b42ba242d2bf9b9f96, type: 3}
+    right: {fileID: 21300000, guid: 2f928a84e3427c948b9d076a1de0e50e, type: 3}

@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelector : MonoBehaviour
 {
+    public GameObject characterSelectorMenu;
+    public GameObject deviceSelectorMenu;
+    public GameObject characterSelector;
+    public GameObject deviceSelector;
+
     public int player1Selected;
     public int player2Selected;
 
-    public List<RectTransform> upperPortraits;
-    public List<RectTransform> lowerPortraits;
-
     public RectTransform player1Selector;
     public RectTransform player2Selector;
+
+    public int player1Phase;
+    public int player2Phase;
 
     public ColorChanger player1Color;
     public ColorChanger player2Color;
@@ -21,6 +27,9 @@ public class CharacterSelector : MonoBehaviour
 
     public float hueSpeed;
     private float hue;
+    
+    public List<RectTransform> upperPortraits;
+    public List<RectTransform> lowerPortraits;
 
     public List<TMPro.TextMeshProUGUI> player1Info;
     public List<TMPro.TextMeshProUGUI> player2Info;
@@ -230,30 +239,36 @@ public class CharacterSelector : MonoBehaviour
 
         if (player1)
         {
-            player1Selected -= 1;
-
-            if (player1Selected == -1)
+            if (player1Phase == 0)
             {
-                player1Selected = lowerPortraits.Count - 1;
-            }
+                player1Selected -= 1;
 
-            if (player1Selected == 99)
-            {
-                player1Selected = 100 + upperPortraits.Count - 1;
+                if (player1Selected == -1)
+                {
+                    player1Selected = lowerPortraits.Count - 1;
+                }
+
+                if (player1Selected == 99)
+                {
+                    player1Selected = 100 + upperPortraits.Count - 1;
+                }
             }
         }
         else
         {
-            player2Selected -= 1;
-
-            if (player2Selected == -1)
+            if (player2Phase == 0)
             {
-                player2Selected = lowerPortraits.Count - 1;
-            }
+                player2Selected -= 1;
 
-            if (player2Selected == 99)
-            {
-                player2Selected = 100 + upperPortraits.Count - 1;
+                if (player2Selected == -1)
+                {
+                    player2Selected = lowerPortraits.Count - 1;
+                }
+
+                if (player2Selected == 99)
+                {
+                    player2Selected = 100 + upperPortraits.Count - 1;
+                }
             }
         }
     }
@@ -267,30 +282,36 @@ public class CharacterSelector : MonoBehaviour
 
         if (player1)
         {
-            player1Selected += 1;
-
-            if (player1Selected == lowerPortraits.Count)
+            if (player1Phase == 0)
             {
-                player1Selected = 0;
-            }
+                player1Selected += 1;
 
-            if (player1Selected == 100 + upperPortraits.Count)
-            {
-                player1Selected = 100;
+                if (player1Selected == lowerPortraits.Count)
+                {
+                    player1Selected = 0;
+                }
+
+                if (player1Selected == 100 + upperPortraits.Count)
+                {
+                    player1Selected = 100;
+                }
             }
         }
         else
         {
-            player2Selected += 1;
-
-            if (player2Selected == lowerPortraits.Count)
+            if (player2Phase == 0)
             {
-                player2Selected = 0;
-            }
+                player2Selected += 1;
 
-            if (player2Selected == 100 + upperPortraits.Count)
-            {
-                player2Selected = 100;
+                if (player2Selected == lowerPortraits.Count)
+                {
+                    player2Selected = 0;
+                }
+
+                if (player2Selected == 100 + upperPortraits.Count)
+                {
+                    player2Selected = 100;
+                }
             }
         }
     }
@@ -304,56 +325,62 @@ public class CharacterSelector : MonoBehaviour
 
         if (player1)
         {
-            if (player1Selected < 4)
+            if (player1Phase == 0)
             {
-                player1Selected = 100;
-            }
-            else if (player1Selected == 4)
-            {
-                player1Selected = 101;
-            }
-            else if (player1Selected > 4 && player1Selected < 100)
-            {
-                player1Selected = 102;
-            }
-            else if (player1Selected == 100)
-            {
-                player1Selected = 3;
-            }
-            else if (player1Selected == 101)
-            {
-                player1Selected = 4;
-            }
-            else if (player1Selected == 102)
-            {
-                player1Selected = 5;
+                if (player1Selected < 4)
+                {
+                    player1Selected = 100;
+                }
+                else if (player1Selected == 4)
+                {
+                    player1Selected = 101;
+                }
+                else if (player1Selected > 4 && player1Selected < 100)
+                {
+                    player1Selected = 102;
+                }
+                else if (player1Selected == 100)
+                {
+                    player1Selected = 3;
+                }
+                else if (player1Selected == 101)
+                {
+                    player1Selected = 4;
+                }
+                else if (player1Selected == 102)
+                {
+                    player1Selected = 5;
+                }
             }
         }
         else
         {
-            if (player2Selected < 4)
+            if (player2Phase == 0)
             {
-                player2Selected = 100;
-            }
-            else if (player2Selected == 4)
-            {
-                player2Selected = 101;
-            }
-            else if (player2Selected > 4 && player2Selected < 100)
-            {
-                player2Selected = 102;
-            }
-            else if (player2Selected == 100)
-            {
-                player2Selected = 3;
-            }
-            else if (player2Selected == 101)
-            {
-                player2Selected = 4;
-            }
-            else if (player2Selected == 102)
-            {
-                player2Selected = 5;
+                if (player2Selected < 4)
+                {
+                    player2Selected = 100;
+                }
+                else if (player2Selected == 4)
+                {
+                    player2Selected = 101;
+                }
+                else if (player2Selected > 4 && player2Selected < 100)
+                {
+                    player2Selected = 102;
+                }
+                else if (player2Selected == 100)
+                {
+                    player2Selected = 3;
+                }
+                else if (player2Selected == 101)
+                {
+                    player2Selected = 4;
+                }
+                else if (player2Selected == 102)
+                {
+                    player2Selected = 5;
+                }
             }
         }
     }
@@ -367,56 +394,129 @@ public class CharacterSelector : MonoBehaviour
 
         if (player1)
         {
-            if (player1Selected < 4)
+            if (player1Phase == 0)
             {
-                player1Selected = 100;
-            }
-            else if (player1Selected == 4)
-            {
-                player1Selected = 101;
-            }
-            else if (player1Selected > 4 && player1Selected < 100)
-            {
-                player1Selected = 102;
-            }
-            else if (player1Selected == 100)
-            {
-                player1Selected = 3;
-            }
-            else if (player1Selected == 101)
-            {
-                player1Selected = 4;
-            }
-            else if (player1Selected == 102)
-            {
-                player1Selected = 5;
+                if (player1Selected < 4)
+                {
+                    player1Selected = 100;
+                }
+                else if (player1Selected == 4)
+                {
+                    player1Selected = 101;
+                }
+                else if (player1Selected > 4 && player1Selected < 100)
+                {
+                    player1Selected = 102;
+                }
+                else if (player1Selected == 100)
+                {
+                    player1Selected = 3;
+                }
+                else if (player1Selected == 101)
+                {
+                    player1Selected = 4;
+                }
+                else if (player1Selected == 102)
+                {
+                    player1Selected = 5;
+                }
             }
         }
         else
         {
-            if (player2Selected < 4)
+            if (player2Phase == 0)
             {
-                player2Selected = 100;
+                if (player2Selected < 4)
+                {
+                    player2Selected = 100;
+                }
+                else if (player2Selected == 4)
+                {
+                    player2Selected = 101;
+                }
+                else if (player2Selected > 4 && player2Selected < 100)
+                {
+                    player2Selected = 102;
+                }
+                else if (player2Selected == 100)
+                {
+                    player2Selected = 3;
+                }
+                else if (player2Selected == 101)
+                {
+                    player2Selected = 4;
+                }
+                else if (player2Selected == 102)
+                {
+                    player2Selected = 5;
+                }
             }
-            else if (player2Selected == 4)
+        }
+    }
+
+    public void Select(bool player1, bool active, bool gamepad)
+    {
+        if (!active)
+        {
+            return;
+        }
+
+        if (player1)
+        {
+            if (player1Phase == 0)
             {
-                player2Selected = 101;
+                player1Phase += 1;
+
+                SceneManager.LoadScene("StageSakura");
             }
-            else if (player2Selected > 4 && player2Selected < 100)
+        }
+        else
+        {
+            if (player2Phase == 0)
             {
-                player2Selected = 102;
+                player2Phase += 1;
             }
-            else if (player2Selected == 100)
+        }
+    }
+
+    public void Back(bool player1, bool active, bool gamepad)
+    {
+        if (!active)
+        {
+            return;
+        }
+
+        if ((player1 && player1Phase == 0) || (!player1 && player2Phase == 0))
+        {
+            // Reset Device Pairings
+            GameObject.FindWithTag("InputManager").GetComponent<PlayerInputPairing>().ChangePairings(true, false, true, false);
+
+            deviceSelector.GetComponent<DeviceSelection>().gamepad1Player = 0;
+            deviceSelector.GetComponent<DeviceSelection>().gamepad2Player = 0;
+            deviceSelector.GetComponent<DeviceSelection>().keyboard1Player = 0;
+            deviceSelector.GetComponent<DeviceSelection>().keyboard2Player = 0;
+
+            player1Phase = 0;
+            player2Phase = 0;
+
+            deviceSelectorMenu.SetActive(true);
+            deviceSelector.SetActive(true);
+            characterSelectorMenu.SetActive(false);
+            characterSelector.SetActive(false);
+        }
+
+        if (player1)
+        {
+            if (player1Phase == 1)
             {
-                player2Selected = 3;
+                player1Phase = 0;
             }
-            else if (player2Selected == 101)
+        }
+        else
+        {
+            if (player2Phase == 1)
             {
-                player2Selected = 4;
-            }
-            else if (player2Selected == 102)
-            {
-                player2Selected = 5;
+                player2Phase = 0;
             }
         }
     }

@@ -5,8 +5,20 @@ using UnityEngine.UI;
 
 public class RebindTester : MonoBehaviour
 {
+    public RebindsMenu rebindsMenu;
+
     public List<TMPro.TextMeshProUGUI> player1Buttons;
     public List<TMPro.TextMeshProUGUI> player2Buttons;
+
+    public void Back(bool active)
+    {
+        if (!active)
+        {
+            return;
+        }
+
+        rebindsMenu.TestButtons();
+    }
 
     public void Up(bool player1, bool active)
     {

@@ -8,6 +8,8 @@ public class DeviceSelection : MonoBehaviour
 {
     public GameObject characterSelectorMenu;
     public GameObject deviceSelectorMenu;
+    public GameObject characterSelector;
+    public GameObject deviceSelector;
 
     public RectTransform gamepad1;
     public RectTransform gamepad2;
@@ -15,12 +17,12 @@ public class DeviceSelection : MonoBehaviour
     public RectTransform keyboard2;
 
     public float iconXPos;
+    public float iconSpeed;
 
-    private int gamepad1Player;
-    private int gamepad2Player;
-    private int keyboard1Player;
-    private int keyboard2Player;
-
+    public int gamepad1Player;
+    public int gamepad2Player;
+    public int keyboard1Player;
+    public int keyboard2Player;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,10 @@ public class DeviceSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ChangePositions(gamepad1, gamepad1Player);
+        ChangePositions(gamepad2, gamepad2Player);
+        ChangePositions(keyboard1, keyboard1Player);
+        ChangePositions(keyboard2, keyboard2Player);
     }
 
     public void Left(bool player1, bool active, bool gamepad)
@@ -83,8 +88,6 @@ public class DeviceSelection : MonoBehaviour
                 }
             }
         }
-
-        ChangePositions();
     }
 
     public void Right(bool player1, bool active, bool gamepad)
@@ -136,29 +139,54 @@ public class DeviceSelection : MonoBehaviour
                 }
             }
         }
-
-        ChangePositions();
     }
 
-    public void Select()
+    public void Select(bool player1, bool active, bool gamepad)
     {
-        PlayerInputPairing pairings = GameObject.FindWithTag("InputManager").GetComponent<PlayerInputPairing>();
-        pairings.gamepad1.GetComponent<PlayerInputBattle>().player1 = gamepad1Player == 1 ? false : true;
-        pairings.gamepad2.GetComponent<PlayerInputBattle>().player1 = gamepad2Player == 1 ? false : true;
-        pairings.keyboard1.GetComponent<PlayerInputBattle>().player1 = keyboard1Player == 1 ? false : true;
-        pairings.keyboard2.GetComponent<PlayerInputBattle>().player1 = keyboard2Player == 1 ? false : true;
+        if (!active)
+        {
+            return;
+        }
+
+        // Set Device Pairings
+        GameObject.FindWithTag("InputManager").GetComponent<PlayerInputPairing>().ChangePairings(gamepad1Player == 1 ? false : true,
+            gamepad2Player == 1 ? false : true, keyboard1Player == 1 ? false : true, keyboard2Player == 1 ? false : true);
 
         characterSelectorMenu.SetActive(true);
+        characterSelector.SetActive(true);
         deviceSelectorMenu.SetActive(false);
-
-        SceneManager.LoadScene("3D Test Scene");
+        deviceSelector.SetActive(false);
     }
 
-    private void ChangePositions()
+    public void Back(bool player1, bool active, bool gamepad)
     {
-        gamepad1.anchoredPosition = new Vector2(iconXPos * gamepad1Player, gamepad1.anchoredPosition.y);
-        keyboard1.anchoredPosition = new Vector2(iconXPos * keyboard1Player, keyboard1.anchoredPosition.y);
-        gamepad2.anchoredPosition = new Vector2(iconXPos * gamepad2Player, gamepad2.anchoredPosition.y);
-        keyboard2.anchoredPosition = new Vector2(iconXPos * keyboard2Player, keyboard2.anchoredPosition.y);
+        if (!active)
+        {
+            return;
+        }
+
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public void ChangePositions(RectTransform icon, int direction)
+    {
+        if (icon.anchoredPosition.x < iconXPos * direction)
+        {
+            icon.anchoredPosition = new Vector2(icon.anchoredPosition.x + iconSpeed * Time.deltaTime, icon.anchoredPosition.y);
+
+            if (icon.anchoredPosition.x > iconXPos * direction)
+            {
+                icon.anchoredPosition = new Vector2(iconXPos * direction, icon.anchoredPosition.y);
+            }
+        }
+        if (icon.anchoredPosition.x > iconXPos * direction)
+        {
+            icon.anchoredPosition = new Vector2(icon.anchoredPosition.x - iconSpeed * Time.deltaTime, icon.anchoredPosition.y);
+
+            if (icon.anchoredPosition.x < iconXPos * direction)
+            {
+                icon.anchoredPosition = new Vector2(iconXPos * direction, icon.anchoredPosition.y);
+            }
+        }
     }
 }
