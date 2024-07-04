@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Select",
+                    "name": "Accept",
                     "type": "Button",
                     "id": "b68076f5-0055-40f9-9873-ccbc9151943a",
                     "expectedControlType": "Button",
@@ -167,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard1",
-                    "action": "Select",
+                    "action": "Accept",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -178,7 +178,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard1",
-                    "action": "Select",
+                    "action": "Accept",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -189,7 +189,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad1",
-                    "action": "Select",
+                    "action": "Accept",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -200,7 +200,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad1",
-                    "action": "Select",
+                    "action": "Accept",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

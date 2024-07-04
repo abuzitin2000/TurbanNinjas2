@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public RebindsMenu rebinds;
+    public VideoSettingsManager video;
 
     public SpriteRenderer stand;
     public Sprite[] stands;
     public List<GameObject> menus;
 
-    private List<UnityEngine.UI.Button> buttons;
-    private int selectedItem;
-    private int selectedMenu;
+    public List<UnityEngine.UI.Button> buttons;
+    public int selectedItem;
+    public int selectedMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -57,34 +58,30 @@ public class MainMenuManager : MonoBehaviour
 
     public void MenuLeft()
     {
-        switch (buttons[selectedItem].name)
+        switch (selectedMenu)
         {
-            case "ButtonRebindsType":
-                rebinds.type -= 1;
-                rebinds.SwitchType();
+            case 5:
+                rebinds.MenuLeft(selectedItem);
                 ChangeMenuItems(5, -1);
                 break;
-            case "ButtonRebindsController":
-                rebinds.controller -= 1;
-                rebinds.SwitchController();
-                ChangeMenuItems(5, -1);
+            case 6:
+                video.MenuLeft(selectedItem);
+                ChangeMenuItems(6, -1);
                 break;
         }
     }
 
     public void MenuRight()
     {
-        switch (buttons[selectedItem].name)
+        switch (selectedMenu)
         {
-            case "ButtonRebindsType":
-                rebinds.type += 1;
-                rebinds.SwitchType();
+            case 5:
+                rebinds.MenuRight(selectedItem);
                 ChangeMenuItems(5, -1);
                 break;
-            case "ButtonRebindsController":
-                rebinds.controller += 1;
-                rebinds.SwitchController();
-                ChangeMenuItems(5, -1);
+            case 6:
+                video.MenuRight(selectedItem);
+                ChangeMenuItems(6, -1);
                 break;
         }
     }
@@ -146,6 +143,11 @@ public class MainMenuManager : MonoBehaviour
         ChangeMenuItems(5, 0);
     }
 
+    public void SelectVideo()
+    {
+        ChangeMenuItems(6, 0);
+    }
+
     public void SelectBack()
     {
         switch (selectedMenu)
@@ -173,13 +175,21 @@ public class MainMenuManager : MonoBehaviour
             case 5:
                 ChangeMenuItems(4, 3);
                 break;
+            // Video
+            case 6:
+                if (video.resolutionDropdown.activeSelf)
+                    video.CloseDropdown();
+                else
+                    video.SaveSettings();
+                    ChangeMenuItems(4, 0);
+                break;
             default:
                 ChangeMenuItems(0, 0);
                 break;
         }
     }
 
-    private void ChangeMenuItems(int selectedMenu, int selectButton)
+    public void ChangeMenuItems(int selectedMenu, int selectButton)
 	{
         this.selectedMenu = selectedMenu;
 
@@ -196,7 +206,10 @@ public class MainMenuManager : MonoBehaviour
 
 		foreach (UnityEngine.UI.Button button in menus[selectedMenu].GetComponentsInChildren<UnityEngine.UI.Button>(false))
 		{
-            buttons.Add(button);
+            if (button.enabled)
+            {
+                buttons.Add(button);
+            }
 		}
 
         // Select First Button as Default

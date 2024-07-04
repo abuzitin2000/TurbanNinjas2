@@ -25,7 +25,37 @@ public class RebindsMenu : MonoBehaviour
 		SwitchController();
 	}
 
-	public void SwitchType()
+	public void MenuLeft(int index)
+	{
+		switch (index)
+		{
+			case 0:
+                type -= 1;
+                SwitchType();
+				break;
+			case 1:
+                controller -= 1;
+                SwitchController();
+				break;
+        }
+    }
+
+    public void MenuRight(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                type += 1;
+                SwitchType();
+                break;
+            case 1:
+                controller += 1;
+                SwitchController();
+                break;
+        }
+    }
+
+    public void SwitchType()
 	{
 		if (type > 2)
 		{
@@ -88,11 +118,6 @@ public class RebindsMenu : MonoBehaviour
 
 		// Enable current menu
 		rebindMenus[type * 2 + controller].SetActive(true);
-	}
-
-	public void Rebind()
-	{
-
 	}
 
 	public void ResetBinds()

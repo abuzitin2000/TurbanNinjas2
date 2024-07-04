@@ -27,7 +27,7 @@ public class PlayerInputPairing : MonoBehaviour
 
             if ((device is Keyboard) || (device is Gamepad))
             {
-                //DeviceAdded(device);
+                DeviceAdded(device);
             }
         };
 

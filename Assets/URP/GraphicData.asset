@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436d52a7139b4f346b11a868aae980f4, type: 3}
+  m_Name: GraphicData
+  m_EditorClassIdentifier: 
+  screenModes: 000000000100000003000000
+  fpsLimits: ffffffff1e0000003c0000004b0000005a0000007800000090000000f0000000
+  presets:
+  - name: Very Low
+    textureQuality: 0
+    meshQuality: 0
+    effectsQuality: 0
+    shadowQuality: 0
+    antiAliasing: 0
+    msaa: 1
+    hdr: 0
+    renderScale: 0.8
+  - name: Low
+    textureQuality: 1
+    meshQuality: 1
+    effectsQuality: 1
+    shadowQuality: 1
+    antiAliasing: 1
+    msaa: 1
+    hdr: 0
+    renderScale: 1
+  - name: Medium
+    textureQuality: 2
+    meshQuality: 2
+    effectsQuality: 2
+    shadowQuality: 2
+    antiAliasing: 1
+    msaa: 2
+    hdr: 1
+    renderScale: 1
+  - name: High
+    textureQuality: 3
+    meshQuality: 3
+    effectsQuality: 3
+    shadowQuality: 3
+    antiAliasing: 2
+    msaa: 2
+    hdr: 1
+    renderScale: 1
+  - name: Very High
+    textureQuality: 4
+    meshQuality: 4
+    effectsQuality: 4
+    shadowQuality: 4
+    antiAliasing: 2
+    msaa: 4
+    hdr: 1
+    renderScale: 1
+  - name: Ultra
+    textureQuality: 5
+    meshQuality: 5
+    effectsQuality: 5
+    shadowQuality: 5
+    antiAliasing: 2
+    msaa: 8
+    hdr: 1
+    renderScale: 2
+  textures:
+  - name: Very Low
+    mipmapLimit: 3
+    anisotropicFiltering: 0
+    depthTextures: 0
+    opaqueTextures: 0
+  - name: Low
+    mipmapLimit: 2
+    anisotropicFiltering: 0
+    depthTextures: 0
+    opaqueTextures: 0
+  - name: Medium
+    mipmapLimit: 1
+    anisotropicFiltering: 1
+    depthTextures: 0
+    opaqueTextures: 0
+  - name: High
+    mipmapLimit: 0
+    anisotropicFiltering: 1
+    depthTextures: 1
+    opaqueTextures: 1
+  - name: Very High
+    mipmapLimit: 0
+    anisotropicFiltering: 2
+    depthTextures: 1
+    opaqueTextures: 1
+  - name: Ultra
+    mipmapLimit: 0
+    anisotropicFiltering: 2
+    depthTextures: 1
+    opaqueTextures: 1
+  meshes:
+  - name: Very Low
+    lodBias: 0.3
+    maxLod: 0
+    skinWeights: 1
+  - name: Low
+    lodBias: 0.4
+    maxLod: 0
+    skinWeights: 2
+  - name: Medium
+    lodBias: 0.7
+    maxLod: 0
+    skinWeights: 2
+  - name: High
+    lodBias: 1
+    maxLod: 0
+    skinWeights: 2
+  - name: Very High
+    lodBias: 1.5
+    maxLod: 0
+    skinWeights: 4
+  - name: Ultra
+    lodBias: 2
+    maxLod: 0
+    skinWeights: 255
+  effects:
+  - name: Very Low
+    reflectionProbes: 0
+    particleRaycastBudget: 4
+    colorGrading: 0
+    colorGradingLutSize: 4
+  - name: Low
+    reflectionProbes: 0
+    particleRaycastBudget: 16
+    colorGrading: 0
+    colorGradingLutSize: 8
+  - name: Medium
+    reflectionProbes: 0
+    particleRaycastBudget: 64
+    colorGrading: 0
+    colorGradingLutSize: 16
+  - name: High
+    reflectionProbes: 1
+    particleRaycastBudget: 256
+    colorGrading: 0
+    colorGradingLutSize: 32
+  - name: Very High
+    reflectionProbes: 1
+    particleRaycastBudget: 1024
+    colorGrading: 1
+    colorGradingLutSize: 32
+  - name: Ultra
+    reflectionProbes: 1
+    particleRaycastBudget: 4096
+    colorGrading: 1
+    colorGradingLutSize: 64
+  shadows:
+  - name: Very Low
+    realtimeGI: 25
+    shadowmaskMode: 0
+    shadowObject: 0
+  - name: Low
+    realtimeGI: 25
+    shadowmaskMode: 0
+    shadowObject: 1
+  - name: Medium
+    realtimeGI: 50
+    shadowmaskMode: 0
+    shadowObject: 2
+  - name: High
+    realtimeGI: 75
+    shadowmaskMode: 1
+    shadowObject: 3
+  - name: Very High
+    realtimeGI: 75
+    shadowmaskMode: 1
+    shadowObject: 4
+  - name: Ultra
+    realtimeGI: 100
+    shadowmaskMode: 1
+    shadowObject: 5

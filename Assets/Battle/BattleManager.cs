@@ -50,9 +50,6 @@ public class BattleManager : MonoBehaviour
     // Setup Battle
     void Start()
     {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
-
         character1 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         character2 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
