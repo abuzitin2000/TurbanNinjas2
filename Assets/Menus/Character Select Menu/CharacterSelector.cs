@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterSelector : MonoBehaviour
 {
@@ -34,12 +35,43 @@ public class CharacterSelector : MonoBehaviour
     public List<TMPro.TextMeshProUGUI> player1Info;
     public List<TMPro.TextMeshProUGUI> player2Info;
 
-    public List<string> ninjaNames;
-    public List<string> ninjaTypes;
-    public List<string> ninjaMove1s;
-    public List<string> ninjaMove2s;
-    public List<string> ninjaMove3s;
-    public List<string> ninjaJutsus;
+    public List<Image> player1InfoIcons;
+    public List<Image> player2InfoIcons;
+
+    public List<Sprite> inputIconList;
+
+    [System.Serializable]
+    public enum inputIcon
+    {
+        None,
+        Down,
+        Up,
+        Left,
+        Right,
+        DownRight,
+        DownLeft,
+        UpRight,
+        UpLeft,
+        Punch,
+        Kick,
+        Plus
+    }
+
+    [System.Serializable]
+    public class charInfo
+    {
+        public string name;
+        public string type;
+        public string move1Description;
+        public List<inputIcon> move1InputIcons;
+        public string move2Description;
+        public List<inputIcon> move2InputIcons;
+        public string move3Description;
+        public List<inputIcon> move3InputIcons;
+        public string jutsu;
+    }
+
+    public List<charInfo> charInfos;
 
     // Start is called before the first frame update
     void Start()
@@ -193,40 +225,70 @@ public class CharacterSelector : MonoBehaviour
         // Texts
         if (player1Selected < 100)
         {
-            player1Info[0].text = ninjaNames[player1Selected];
-            player1Info[1].text = ninjaTypes[player1Selected];
-            player1Info[2].text = ninjaMove1s[player1Selected];
-            player1Info[3].text = ninjaMove2s[player1Selected];
-            player1Info[4].text = ninjaMove3s[player1Selected];
-            player1Info[5].text = ninjaJutsus[player1Selected];
+            player1Info[0].text = charInfos[player1Selected].name;
+            player1Info[1].text = "Type: " + charInfos[player1Selected].type;
+            player1Info[2].text = charInfos[player1Selected].move1Description;
+            player1InfoIcons[0].sprite = inputIconList[(int)charInfos[player1Selected].move1InputIcons[0]];
+            player1InfoIcons[1].sprite = inputIconList[(int)charInfos[player1Selected].move1InputIcons[1]];
+            player1InfoIcons[2].sprite = inputIconList[(int)charInfos[player1Selected].move1InputIcons[2]];
+            player1InfoIcons[3].sprite = inputIconList[(int)charInfos[player1Selected].move1InputIcons[3]];
+            player1InfoIcons[4].sprite = inputIconList[(int)charInfos[player1Selected].move1InputIcons[4]];
+            player1Info[3].text = charInfos[player1Selected].move2Description;
+            player1InfoIcons[5].sprite = inputIconList[(int)charInfos[player1Selected].move2InputIcons[0]];
+            player1InfoIcons[6].sprite = inputIconList[(int)charInfos[player1Selected].move2InputIcons[1]];
+            player1InfoIcons[7].sprite = inputIconList[(int)charInfos[player1Selected].move2InputIcons[2]];
+            player1InfoIcons[8].sprite = inputIconList[(int)charInfos[player1Selected].move2InputIcons[3]];
+            player1InfoIcons[9].sprite = inputIconList[(int)charInfos[player1Selected].move2InputIcons[4]];
+            player1Info[4].text = charInfos[player1Selected].move3Description;
+            player1InfoIcons[10].sprite = inputIconList[(int)charInfos[player1Selected].move3InputIcons[0]];
+            player1InfoIcons[11].sprite = inputIconList[(int)charInfos[player1Selected].move3InputIcons[1]];
+            player1InfoIcons[12].sprite = inputIconList[(int)charInfos[player1Selected].move3InputIcons[2]];
+            player1InfoIcons[13].sprite = inputIconList[(int)charInfos[player1Selected].move3InputIcons[3]];
+            player1InfoIcons[14].sprite = inputIconList[(int)charInfos[player1Selected].move3InputIcons[4]];
+            player1Info[5].text = charInfos[player1Selected].jutsu;
         }
         else
         {
-            player1Info[0].text = ninjaNames[player1Selected - 100 + lowerPortraits.Count];
-            player1Info[1].text = ninjaTypes[player1Selected - 100 + lowerPortraits.Count];
-            player1Info[2].text = ninjaMove1s[player1Selected - 100 + lowerPortraits.Count];
-            player1Info[3].text = ninjaMove2s[player1Selected - 100 + lowerPortraits.Count];
-            player1Info[4].text = ninjaMove3s[player1Selected - 100 + lowerPortraits.Count];
-            player1Info[5].text = ninjaJutsus[player1Selected - 100 + lowerPortraits.Count];
+            player1Info[0].text = charInfos[player1Selected - 100 + lowerPortraits.Count].name;
+            player1Info[1].text = "Type: " + charInfos[player1Selected - 100 + lowerPortraits.Count].type;
+            player1Info[2].text = charInfos[player1Selected - 100 + lowerPortraits.Count].move1Description;
+            player1InfoIcons[0].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[0]];
+            player1InfoIcons[1].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[1]];
+            player1InfoIcons[2].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[2]];
+            player1InfoIcons[3].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[3]];
+            player1InfoIcons[4].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[4]];
+            player1Info[3].text = charInfos[player1Selected - 100 + lowerPortraits.Count].move2Description;
+            player1InfoIcons[5].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move2InputIcons[0]];
+            player1InfoIcons[6].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move2InputIcons[1]];
+            player1InfoIcons[7].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move2InputIcons[2]];
+            player1InfoIcons[8].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[3]];
+            player1InfoIcons[9].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[4]];
+            player1Info[4].text = charInfos[player1Selected - 100 + lowerPortraits.Count].move3Description;
+            player1InfoIcons[10].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move3InputIcons[0]];
+            player1InfoIcons[11].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move3InputIcons[1]];
+            player1InfoIcons[12].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move3InputIcons[2]];
+            player1InfoIcons[13].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[3]];
+            player1InfoIcons[14].sprite = inputIconList[(int)charInfos[player1Selected - 100 + lowerPortraits.Count].move1InputIcons[4]];
+            player1Info[5].text = charInfos[player1Selected - 100 + lowerPortraits.Count].jutsu;
         }
 
         if (player2Selected < 100)
         {
-            player2Info[0].text = ninjaNames[player2Selected];
-            player2Info[1].text = ninjaTypes[player2Selected];
-            player2Info[2].text = ninjaMove1s[player2Selected];
-            player2Info[3].text = ninjaMove2s[player2Selected];
-            player2Info[4].text = ninjaMove3s[player2Selected];
-            player2Info[5].text = ninjaJutsus[player2Selected];
+            player2Info[0].text = charInfos[player2Selected].name;
+            player2Info[1].text = "Type: " + charInfos[player2Selected].type;
+            player2Info[2].text = charInfos[player2Selected].move1Description;
+            player2Info[3].text = charInfos[player2Selected].move2Description;
+            player2Info[4].text = charInfos[player2Selected].move3Description;
+            player2Info[5].text = charInfos[player2Selected].jutsu;
         }
         else
         {
-            player2Info[0].text = ninjaNames[player2Selected - 100 + lowerPortraits.Count];
-            player2Info[1].text = ninjaTypes[player2Selected - 100 + lowerPortraits.Count];
-            player2Info[2].text = ninjaMove1s[player2Selected - 100 + lowerPortraits.Count];
-            player2Info[3].text = ninjaMove2s[player2Selected - 100 + lowerPortraits.Count];
-            player2Info[4].text = ninjaMove3s[player2Selected - 100 + lowerPortraits.Count];
-            player2Info[5].text = ninjaJutsus[player2Selected - 100 + lowerPortraits.Count];
+            player2Info[0].text = charInfos[player2Selected - 100 + lowerPortraits.Count].name;
+            player2Info[1].text = "Type: " + charInfos[player2Selected - 100 + lowerPortraits.Count].type;
+            player2Info[2].text = charInfos[player2Selected - 100 + lowerPortraits.Count].move1Description;
+            player2Info[3].text = charInfos[player2Selected - 100 + lowerPortraits.Count].move2Description;
+            player2Info[4].text = charInfos[player2Selected - 100 + lowerPortraits.Count].move3Description;
+            player2Info[5].text = charInfos[player2Selected - 100 + lowerPortraits.Count].jutsu;
         }
     }
 
