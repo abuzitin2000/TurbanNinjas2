@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class CharacterAnimation : MonoBehaviour
 {
@@ -160,12 +159,12 @@ public class CharacterAnimation : MonoBehaviour
         int upperCount = characterData.characterAnimations[anim].phases[0].duration - 1;
         int lowerCount = 0;
 
-        int i = phase;
-        while (i > 0)
+        int i = 1;
+        while (i <= phase)
         {
             lowerCount = upperCount + 1;
             upperCount += characterData.characterAnimations[anim].phases[i].duration;
-            i--;
+            i++;
         }
 
         float percentage = (float)(frame - lowerCount) / (float)(upperCount - lowerCount);
