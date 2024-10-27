@@ -7,72 +7,100 @@ public class CharacterAnimation : MonoBehaviour
     public BattleManager battleManager;
     public CollisionManager collisionManager;
 
-    public Animator player1Animator;
-    public Animator player2Animator;
+    public Animator character1Animator;
+    public Animator character2Animator;
 
-    private string player1CurrentAnimation;
-    private string player2CurrentAnimation;
+    private string character1CurrentAnimation;
+    private string character2CurrentAnimation;
 
     public void AnimateCharacters()
     {
-        if (player1CurrentAnimation != battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName)
+        // Character States
+        BattleGameState.CharacterState character1State = battleManager.gameState.character1;
+        BattleGameState.CharacterState character2State = battleManager.gameState.character2;
+
+        // Animations to Play
+        string character1AnimationName = GetAnimation(battleManager.character1Datas, character1State.animation).animationFileName;
+        string character2AnimationName = GetAnimation(battleManager.character2Datas, character2State.animation).animationFileName;
+
+        if (character1CurrentAnimation != character1AnimationName)
         {
-            player1Animator.CrossFadeInFixedTime(battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName, 0.1f, 0);
-            player1CurrentAnimation = battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName;
+            character1Animator.CrossFadeInFixedTime(character1AnimationName, 0.1f, 0);
+            character1CurrentAnimation = character1AnimationName;
         }
-        else if (!player1Animator.IsInTransition(0))
+        else if (!character1Animator.IsInTransition(0))
         {
-            player1Animator.Play(battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].animationFileName, 0, GetAnimationPercentage(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame));
+            character1Animator.Play(character1AnimationName, 0, GetAnimationPercentage(battleManager.character1Datas, character1State.animation, character1State.frame));
         }
 
-        if (player2CurrentAnimation != battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName)
+        if (character2CurrentAnimation != character2AnimationName)
         {
-            player2Animator.CrossFadeInFixedTime(battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName, 0.1f, 0);
-            player2CurrentAnimation = battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName;
+            character2Animator.CrossFadeInFixedTime(character2AnimationName, 0.1f, 0);
+            character2CurrentAnimation = character2AnimationName;
         }
-        else if (!player2Animator.IsInTransition(0))
+        else if (!character2Animator.IsInTransition(0))
         {
-            player2Animator.Play(battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].animationFileName, 0, GetAnimationPercentage(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame));
+            character2Animator.Play(character2AnimationName, 0, GetAnimationPercentage(battleManager.character2Datas, character2State.animation, character2State.frame));
         }
 
-        battleManager.character1.transform.localScale = new Vector3(battleManager.gameState.player1.mirrored ? -1f : 1f, 1f, 1f);
-        battleManager.character2.transform.localScale = new Vector3(battleManager.gameState.player2.mirrored ? -1f : 1f, 1f, 1f);
-        battleManager.character1.transform.eulerAngles = new Vector3(battleManager.character1.transform.eulerAngles.x, battleManager.gameState.player1.mirrored ? 270f : -270f, battleManager.character1.transform.eulerAngles.z);
-        battleManager.character2.transform.eulerAngles = new Vector3(battleManager.character2.transform.eulerAngles.x, battleManager.gameState.player2.mirrored ? 270f : -270f, battleManager.character2.transform.eulerAngles.z);
+        battleManager.character1.transform.localScale = new Vector3(battleManager.gameState.character1.mirrored ? -1f : 1f, 1f, 1f);
+        battleManager.character2.transform.localScale = new Vector3(battleManager.gameState.character2.mirrored ? -1f : 1f, 1f, 1f);
+        battleManager.character1.transform.eulerAngles = new Vector3(battleManager.character1.transform.eulerAngles.x, battleManager.gameState.character1.mirrored ? 270f : -270f, battleManager.character1.transform.eulerAngles.z);
+        battleManager.character2.transform.eulerAngles = new Vector3(battleManager.character2.transform.eulerAngles.x, battleManager.gameState.character2.mirrored ? 270f : -270f, battleManager.character2.transform.eulerAngles.z);
     }
 
-    public bool SetAnimation(BattleGameState.CharacterState characterState, CharacterData characterData, string name)
+    public void AdvanceFrames()
     {
-        int anim = characterData.characterAnimations.FindIndex(x => x.name == name);
+        // Player 1
+        SetFrame(true, GetAnimation(battleManager.character1Datas, battleManager.gameState.character1.animation), battleManager.gameState.character1.frame + 1);
 
-        // Check if anim exists
-        if (anim == -1)
-		{
-            Debug.Log("Not Found");
-            return false;
-		}
+        // Player 2
+        SetFrame(false, GetAnimation(battleManager.character2Datas, battleManager.gameState.character2.animation), battleManager.gameState.character2.frame + 1);
+    }
 
-        // Start from begining if animation is not set as looping or a new animation is starting
-        if (anim != characterState.animation || (anim == characterState.animation && !characterData.characterAnimations[anim].loop))
+    public bool SetAnimation(bool isCharacter1, string animationName)
+    {
+        // Get Animations Data List
+        List<AnimationsData> animationsData = isCharacter1 ? battleManager.character1Datas : battleManager.character2Datas;
+
+        // Find Animation Index
+        int animationIndex = FindAnimationIndexbyName(animationsData, animationName);
+
+        // Check if animation exists
+        if (animationIndex == -1)
         {
-            SetFrame(characterState, characterData, anim, 0);
+            Debug.Log("Animation To Set Not Found");
+            return false;
+        }
+
+        // Get Animation Data
+        AnimationsData.CharacterAnimation animation = GetAnimation(animationsData, animationIndex);
+
+        // Current Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
+        // Start Animation from start if actually changing animation or resetting it
+        if (animationIndex != characterState.animation || (animationIndex == characterState.animation && !animation.loop))
+        {
+            SetFrame(isCharacter1, animation, 0);
             characterState.attacking = false;
             characterState.hit = false;
         }
 
-        characterState.animation = anim;
+        // Set Animation
+        characterState.animation = animationIndex;
 
         return true;
     }
 
-    public void SetFrame(BattleGameState.CharacterState characterState, CharacterData characterData, int anim, int frame)
+    private void SetFrame(bool isCharacter1, AnimationsData.CharacterAnimation animation, int frame)
     {
-        int framePhase = FindPhase(characterData, anim, frame);
+        int framePhase = FindPhase(animation, frame);
 
         // Check if frame exists
-        if (framePhase > characterData.characterAnimations[anim].phases.Count - 1)
+        if (framePhase > animation.phases.Count - 1)
 		{
-            Debug.LogError("Animation not found!!!");
+            Debug.LogError("Frame Doesn't Exists!");
             return;
 		}
 
@@ -80,49 +108,44 @@ public class CharacterAnimation : MonoBehaviour
         if (framePhase == -1)
         {
             // If already Idle
-            if (anim == 0)
+            if (animation.name == "Idle")
 			{
-                SetFrame(characterState, characterData, anim, 0);
+                SetFrame(isCharacter1, animation, 0);
 			}
 
-            SetAnimation(characterState, characterData, "Idle");
+            SetAnimation(isCharacter1, "Idle");
             return;
         }
 
+        // Current Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
+        // Set Frame
         characterState.frame = frame;
 
         // Animation settings
-        characterState.cancellable = characterData.characterAnimations[anim].phases[framePhase].specialCancellable;
+        characterState.cancellable = animation.phases[framePhase].specialCancellable;
 
         // Change velocity
-        if (characterData.characterAnimations[anim].phases[framePhase].changeVelocity)
+        if (animation.phases[framePhase].changeVelocity)
 		{
             if (!characterState.mirrored)
 			{
-                characterState.velocityX = characterData.characterAnimations[anim].phases[framePhase].velocityX;
+                characterState.velocityX = animation.phases[framePhase].velocityX;
 			}
 			else
 			{
-                characterState.velocityX = characterData.characterAnimations[anim].phases[framePhase].velocityX * -1;
+                characterState.velocityX = animation.phases[framePhase].velocityX * -1;
             }
 
-            characterState.velocityY = characterData.characterAnimations[anim].phases[framePhase].velocityY;
+            characterState.velocityY = animation.phases[framePhase].velocityY;
         }
     }
 
-    public void AdvanceFrames()
-    {
-        // Player 1
-        SetFrame(battleManager.gameState.player1, battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame + 1);
-
-        // Player 2
-        SetFrame(battleManager.gameState.player2, battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame + 1);
-    }
-
-    public int FindPhase(CharacterData characterData, int anim, int frame)
+    public int FindPhase(AnimationsData.CharacterAnimation animation, int frame)
 	{
         // End animation if animation has no frames
-        if (characterData.characterAnimations[anim].phases.Count == 0 || characterData.characterAnimations[anim].phases[0].duration == 0)
+        if (animation.phases.Count == 0 || animation.phases[0].duration == 0)
         {
             return -1;
         }
@@ -130,13 +153,13 @@ public class CharacterAnimation : MonoBehaviour
         // Search Phase
         int phase = 0;
 
-        while (frame + 1 > characterData.characterAnimations[anim].phases[phase].duration)
+        while (frame + 1 > animation.phases[phase].duration)
         {
-            frame -= characterData.characterAnimations[anim].phases[phase].duration;
+            frame -= animation.phases[phase].duration;
             phase++;
 
             // If the frame is higher than enire animation length therefore finished
-            if (phase > characterData.characterAnimations[anim].phases.Count - 1)
+            if (phase > animation.phases.Count - 1)
             {
                 return -1;
             }
@@ -145,32 +168,78 @@ public class CharacterAnimation : MonoBehaviour
         return phase;
     }
 
-    private float GetAnimationPercentage(CharacterData characterData, int anim, int frame)
+    private int FindAnimationIndexbyName(List<AnimationsData> animationsData, string animationName)
     {
-        int phase = FindPhase(characterData, anim, frame);
+        // Find animation index
+        int animationIndex = -1;
+        int fileIndex = 0;
+
+        foreach (AnimationsData animations in animationsData)
+        {
+            animationIndex = animations.characterAnimations.FindIndex(x => x.name == animationName);
+
+            // Found
+            if (animationIndex != -1)
+            {
+                break;
+            }
+
+            fileIndex++;
+        }
+
+        return animationIndex + fileIndex * 100;
+    }
+
+    private AnimationsData.CharacterAnimation GetAnimation(List<AnimationsData> animationsData, int animationIndex)
+    {
+        // Animation Data
+        AnimationsData.CharacterAnimation animation;
+
+        if (animationIndex < 100)
+        {
+            animation = animationsData[0].characterAnimations[animationIndex];
+        }
+        else if (animationIndex < 200)
+        {
+            animation = animationsData[1].characterAnimations[animationIndex - 100];
+        }
+        else
+        {
+            animation = animationsData[2].characterAnimations[animationIndex - 200];
+        }
+
+        return animation;
+    }
+
+    private float GetAnimationPercentage(List<AnimationsData> animationsData, int animationIndex, int frame)
+    {
+        // Animation Data
+        AnimationsData.CharacterAnimation animation = GetAnimation(animationsData, animationIndex);
+        int phase = FindPhase(animation, frame);
 
         // If animation is not found
         if (phase == -1)
         {
+            Debug.Log("Animation Not Found While Trying To Animate Character!");
             return 0f;
         }
 
         // Find Phase Percentage
-        int upperCount = characterData.characterAnimations[anim].phases[0].duration - 1;
+        int upperCount = animation.phases[0].duration - 1;
         int lowerCount = 0;
 
         int i = 1;
         while (i <= phase)
         {
             lowerCount = upperCount + 1;
-            upperCount += characterData.characterAnimations[anim].phases[i].duration;
+            upperCount += animation.phases[i].duration;
             i++;
         }
 
         float percentage = (float)(frame - lowerCount) / (float)(upperCount - lowerCount);
 
         // Find Animation Time
-        float animationTime = Mathf.Lerp(characterData.characterAnimations[anim].phases[phase].animStartTime, characterData.characterAnimations[anim].phases[phase].animEndTime, percentage);
+        float animationTime = Mathf.Lerp(animation.phases[phase].animStartTime, animation.phases[phase].animEndTime, percentage);
 
         if (animationTime < 0f)
         {
@@ -185,89 +254,39 @@ public class CharacterAnimation : MonoBehaviour
         return animationTime;
     }
 
-    private int GetTotalFrameCount(CharacterData characterData, int anim)
+    public AnimationsData.CharacterAnimationPhase GetAnimationPhase(bool isCharacter1)
     {
-        int totalFrameCount = 0;
+        // Get Animations Data List
+        List<AnimationsData> animationsData = isCharacter1 ? battleManager.character1Datas : battleManager.character2Datas;
 
-        foreach (CharacterData.characteranimationphase phase in characterData.characterAnimations[anim].phases)
-        {
-            totalFrameCount += phase.duration;
-        }
+        // Current Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
 
-        return totalFrameCount;
+        int animationPhase = FindPhase(GetAnimation(animationsData, characterState.animation), characterState.frame);
+
+        return GetAnimation(animationsData, characterState.animation).phases[animationPhase];
     }
 
     public void CallSpecialFunctions()
 	{
-        // Player 1 Special Function
-        int player1FramePhase = FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame);
-        battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[player1FramePhase].specialFunctions.Invoke(true, battleManager.gameState);
+        // Character 1 Animation Data
+        AnimationsData.CharacterAnimation character1Animation = GetAnimation(battleManager.character1Datas, battleManager.gameState.character1.animation);
+        int character1AnimationPhase = FindPhase(character1Animation, battleManager.gameState.character1.frame);
 
-        // Player 2 Special Function
-        int player2FramePhase = FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame);
-        battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[player2FramePhase].specialFunctions.Invoke(false, battleManager.gameState);
-    }
+        // Character 2 Animation Data
+        AnimationsData.CharacterAnimation character2Animation = GetAnimation(battleManager.character2Datas, battleManager.gameState.character2.animation);
+        int character2AnimationPhase = FindPhase(character2Animation, battleManager.gameState.character2.frame);
 
-    private void OnDrawGizmos()
-    {
-        // Player 1 Hurtbox
-        foreach (CharacterData.hurtboxdata hurtbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hurtBoxes)
+        // Character 1 Special Function
+        if (character1Animation.phases[character1AnimationPhase].specialFunctions != null)
         {
-            int mirrorhurtboxPositionoffsetX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? hurtbox.positionoffsetX * -1 : hurtbox.positionoffsetX;
-            int mirrorhurtboxsizeX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? hurtbox.sizeX * -1 : hurtbox.sizeX;
-
-            Gizmos.color = new Color(0, 1, 1, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player1.positionX + mirrorhurtboxPositionoffsetX + (mirrorhurtboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player1.positionY + hurtbox.positionoffsetY - (hurtbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorhurtboxsizeX / BattleManager.renderRatio, hurtbox.sizeY / BattleManager.renderRatio));
+            character1Animation.phases[character1AnimationPhase].specialFunctions.Invoke(true, battleManager.gameState);
         }
 
-        // Player 1 Hitbox
-        foreach (CharacterData.hitboxdata hitbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hitBoxes)
+        // Character 2 Special Function
+        if (character2Animation.phases[character2AnimationPhase].specialFunctions != null)
         {
-            int mirrorhitboxPositionoffsetX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? hitbox.positionoffsetX * -1 : hitbox.positionoffsetX;
-            int mirrorhitboxsizeX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? hitbox.sizeX * -1 : hitbox.sizeX;
-
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player1.positionX + mirrorhitboxPositionoffsetX + (mirrorhitboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player1.positionY + hitbox.positionoffsetY - (hitbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorhitboxsizeX / BattleManager.renderRatio, hitbox.sizeY / BattleManager.renderRatio));
-        }
-
-        // Player 1 Collisionbox
-        foreach (CharacterData.collisionboxdata collisionbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].collisionBoxes)
-        {
-            int mirrorcollisionboxPositionoffsetX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? collisionbox.positionoffsetX * -1 : collisionbox.positionoffsetX;
-            int mirrorcollisionboxsizeX = battleManager.gameState.player1.positionX > battleManager.gameState.player2.positionX ? collisionbox.sizeX * -1 : collisionbox.sizeX;
-
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player1.positionX + mirrorcollisionboxPositionoffsetX + (mirrorcollisionboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player1.positionY + collisionbox.positionoffsetY - (collisionbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorcollisionboxsizeX / BattleManager.renderRatio, collisionbox.sizeY / BattleManager.renderRatio));
-        }
-
-        // Player 2 Hurtbox
-        foreach (CharacterData.hurtboxdata hurtbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hurtBoxes)
-        {
-            int mirrorhurtboxPositionoffsetX = battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX ? hurtbox.positionoffsetX * -1 : hurtbox.positionoffsetX;
-            int mirrorhurtboxsizeX = battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX ? hurtbox.sizeX * -1 : hurtbox.sizeX;
-
-            Gizmos.color = new Color(0, 1, 1, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player2.positionX + mirrorhurtboxPositionoffsetX + (mirrorhurtboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player2.positionY + hurtbox.positionoffsetY - (hurtbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorhurtboxsizeX / BattleManager.renderRatio, hurtbox.sizeY / BattleManager.renderRatio));
-        }
-
-        // Player 2 Hitbox
-        foreach (CharacterData.hitboxdata hitbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hitBoxes)
-        {
-            int mirrorhitboxPositionoffsetX = battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX ? hitbox.positionoffsetX * -1 : hitbox.positionoffsetX;
-            int mirrorhitboxsizeX = battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX ? hitbox.sizeX * -1 : hitbox.sizeX;
-
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player2.positionX + mirrorhitboxPositionoffsetX + (mirrorhitboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player2.positionY + hitbox.positionoffsetY - (hitbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorhitboxsizeX / BattleManager.renderRatio, hitbox.sizeY / BattleManager.renderRatio));
-        }
-
-        // Player 2 Collisionbox
-        foreach (CharacterData.collisionboxdata collisionbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].collisionBoxes)
-        {
-            int mirrorcollisionboxPositionoffsetX = battleManager.gameState.player2.positionX > battleManager.gameState.player1.positionX ? collisionbox.positionoffsetX * -1 : collisionbox.positionoffsetX;
-            int mirrorcollisionboxsizeX = battleManager.gameState.player2.positionX > battleManager.gameState.player1.positionX ? collisionbox.sizeX * -1 : collisionbox.sizeX;
-
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawCube(new Vector3((battleManager.gameState.player2.positionX + mirrorcollisionboxPositionoffsetX + (mirrorcollisionboxsizeX / 2f)) / BattleManager.renderRatio, (battleManager.gameState.player2.positionY + collisionbox.positionoffsetY - (collisionbox.sizeY / 2f)) / BattleManager.renderRatio, 0), new Vector2(mirrorcollisionboxsizeX / BattleManager.renderRatio, collisionbox.sizeY / BattleManager.renderRatio));
+            character2Animation.phases[character2AnimationPhase].specialFunctions.Invoke(false, battleManager.gameState);
         }
     }
 }

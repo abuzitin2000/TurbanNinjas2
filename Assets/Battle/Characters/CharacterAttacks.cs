@@ -8,14 +8,20 @@ public class CharacterAttacks : MonoBehaviour
 
     public void AttackCharacters()
 	{
-        ProcessSpecials(battleManager.player1InputHistory, battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data);
-        ProcessSpecials(battleManager.player2InputHistory, battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data);
-        ProcessNormals(battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data);
-        ProcessNormals(battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data);
+        // Character 1
+        ProcessSpecials(true, battleManager.player1Buttons, battleManager.player1InputHistory);
+        ProcessNormals(true, battleManager.player1Buttons);
+        
+        // Character 2
+        ProcessSpecials(false, battleManager.player2Buttons, battleManager.player2InputHistory);
+        ProcessNormals(false, battleManager.player2Buttons);
     }
 
-    private void ProcessNormals(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void ProcessNormals(bool isCharacter1, PlayerButtons playerButtons)
     {
+        // Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
         // Return if not able to attack
         if (characterState.stun > 0 || characterState.attacking)
         {
@@ -31,25 +37,25 @@ public class CharacterAttacks : MonoBehaviour
                 // Heavy Punch
                 if (playerButtons.GetHP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StHP");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "StHP");
                     characterState.attacking = true;
                 }
                 // Heavy Kick
                 else if (playerButtons.GetHK(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StHK");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "StHK");
                     characterState.attacking = true;
                 }
                 // Light Punch
                 else if (playerButtons.GetLP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StLP");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "StLP");
                     characterState.attacking = true;
                 }
                 // Light Kick
                 else if (playerButtons.GetLK(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "StLK");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "StLK");
                     characterState.attacking = true;
                 }
             }
@@ -59,25 +65,25 @@ public class CharacterAttacks : MonoBehaviour
                 // Heavy Punch
                 if (playerButtons.GetHP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrHP");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "CrHP");
                     characterState.attacking = true;
                 }
                 // Heavy Kick
                 else if (playerButtons.GetHK(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrHK");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "CrHK");
                     characterState.attacking = true;
                 }
                 // Light Punch
                 else if (playerButtons.GetLP(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrLP");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "CrLP");
                     characterState.attacking = true;
                 }
                 // Light Kick
                 else if (playerButtons.GetLK(false))
                 {
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "CrLK");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "CrLK");
                     characterState.attacking = true;
                 }
             }
@@ -88,32 +94,35 @@ public class CharacterAttacks : MonoBehaviour
             // Heavy Punch
             if (playerButtons.GetHP(false))
             {
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpHP");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "JmpHP");
                 characterState.attacking = true;
             }
             // Heavy Kick
             else if (playerButtons.GetHK(false))
             {
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpHK");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "JmpHK");
                 characterState.attacking = true;
             }
             // Light Punch
             else if (playerButtons.GetLP(false))
             {
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpLP");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "JmpLP");
                 characterState.attacking = true;
             }
             // Light Kick
             else if (playerButtons.GetLK(false))
             {
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JmpLK");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "JmpLK");
                 characterState.attacking = true;
             }
         }
     }
 
-    private void ProcessSpecials(Dictionary<int, PlayerButtons> inputHistory, PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void ProcessSpecials(bool isCharacter1, PlayerButtons playerButtons, Dictionary<int, PlayerButtons> inputHistory)
 	{
+        // Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
         // Return if not able to do a special
         if (characterState.stun > 0 || (characterState.attacking && !characterState.cancellable))
         {
@@ -167,56 +176,56 @@ public class CharacterAttacks : MonoBehaviour
         if (specialInputs[7] && !done)
         {
             specialName += "DU";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // Back Forward Charge
         if (specialInputs[6] && !done)
         {
             specialName += "BF";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // DP Forward
         if (specialInputs[2] && !done)
         {
             specialName += "DPF";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // DP Back
         if (specialInputs[3] && !done)
         {
             specialName += "DPB";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // Half Circle Forward
         if (specialInputs[4] && !done)
         {
             specialName += "HCF";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // Half Circle Back
         if (specialInputs[3] && !done)
         {
             specialName += "HCB";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // Quarter Circle Forward
         if (specialInputs[0] && !done)
 		{
             specialName += "QCF";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         // Quarter Circle Backward
         if (specialInputs[1] && !done)
         {
             specialName += "QCB";
-            done = battleManager.characterAnimator.SetAnimation(characterState, characterData, specialName);
+            done = battleManager.characterAnimator.SetAnimation(isCharacter1, specialName);
         }
 
         if (done)

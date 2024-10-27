@@ -19,7 +19,7 @@ public class RoundManager : MonoBehaviour
 
 	public void CheckRoundOver()
 	{
-		if (battleManager.gameState.player1.health <= 0 || battleManager.gameState.player2.health <= 0)
+		if (battleManager.gameState.character1.health <= 0 || battleManager.gameState.character2.health <= 0)
 		{
 			if (endTimer == -1)
 			{
@@ -46,28 +46,28 @@ public class RoundManager : MonoBehaviour
 		}
 
 		// Win Anim on Landing
-		if (player1Winning && battleManager.gameState.player1.grounded)
+		if (player1Winning && battleManager.gameState.character1.grounded)
 		{
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Win");
-			battleManager.gameState.player1.attacking = true;
+			battleManager.characterAnimator.SetAnimation(true, "Win");
+			battleManager.gameState.character1.attacking = true;
 			player1Winning = false;
 		}
 
-		if (player2Winning && battleManager.gameState.player2.grounded)
+		if (player2Winning && battleManager.gameState.character2.grounded)
 		{
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Win");
-			battleManager.gameState.player2.attacking = true;
+			battleManager.characterAnimator.SetAnimation(false, "Win");
+			battleManager.gameState.character2.attacking = true;
 			player2Winning = false;
 		}
 	}
 
 	private void GiveWins()
 	{
-		if (battleManager.gameState.player1.health > 0)
+		if (battleManager.gameState.character1.health > 0)
 		{
 			player1Wins += 1;
 		}
-		else if (battleManager.gameState.player2.health > 0)
+		else if (battleManager.gameState.character2.health > 0)
 		{
 			player2Wins += 1;
 		}
@@ -80,20 +80,20 @@ public class RoundManager : MonoBehaviour
 
 	private void PlayRoundEndAnimations()
 	{
-		if (battleManager.gameState.player1.health > 0)
+		if (battleManager.gameState.character1.health > 0)
 		{
 			player1Winning = true;
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Lose");
+			battleManager.characterAnimator.SetAnimation(false, "Lose");
 		}
-		else if (battleManager.gameState.player2.health > 0)
+		else if (battleManager.gameState.character2.health > 0)
 		{
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Lose");
+			battleManager.characterAnimator.SetAnimation(true, "Lose");
 			player2Winning = true;
 		}
 		else
 		{
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player1, battleManager.player1Data, "Lose");
-			battleManager.characterAnimator.SetAnimation(battleManager.gameState.player2, battleManager.player2Data, "Lose");
+			battleManager.characterAnimator.SetAnimation(true, "Lose");
+			battleManager.characterAnimator.SetAnimation(false, "Lose");
 		}
 	}
 

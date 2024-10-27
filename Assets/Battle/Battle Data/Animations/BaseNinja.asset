@@ -10,17 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3abb5ee72e02e8c4fa4bfff8332e1838, type: 3}
-  m_Name: BlueNinja
+  m_Name: BaseNinja
   m_EditorClassIdentifier: 
-  stats:
-    health: 1000
-    forwardMoveSpeed: 5
-    backwardMoveSpeed: 5
-    jumpForce: 15
-    jumpHorizontalSpeed: 10
-    fallSpeed: 1
-    forwardDashSpeed: 18
-    backwardDashSpeed: 12
   characterAnimations:
   - name: Idle
     animationFileName: Idle
@@ -187,33 +178,177 @@ MonoBehaviour:
     loop: 0
     phases: []
   - name: StLP
-    animationFileName: 
+    animationFileName: Light Punch
     loop: 0
-    phases: []
+    phases:
+    - duration: 4
+      animStartTime: 0
+      animEndTime: 0.3
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 5
+      animStartTime: 0.3
+      animEndTime: 0.4
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 7
+      animStartTime: 0.4
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: StHP
-    animationFileName: 
+    animationFileName: Heavy Punch
     loop: 0
-    phases: []
+    phases:
+    - duration: 7
+      animStartTime: 0
+      animEndTime: 0.58
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 10
+      animStartTime: 0.58
+      animEndTime: 0.62
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 20
+      animStartTime: 0.62
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: StLK
-    animationFileName: 
+    animationFileName: Light Kick
     loop: 0
-    phases: []
+    phases:
+    - duration: 5
+      animStartTime: 0
+      animEndTime: 0.6
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 3
+      animStartTime: 0.6
+      animEndTime: 0.7
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 15
+      animStartTime: 0.7
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: StHK
-    animationFileName: 
+    animationFileName: Heavy Kick
     loop: 0
-    phases: []
-  - name: StLPQCF
-    animationFileName: 
-    loop: 0
-    phases: []
-  - name: StLPQCB
-    animationFileName: 
-    loop: 0
-    phases: []
-  - name: StLPDPF
-    animationFileName: 
-    loop: 0
-    phases: []
+    phases:
+    - duration: 7
+      animStartTime: 0
+      animEndTime: 0.6
+      specialCancellable: 0
+      changeVelocity: 1
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 10
+      animStartTime: 0.6
+      animEndTime: 0.7
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
+    - duration: 15
+      animStartTime: 0.7
+      animEndTime: 1
+      specialCancellable: 0
+      changeVelocity: 0
+      velocityX: 0
+      velocityY: 0
+      hurtBoxes: []
+      hitBoxes: []
+      collisionBoxes: []
+      specialFunctions:
+        m_PersistentCalls:
+          m_Calls: []
   - name: CrLP
     animationFileName: 
     loop: 0

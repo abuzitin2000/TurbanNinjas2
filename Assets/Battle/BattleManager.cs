@@ -18,6 +18,10 @@ public class BattleManager : MonoBehaviour
     public bool multiplayer;
     public bool start;
 
+    // Selected Characters and Weapons
+    public int player1Ninja;
+    public int player2Ninja;
+
     // Game State
     public BattleGameState gameState;
     public PlayerButtons player1Buttons;
@@ -34,9 +38,15 @@ public class BattleManager : MonoBehaviour
 
     // Game Data
     public BattleData battleData;
-    public CharacterData player1Data;
-    public CharacterData player2Data;
     public InputData inputData;
+    public AnimationsData baseNinjaData;
+    public List<AnimationsData> ninjaDatas;
+    public List<AnimationsData> weaponDatas;
+    public List<StatsData> ninjaStats;
+
+    // Constructed Character Datas
+    public List<AnimationsData> character1Datas;
+    public List<AnimationsData> character2Datas;
 
     // Renders
     public const float renderRatio = 100;
@@ -53,8 +63,11 @@ public class BattleManager : MonoBehaviour
         character1 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         character2 = Instantiate(characterPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
-        characterAnimator.player1Animator = character1.GetComponentInChildren<Animator>();
-        characterAnimator.player2Animator = character2.GetComponentInChildren<Animator>();
+        character1Datas = new List<AnimationsData>() { baseNinjaData, ninjaDatas[player1Ninja], weaponDatas[0] };
+        character2Datas = new List<AnimationsData>() { baseNinjaData, ninjaDatas[player2Ninja], weaponDatas[0] };
+
+        characterAnimator.character1Animator = character1.GetComponentInChildren<Animator>();
+        characterAnimator.character2Animator = character2.GetComponentInChildren<Animator>();
 
         gameState = new BattleGameState();
         player1InputHistory = new Dictionary<int, PlayerButtons>();
@@ -161,11 +174,11 @@ public class BattleManager : MonoBehaviour
     {
         characterAnimator.AnimateCharacters();
 
-        character1.transform.position = transform.position + new Vector3(gameState.player1.positionX / renderRatio, gameState.player1.positionY / renderRatio, 0);
-        character2.transform.position = transform.position + new Vector3(gameState.player2.positionX / renderRatio, gameState.player2.positionY / renderRatio, 0);
+        character1.transform.position = transform.position + new Vector3(gameState.character1.positionX / renderRatio, gameState.character1.positionY / renderRatio, 0);
+        character2.transform.position = transform.position + new Vector3(gameState.character2.positionX / renderRatio, gameState.character2.positionY / renderRatio, 0);
 
-        player1Health.text = gameState.player1.health.ToString();
-        player2Health.text = gameState.player2.health.ToString();
+        player1Health.text = gameState.character1.health.ToString();
+        player2Health.text = gameState.character2.health.ToString();
 
         player1Wins.text = "WINS " + roundManager.player1Wins.ToString();
         player2Wins.text = roundManager.player2Wins.ToString() + " WINS";
@@ -178,13 +191,13 @@ public class BattleManager : MonoBehaviour
 
     public void StartGame()
 	{
-        gameState.player1.health = player1Data.stats.health;
-        gameState.player2.health = player2Data.stats.health;
+        gameState.character1.health = ninjaStats[player1Ninja].health;
+        gameState.character2.health = ninjaStats[player2Ninja].health;
 
-        gameState.player1.positionX = battleData.startPosition * -1;
-        gameState.player2.positionX = battleData.startPosition;
-        gameState.player1.positionY = battleData.groundLevel;
-        gameState.player2.positionY = battleData.groundLevel;
+        gameState.character1.positionX = battleData.startPosition * -1;
+        gameState.character2.positionX = battleData.startPosition;
+        gameState.character1.positionY = battleData.groundLevel;
+        gameState.character2.positionY = battleData.groundLevel;
 
         start = true;
 	}

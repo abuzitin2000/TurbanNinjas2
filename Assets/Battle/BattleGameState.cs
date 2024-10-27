@@ -39,13 +39,13 @@ public class BattleGameState
         public int jumpWindow;
     }
 
-    public CharacterState player1;
-    public CharacterState player2;
+    public CharacterState character1;
+    public CharacterState character2;
 
     public BattleGameState()
     {
-        player1 = new CharacterState();
-        player2 = new CharacterState();
+        character1 = new CharacterState();
+        character2 = new CharacterState();
     }
 
     public BattleGameState CreateCopy()
@@ -57,64 +57,64 @@ public class BattleGameState
 
         // Players Battle States
         CharacterState tempPlayer1 = new CharacterState();
-        tempBattleGameState.player1 = tempPlayer1;
+        tempBattleGameState.character1 = tempPlayer1;
 
         CharacterState tempPlayer2 = new CharacterState();
-        tempBattleGameState.player2 = tempPlayer2;
+        tempBattleGameState.character2 = tempPlayer2;
 
-        tempPlayer1.positionX = player1.positionX;
-        tempPlayer2.positionX = player2.positionX;
+        tempPlayer1.positionX = character1.positionX;
+        tempPlayer2.positionX = character2.positionX;
 
-        tempPlayer1.positionY = player1.positionY;
-        tempPlayer2.positionY = player2.positionY;
+        tempPlayer1.positionY = character1.positionY;
+        tempPlayer2.positionY = character2.positionY;
 
-        tempPlayer1.health = player1.health;
-        tempPlayer2.health = player2.health;
+        tempPlayer1.health = character1.health;
+        tempPlayer2.health = character2.health;
 
-        tempPlayer1.mirrored = player1.mirrored;
-        tempPlayer2.mirrored = player2.mirrored;
+        tempPlayer1.mirrored = character1.mirrored;
+        tempPlayer2.mirrored = character2.mirrored;
 
-        tempPlayer1.stun = player1.stun;
-        tempPlayer2.stun = player2.stun;
+        tempPlayer1.stun = character1.stun;
+        tempPlayer2.stun = character2.stun;
 
-        tempPlayer1.pushback = player1.pushback;
-        tempPlayer2.pushback = player2.pushback;
+        tempPlayer1.pushback = character1.pushback;
+        tempPlayer2.pushback = character2.pushback;
 
-        tempPlayer1.attacking = player1.attacking;
-        tempPlayer2.attacking = player2.attacking;
+        tempPlayer1.attacking = character1.attacking;
+        tempPlayer2.attacking = character2.attacking;
 
-        tempPlayer1.blocking = player1.blocking;
-        tempPlayer2.blocking = player2.blocking;
+        tempPlayer1.blocking = character1.blocking;
+        tempPlayer2.blocking = character2.blocking;
 
-        tempPlayer1.cancellable = player1.cancellable;
-        tempPlayer2.cancellable = player2.cancellable;
+        tempPlayer1.cancellable = character1.cancellable;
+        tempPlayer2.cancellable = character2.cancellable;
 
-        tempPlayer1.hit = player1.hit;
-        tempPlayer2.hit = player2.hit;
+        tempPlayer1.hit = character1.hit;
+        tempPlayer2.hit = character2.hit;
 
-        tempPlayer1.jumping = player1.jumping;
-        tempPlayer2.jumping = player2.jumping;
+        tempPlayer1.jumping = character1.jumping;
+        tempPlayer2.jumping = character2.jumping;
 
-        tempPlayer1.crouching = player1.crouching;
-        tempPlayer2.crouching = player2.crouching;
+        tempPlayer1.crouching = character1.crouching;
+        tempPlayer2.crouching = character2.crouching;
 
-        tempPlayer1.grounded = player1.grounded;
-        tempPlayer2.grounded = player2.grounded;
+        tempPlayer1.grounded = character1.grounded;
+        tempPlayer2.grounded = character2.grounded;
 
-        tempPlayer1.velocityX = player1.velocityX;
-        tempPlayer2.velocityX = player2.velocityX;
+        tempPlayer1.velocityX = character1.velocityX;
+        tempPlayer2.velocityX = character2.velocityX;
 
-        tempPlayer1.velocityY = player1.velocityY;
-        tempPlayer2.velocityY = player2.velocityY;
+        tempPlayer1.velocityY = character1.velocityY;
+        tempPlayer2.velocityY = character2.velocityY;
 
-        tempPlayer1.animation = player1.animation;
-        tempPlayer2.animation = player2.animation;
+        tempPlayer1.animation = character1.animation;
+        tempPlayer2.animation = character2.animation;
 
-        tempPlayer1.frame = player1.frame;
-        tempPlayer2.frame = player2.frame;
+        tempPlayer1.frame = character1.frame;
+        tempPlayer2.frame = character2.frame;
 
-        tempPlayer1.jumpWindow = player1.jumpWindow;
-        tempPlayer2.jumpWindow = player2.jumpWindow;
+        tempPlayer1.jumpWindow = character1.jumpWindow;
+        tempPlayer2.jumpWindow = character2.jumpWindow;
 
         return tempBattleGameState;
     }
@@ -123,59 +123,59 @@ public class BattleGameState
     {
         bool answer = true;
 
-        answer = answer && (gameState.player1.positionX == player1.positionX);
-        answer = answer && (gameState.player2.positionX == player2.positionX);
+        answer = answer && (gameState.character1.positionX == character1.positionX);
+        answer = answer && (gameState.character2.positionX == character2.positionX);
 
-        answer = answer && (gameState.player1.positionY == player1.positionY);
-        answer = answer && (gameState.player2.positionY == player2.positionY);
+        answer = answer && (gameState.character1.positionY == character1.positionY);
+        answer = answer && (gameState.character2.positionY == character2.positionY);
 
-        answer = answer && (gameState.player1.health == player1.health);
-        answer = answer && (gameState.player2.health == player2.health);
+        answer = answer && (gameState.character1.health == character1.health);
+        answer = answer && (gameState.character2.health == character2.health);
 
-        answer = answer && (gameState.player1.mirrored == player1.mirrored);
-        answer = answer && (gameState.player2.mirrored == player2.mirrored);
+        answer = answer && (gameState.character1.mirrored == character1.mirrored);
+        answer = answer && (gameState.character2.mirrored == character2.mirrored);
 
-        answer = answer && (gameState.player1.stun == player1.stun);
-        answer = answer && (gameState.player2.stun == player2.stun);
+        answer = answer && (gameState.character1.stun == character1.stun);
+        answer = answer && (gameState.character2.stun == character2.stun);
 
-        answer = answer && (gameState.player1.pushback == player1.pushback);
-        answer = answer && (gameState.player2.pushback == player2.pushback);
+        answer = answer && (gameState.character1.pushback == character1.pushback);
+        answer = answer && (gameState.character2.pushback == character2.pushback);
 
-        answer = answer && (gameState.player1.attacking == player1.attacking);
-        answer = answer && (gameState.player2.attacking == player2.attacking);
+        answer = answer && (gameState.character1.attacking == character1.attacking);
+        answer = answer && (gameState.character2.attacking == character2.attacking);
 
-        answer = answer && (gameState.player1.blocking == player1.blocking);
-        answer = answer && (gameState.player2.blocking == player2.blocking);
+        answer = answer && (gameState.character1.blocking == character1.blocking);
+        answer = answer && (gameState.character2.blocking == character2.blocking);
 
-        answer = answer && (gameState.player1.cancellable == player1.cancellable);
-        answer = answer && (gameState.player2.cancellable == player2.cancellable);
+        answer = answer && (gameState.character1.cancellable == character1.cancellable);
+        answer = answer && (gameState.character2.cancellable == character2.cancellable);
 
-        answer = answer && (gameState.player1.hit == player1.hit);
-        answer = answer && (gameState.player2.hit == player2.hit);
+        answer = answer && (gameState.character1.hit == character1.hit);
+        answer = answer && (gameState.character2.hit == character2.hit);
 
-        answer = answer && (gameState.player1.jumping == player1.jumping);
-        answer = answer && (gameState.player2.jumping == player2.jumping);
+        answer = answer && (gameState.character1.jumping == character1.jumping);
+        answer = answer && (gameState.character2.jumping == character2.jumping);
 
-        answer = answer && (gameState.player1.crouching == player1.crouching);
-        answer = answer && (gameState.player2.crouching == player2.crouching);
+        answer = answer && (gameState.character1.crouching == character1.crouching);
+        answer = answer && (gameState.character2.crouching == character2.crouching);
 
-        answer = answer && (gameState.player1.grounded == player1.grounded);
-        answer = answer && (gameState.player2.grounded == player2.grounded);
+        answer = answer && (gameState.character1.grounded == character1.grounded);
+        answer = answer && (gameState.character2.grounded == character2.grounded);
 
-        answer = answer && (gameState.player1.velocityX == player1.velocityX);
-        answer = answer && (gameState.player2.velocityX == player2.velocityX);
+        answer = answer && (gameState.character1.velocityX == character1.velocityX);
+        answer = answer && (gameState.character2.velocityX == character2.velocityX);
 
-        answer = answer && (gameState.player1.velocityY == player1.velocityY);
-        answer = answer && (gameState.player2.velocityY == player2.velocityY);
+        answer = answer && (gameState.character1.velocityY == character1.velocityY);
+        answer = answer && (gameState.character2.velocityY == character2.velocityY);
 
-        answer = answer && (gameState.player1.animation == player1.animation);
-        answer = answer && (gameState.player2.animation == player2.animation);
+        answer = answer && (gameState.character1.animation == character1.animation);
+        answer = answer && (gameState.character2.animation == character2.animation);
 
-        answer = answer && (gameState.player1.frame == player1.frame);
-        answer = answer && (gameState.player2.frame == player2.frame);
+        answer = answer && (gameState.character1.frame == character1.frame);
+        answer = answer && (gameState.character2.frame == character2.frame);
 
-        answer = answer && (gameState.player1.jumpWindow == player1.jumpWindow);
-        answer = answer && (gameState.player2.jumpWindow == player2.jumpWindow);
+        answer = answer && (gameState.character1.jumpWindow == character1.jumpWindow);
+        answer = answer && (gameState.character2.jumpWindow == character2.jumpWindow);
 
         return answer;
     }

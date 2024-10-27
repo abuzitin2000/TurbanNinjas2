@@ -3,33 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "GameData/Character")]
-public class CharacterData : ScriptableObject
+[CreateAssetMenu(menuName = "GameData/Animations")]
+public class AnimationsData : ScriptableObject
 {
     [System.Serializable]
-    public class characterdata
-    {
-        public int health;
-        public int forwardMoveSpeed;
-        public int backwardMoveSpeed;
-        public int jumpForce;
-        public int jumpHorizontalSpeed;
-        public int fallSpeed;
-        public int forwardDashSpeed;
-        public int backwardDashSpeed;
-    }
-
-    [System.Serializable]
-    public class characteranimation
+    public class CharacterAnimation
     {
         public string name;
         public string animationFileName;
         public bool loop;
-        public List<characteranimationphase> phases;
+        public List<CharacterAnimationPhase> phases;
     }
 
     [System.Serializable]
-    public class characteranimationphase
+    public class CharacterAnimationPhase
     {
         public int duration;
         public float animStartTime;
@@ -38,14 +25,14 @@ public class CharacterData : ScriptableObject
         public bool changeVelocity;
         public int velocityX;
         public int velocityY;
-        public List<hurtboxdata> hurtBoxes;
-        public List<hitboxdata> hitBoxes;
+        public List<HurtboxData> hurtBoxes;
+        public List<HitboxData> hitBoxes;
         public List<collisionboxdata> collisionBoxes;
         public SpecialEvent specialFunctions;
     }
 
     [System.Serializable]
-    public class hurtboxdata
+    public class HurtboxData
     {
         public int positionoffsetX;
         public int positionoffsetY;
@@ -54,7 +41,7 @@ public class CharacterData : ScriptableObject
     }
 
     [System.Serializable]
-    public class hitboxdata
+    public class HitboxData
     {
         public int positionoffsetX;
         public int positionoffsetY;
@@ -81,8 +68,5 @@ public class CharacterData : ScriptableObject
     }
 
     [SerializeField]
-    public characterdata stats;
-
-    [SerializeField]
-    public List<characteranimation> characterAnimations;
+    public List<CharacterAnimation> characterAnimations;
 }

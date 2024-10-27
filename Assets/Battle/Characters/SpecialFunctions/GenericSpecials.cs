@@ -10,11 +10,11 @@ public class GenericSpecials : MonoBehaviour
 
         if (player1)
         {
-            characterState = gameState.player1;
+            characterState = gameState.character1;
         }
 		else
 		{
-            characterState = gameState.player2;
+            characterState = gameState.character2;
         }
 
         characterState.stun = 1000;

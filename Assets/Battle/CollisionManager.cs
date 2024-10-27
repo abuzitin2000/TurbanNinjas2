@@ -8,28 +8,39 @@ public class CollisionManager : MonoBehaviour
 
 	public void CalculateCollisions()
 	{
-		// Player 1 Hitboxes
-		foreach (CharacterData.hitboxdata hitbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hitBoxes)
+		// Character Animator
+		CharacterAnimation animator = battleManager.characterAnimator;
+
+		// Character Animation Phase Data
+		AnimationsData.CharacterAnimationPhase character1Phase = animator.GetAnimationPhase(true);
+        AnimationsData.CharacterAnimationPhase character2Phase = animator.GetAnimationPhase(false);
+
+        // Character States
+        BattleGameState.CharacterState character1State = battleManager.gameState.character1;
+        BattleGameState.CharacterState character2State = battleManager.gameState.character2;
+
+        // Player 1 Hitboxes
+        foreach (AnimationsData.HitboxData hitbox in character1Phase.hitBoxes)
 		{
 			// Player 2 Hurtboxes
-			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hurtBoxes)
+			foreach (AnimationsData.HurtboxData hurtbox in character2Phase.hurtBoxes)
 			{
-				if (CheckCollision(battleManager.gameState.player1.positionX, battleManager.gameState.player1.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, battleManager.gameState.player1.mirrored, battleManager.gameState.player2.positionX, battleManager.gameState.player2.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, battleManager.gameState.player2.mirrored))
+				if (CheckCollision(character1State.positionX, character1State.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, character1State.mirrored, character2State.positionX, character2State.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, character2State.mirrored))
 				{
-					ApplyHit(battleManager.gameState.player1, battleManager.player1Data, battleManager.gameState.player2, battleManager.player2Data, hitbox);
+					ApplyHit(true, hitbox);
 				}
 			}
 		}
 
 		// Player 2 Hitboxes
-		foreach (CharacterData.hitboxdata hitbox in battleManager.player2Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].hitBoxes)
+		foreach (AnimationsData.HitboxData hitbox in character2Phase.hitBoxes)
 		{
 			// Player 1 Hurtboxes
-			foreach (CharacterData.hurtboxdata hurtbox in battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].hurtBoxes)
+			foreach (AnimationsData.HurtboxData hurtbox in character1Phase.hurtBoxes)
 			{
-				if (CheckCollision(battleManager.gameState.player2.positionX, battleManager.gameState.player2.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, battleManager.gameState.player2.mirrored, battleManager.gameState.player1.positionX, battleManager.gameState.player1.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, battleManager.gameState.player1.mirrored))
+				if (CheckCollision(character2State.positionX, character2State.positionY, hitbox.sizeX, hitbox.sizeY, hitbox.positionoffsetX, hitbox.positionoffsetY, character2State.mirrored, character1State.positionX, character1State.positionY, hurtbox.sizeX, hurtbox.sizeY, hurtbox.positionoffsetX, hurtbox.positionoffsetY, character1State.mirrored))
 				{
-					ApplyHit(battleManager.gameState.player2, battleManager.player2Data, battleManager.gameState.player1, battleManager.player1Data, hitbox);
+					ApplyHit(false, hitbox);
 				}
 			}
 		}
@@ -52,10 +63,14 @@ public class CollisionManager : MonoBehaviour
 		return collisionX && collisionY;
 	}
 
-	private void ApplyHit(BattleGameState.CharacterState attacker, CharacterData attackerData, BattleGameState.CharacterState defender, CharacterData defenderData, CharacterData.hitboxdata hitbox)
+	private void ApplyHit(bool isAttackerCharacter1, AnimationsData.HitboxData hitbox)
 	{
-		// Don't hit if already hit
-		if (attacker.hit)
+        // Character States
+        BattleGameState.CharacterState attacker = isAttackerCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+        BattleGameState.CharacterState defender = isAttackerCharacter1 ? battleManager.gameState.character2 : battleManager.gameState.character1;
+
+        // Don't hit if already hit
+        if (attacker.hit)
 		{
 			return;
 		}
@@ -66,12 +81,12 @@ public class CollisionManager : MonoBehaviour
 			{
 				if (defender.crouching)
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "CrouchingBlock");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "CrouchingBlock");
 					DealChipDamage(attacker, defender, hitbox);
 				}
 				else
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "StandingBlock");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "StandingBlock");
 					DealChipDamage(attacker, defender, hitbox);
 				}
 			}
@@ -79,12 +94,12 @@ public class CollisionManager : MonoBehaviour
 			{
 				if (defender.crouching)
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "CrouchingBlock");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "CrouchingBlock");
 					DealChipDamage(attacker, defender, hitbox);
 				}
 				else
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "StandingHit");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "StandingHit");
 					DealDamage(attacker, defender, hitbox);
 				}
 			}
@@ -92,12 +107,12 @@ public class CollisionManager : MonoBehaviour
 			{
 				if (defender.crouching)
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "CrouchingHit");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "CrouchingHit");
 					DealDamage(attacker, defender, hitbox);
 				}
 				else
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "StandingBlock");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "StandingBlock");
 					DealChipDamage(attacker, defender, hitbox);
 				}
 			}
@@ -105,12 +120,12 @@ public class CollisionManager : MonoBehaviour
 			{
 				if (defender.crouching)
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "CrouchingHit");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "CrouchingHit");
 					DealDamage(attacker, defender, hitbox);
 				}
 				else
 				{
-					battleManager.characterAnimator.SetAnimation(defender, defenderData, "StandingHit");
+					battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "StandingHit");
 					DealDamage(attacker, defender, hitbox);
 				}
 			}
@@ -119,18 +134,18 @@ public class CollisionManager : MonoBehaviour
 		{
 			if (defender.crouching)
 			{
-				battleManager.characterAnimator.SetAnimation(defender, defenderData, "CrouchingHit");
+				battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "CrouchingHit");
 				DealDamage(attacker, defender, hitbox);
 			}
 			else
 			{
-				battleManager.characterAnimator.SetAnimation(defender, defenderData, "StandingHit");
+				battleManager.characterAnimator.SetAnimation(!isAttackerCharacter1, "StandingHit");
 				DealDamage(attacker, defender, hitbox);
 			}
 		}
 	}
 
-	private void DealDamage(BattleGameState.CharacterState attacker, BattleGameState.CharacterState defender, CharacterData.hitboxdata hitbox)
+	private void DealDamage(BattleGameState.CharacterState attacker, BattleGameState.CharacterState defender, AnimationsData.HitboxData hitbox)
 	{
 		defender.health -= hitbox.damage;
 		defender.stun = hitbox.hitStun;
@@ -151,7 +166,7 @@ public class CollisionManager : MonoBehaviour
 		attacker.hit = true;
 	}
 
-	private void DealChipDamage(BattleGameState.CharacterState attacker, BattleGameState.CharacterState defender, CharacterData.hitboxdata hitbox)
+	private void DealChipDamage(BattleGameState.CharacterState attacker, BattleGameState.CharacterState defender, AnimationsData.HitboxData hitbox)
 	{
 		defender.health -= hitbox.chipDamage;
 		defender.stun = hitbox.blockStun;
@@ -173,81 +188,93 @@ public class CollisionManager : MonoBehaviour
 
 	public void HandleCollisionBoxes()
 	{
-		List<CharacterData.collisionboxdata> player1CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player1.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player1Data, battleManager.gameState.player1.animation, battleManager.gameState.player1.frame)].collisionBoxes;
-		List<CharacterData.collisionboxdata> player2CollisionBoxes = battleManager.player1Data.characterAnimations[battleManager.gameState.player2.animation].phases[battleManager.characterAnimator.FindPhase(battleManager.player2Data, battleManager.gameState.player2.animation, battleManager.gameState.player2.frame)].collisionBoxes;
+        // Character Animator
+        CharacterAnimation animator = battleManager.characterAnimator;
 
-		if (player1CollisionBoxes.Count == 0 || player2CollisionBoxes.Count == 0)
+        // Character Animation Phase Data
+        AnimationsData.CharacterAnimationPhase character1Phase = animator.GetAnimationPhase(true);
+        AnimationsData.CharacterAnimationPhase character2Phase = animator.GetAnimationPhase(false);
+
+        // Character States
+        BattleGameState.CharacterState character1State = battleManager.gameState.character1;
+        BattleGameState.CharacterState character2State = battleManager.gameState.character2;
+
+		// Collision Boxes
+        List<AnimationsData.collisionboxdata> character1CollisionBoxes = character1Phase.collisionBoxes;
+		List<AnimationsData.collisionboxdata> character2CollisionBoxes = character2Phase.collisionBoxes;
+
+		if (character1CollisionBoxes.Count == 0 || character2CollisionBoxes.Count == 0)
 		{
 			return;
 		}
 
-		if (!CheckCollision(battleManager.gameState.player1.positionX, battleManager.gameState.player1.positionY, player1CollisionBoxes[0].sizeX, player1CollisionBoxes[0].sizeY, player1CollisionBoxes[0].positionoffsetX, player1CollisionBoxes[0].positionoffsetY, battleManager.gameState.player1.mirrored, battleManager.gameState.player2.positionX, battleManager.gameState.player2.positionY, player2CollisionBoxes[0].sizeX, player2CollisionBoxes[0].sizeY, player2CollisionBoxes[0].positionoffsetX, player2CollisionBoxes[0].positionoffsetY, battleManager.gameState.player2.mirrored))
+		if (!CheckCollision(character1State.positionX, character1State.positionY, character1CollisionBoxes[0].sizeX, character1CollisionBoxes[0].sizeY, character1CollisionBoxes[0].positionoffsetX, character1CollisionBoxes[0].positionoffsetY, character1State.mirrored, character2State.positionX, character2State.positionY, character2CollisionBoxes[0].sizeX, character2CollisionBoxes[0].sizeY, character2CollisionBoxes[0].positionoffsetX, character2CollisionBoxes[0].positionoffsetY, character2State.mirrored))
 		{
 			return;
 		}
 
 		// Player 1 Dash moves
-		if (battleManager.gameState.player1.attacking && !battleManager.gameState.player2.attacking)
+		if (character1State.attacking && !character2State.attacking)
 		{
-			if (battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX)
+			if (character1State.positionX < character2State.positionX)
 			{
-				int player1CollisionBoxStartX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) + (player1CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX;
-				int player2CollisionBoxStartX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) + (player2CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX;
-				battleManager.gameState.player1.positionX -= player1CollisionBoxes[0].sizeX - (player2CollisionBoxStartX - player1CollisionBoxStartX);
+				int player1CollisionBoxStartX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) + (character1CollisionBoxes[0].sizeX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX;
+				int player2CollisionBoxStartX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) + (character2CollisionBoxes[0].sizeX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX;
+				character1State.positionX -= character1CollisionBoxes[0].sizeX - (player2CollisionBoxStartX - player1CollisionBoxStartX);
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX < battleManager.battleData.stageSize * -1)
+				if (character1State.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int offset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
-					battleManager.gameState.player1.positionX += offset;
-					battleManager.gameState.player2.positionX += offset;
+					int offset = battleManager.battleData.stageSize * -1 - character1State.positionX;
+					character1State.positionX += offset;
+					character2State.positionX += offset;
 				}
 			}
 			else
 			{
-				int player1CollisionBoxEndX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX + player1CollisionBoxes[0].sizeX;
-				int player2CollisionBoxEndX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX + player2CollisionBoxes[0].sizeX;
-				battleManager.gameState.player1.positionX += player1CollisionBoxes[0].sizeX - (player1CollisionBoxEndX - player2CollisionBoxEndX);
+				int player1CollisionBoxEndX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX + character1CollisionBoxes[0].sizeX;
+				int player2CollisionBoxEndX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX + character2CollisionBoxes[0].sizeX;
+				character1State.positionX += character1CollisionBoxes[0].sizeX - (player1CollisionBoxEndX - player2CollisionBoxEndX);
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX > battleManager.battleData.stageSize)
+				if (character1State.positionX > battleManager.battleData.stageSize)
 				{
-					int offset = battleManager.gameState.player1.positionX - battleManager.battleData.stageSize;
-					battleManager.gameState.player1.positionX -= offset;
-					battleManager.gameState.player2.positionX -= offset;
+					int offset = character1State.positionX - battleManager.battleData.stageSize;
+					character1State.positionX -= offset;
+					character2State.positionX -= offset;
 				}
 			}
 		}
 
 		// Player 2 Dash moves
-		else if (!battleManager.gameState.player1.attacking && battleManager.gameState.player2.attacking)
+		else if (!character1State.attacking && character2State.attacking)
 		{
-			if (battleManager.gameState.player2.positionX < battleManager.gameState.player1.positionX)
+			if (character2State.positionX < character1State.positionX)
 			{
-				int player1CollisionBoxStartX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) + (player1CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX;
-				int player2CollisionBoxStartX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) + (player2CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX;
-				battleManager.gameState.player2.positionX -= player2CollisionBoxes[0].sizeX - (player1CollisionBoxStartX - player2CollisionBoxStartX);
+				int player1CollisionBoxStartX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) + (character1CollisionBoxes[0].sizeX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX;
+				int player2CollisionBoxStartX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) + (character2CollisionBoxes[0].sizeX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX;
+				character2State.positionX -= character2CollisionBoxes[0].sizeX - (player1CollisionBoxStartX - player2CollisionBoxStartX);
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX < battleManager.battleData.stageSize * -1)
+				if (character2State.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int offset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
-					battleManager.gameState.player1.positionX += offset;
-					battleManager.gameState.player2.positionX += offset;
+					int offset = battleManager.battleData.stageSize * -1 - character2State.positionX;
+					character1State.positionX += offset;
+					character2State.positionX += offset;
 				}
 			}
 			else
 			{
-				int player1CollisionBoxEndX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX + player1CollisionBoxes[0].sizeX;
-				int player2CollisionBoxEndX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX + player2CollisionBoxes[0].sizeX;
-				battleManager.gameState.player2.positionX += player2CollisionBoxes[0].sizeX - (player2CollisionBoxEndX - player1CollisionBoxEndX);
+				int player1CollisionBoxEndX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX + character1CollisionBoxes[0].sizeX;
+				int player2CollisionBoxEndX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX + character2CollisionBoxes[0].sizeX;
+				character2State.positionX += character2CollisionBoxes[0].sizeX - (player2CollisionBoxEndX - player1CollisionBoxEndX);
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX > battleManager.battleData.stageSize)
+				if (character2State.positionX > battleManager.battleData.stageSize)
 				{
-					int offset = battleManager.gameState.player2.positionX - battleManager.battleData.stageSize;
-					battleManager.gameState.player1.positionX -= offset;
-					battleManager.gameState.player2.positionX -= offset;
+					int offset = character2State.positionX - battleManager.battleData.stageSize;
+					character1State.positionX -= offset;
+					character2State.positionX -= offset;
 				}
 			}
 		}
@@ -255,54 +282,54 @@ public class CollisionManager : MonoBehaviour
 		// Both are moving or not attacking
 		else
 		{
-			if (battleManager.gameState.player1.positionX < battleManager.gameState.player2.positionX)
+			if (character1State.positionX < character2State.positionX)
 			{
-				int player1CollisionBoxStartX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) + (player1CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX;
-				int player2CollisionBoxStartX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) + (player2CollisionBoxes[0].sizeX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX;
+				int player1CollisionBoxStartX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) + (character1CollisionBoxes[0].sizeX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX;
+				int player2CollisionBoxStartX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) + (character2CollisionBoxes[0].sizeX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX;
 
-				int offset = player1CollisionBoxes[0].sizeX - (player2CollisionBoxStartX - player1CollisionBoxStartX);
-				battleManager.gameState.player1.positionX -= offset / 2;
-				battleManager.gameState.player2.positionX += offset / 2;
+				int offset = character1CollisionBoxes[0].sizeX - (player2CollisionBoxStartX - player1CollisionBoxStartX);
+				character1State.positionX -= offset / 2;
+				character2State.positionX += offset / 2;
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX < battleManager.battleData.stageSize * -1)
+				if (character1State.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int walloffset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player1.positionX;
-					battleManager.gameState.player1.positionX += walloffset;
-					battleManager.gameState.player2.positionX += walloffset;
+					int walloffset = battleManager.battleData.stageSize * -1 - character1State.positionX;
+					character1State.positionX += walloffset;
+					character2State.positionX += walloffset;
 				}
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX > battleManager.battleData.stageSize)
+				if (character2State.positionX > battleManager.battleData.stageSize)
 				{
-					int walloffset = battleManager.gameState.player2.positionX - battleManager.battleData.stageSize;
-					battleManager.gameState.player1.positionX -= walloffset;
-					battleManager.gameState.player2.positionX -= walloffset;
+					int walloffset = character2State.positionX - battleManager.battleData.stageSize;
+					character1State.positionX -= walloffset;
+					character2State.positionX -= walloffset;
 				}
 			}
 			else
 			{
-				int player1CollisionBoxEndX = battleManager.gameState.player1.mirrored ? battleManager.gameState.player1.positionX + (player1CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player1.positionX + player1CollisionBoxes[0].positionoffsetX + player1CollisionBoxes[0].sizeX;
-				int player2CollisionBoxEndX = battleManager.gameState.player2.mirrored ? battleManager.gameState.player2.positionX + (player2CollisionBoxes[0].positionoffsetX * -1) : battleManager.gameState.player2.positionX + player2CollisionBoxes[0].positionoffsetX + player2CollisionBoxes[0].sizeX;
+				int player1CollisionBoxEndX = character1State.mirrored ? character1State.positionX + (character1CollisionBoxes[0].positionoffsetX * -1) : character1State.positionX + character1CollisionBoxes[0].positionoffsetX + character1CollisionBoxes[0].sizeX;
+				int player2CollisionBoxEndX = character2State.mirrored ? character2State.positionX + (character2CollisionBoxes[0].positionoffsetX * -1) : character2State.positionX + character2CollisionBoxes[0].positionoffsetX + character2CollisionBoxes[0].sizeX;
 
-				int offset = player1CollisionBoxes[0].sizeX - (player1CollisionBoxEndX - player2CollisionBoxEndX);
-				battleManager.gameState.player1.positionX += offset / 2;
-				battleManager.gameState.player2.positionX -= offset / 2;
+				int offset = character1CollisionBoxes[0].sizeX - (player1CollisionBoxEndX - player2CollisionBoxEndX);
+				character1State.positionX += offset / 2;
+				character2State.positionX -= offset / 2;
 
 				// Check Wall
-				if (battleManager.gameState.player1.positionX > battleManager.battleData.stageSize)
+				if (character1State.positionX > battleManager.battleData.stageSize)
 				{
-					int walloffset = battleManager.gameState.player1.positionX - battleManager.battleData.stageSize;
-					battleManager.gameState.player1.positionX -= walloffset;
-					battleManager.gameState.player2.positionX -= walloffset;
+					int walloffset = character1State.positionX - battleManager.battleData.stageSize;
+					character1State.positionX -= walloffset;
+					character2State.positionX -= walloffset;
 				}
 
 				// Check Wall
-				if (battleManager.gameState.player2.positionX < battleManager.battleData.stageSize * -1)
+				if (character2State.positionX < battleManager.battleData.stageSize * -1)
 				{
-					int walloffset = battleManager.battleData.stageSize * -1 - battleManager.gameState.player2.positionX;
-					battleManager.gameState.player1.positionX += walloffset;
-					battleManager.gameState.player2.positionX += walloffset;
+					int walloffset = battleManager.battleData.stageSize * -1 - character2State.positionX;
+					character1State.positionX += walloffset;
+					character2State.positionX += walloffset;
 				}
 			}
 		}

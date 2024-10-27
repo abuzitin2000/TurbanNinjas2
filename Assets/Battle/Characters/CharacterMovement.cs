@@ -8,69 +8,79 @@ public class CharacterMovement : MonoBehaviour
 
     public void CalculateCharactersMovement()
     {
-        TurnCharacters(battleManager.gameState.player1, battleManager.gameState.player2);
-        CalculateCharacterMovement(battleManager.player1Buttons, battleManager.gameState.player1, battleManager.player1Data, battleManager.player1InputHistory);
-        CalculateCharacterMovement(battleManager.player2Buttons, battleManager.gameState.player2, battleManager.player2Data, battleManager.player2InputHistory);
+        TurnCharacters();
+        CalculateCharacterMovement(true, battleManager.player1Buttons, battleManager.player1InputHistory);
+        CalculateCharacterMovement(false, battleManager.player2Buttons, battleManager.player2InputHistory);
     }
 
-    private void CalculateCharacterMovement(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData, Dictionary<int, PlayerButtons> inputHistory)
+    private void CalculateCharacterMovement(bool isCharacter1, PlayerButtons playerButtons, Dictionary<int, PlayerButtons> inputHistory)
     {
-        CharacterCrouch(playerButtons, characterState, characterData);
-        CharacterDash(playerButtons, characterState, characterData, inputHistory);
-        CharacterWalk(playerButtons, characterState, characterData);
-        CharacterJump(playerButtons, characterState, characterData);
+        CharacterCrouch(isCharacter1, playerButtons);
+        CharacterDash(isCharacter1, playerButtons, inputHistory);
+        CharacterWalk(isCharacter1, playerButtons);
+        CharacterJump(isCharacter1, playerButtons);
     }
 
     public void MoveCharacters()
     {
-        MoveCharacter(battleManager.gameState.player1, battleManager.player1Data);
-        MoveCharacter(battleManager.gameState.player2, battleManager.player2Data);
+        MoveCharacter(true);
+        MoveCharacter(false);
     }
 
-    private void MoveCharacter(BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void MoveCharacter(bool isCharacter1)
     {
-        CharacterVerticalMovement(characterState, characterData);
-        CharacterHorizontalMovement(characterState, characterData);
+        CharacterVerticalMovement(isCharacter1);
+        CharacterHorizontalMovement(isCharacter1);
     }
 
-    private void TurnCharacters(BattleGameState.CharacterState player1State, BattleGameState.CharacterState player2State)
+    private void TurnCharacters()
     {
-        if (player1State.positionX > player2State.positionX)
+        // Character States
+        BattleGameState.CharacterState character1State = battleManager.gameState.character1;
+        BattleGameState.CharacterState character2State = battleManager.gameState.character2;
+
+        // When Character 1 is on Right Side
+        if (character1State.positionX > character2State.positionX)
         {
-            if (!player1State.attacking && player1State.stun == 0)
+            if (!character1State.attacking && character1State.stun == 0)
 			{
-                player1State.mirrored = true;
+                character1State.mirrored = true;
 			}
 
-            if (!player2State.attacking && player2State.stun == 0)
+            if (!character2State.attacking && character2State.stun == 0)
             {
-                player2State.mirrored = false;
+                character2State.mirrored = false;
             }
         }
 
-        if (player1State.positionX < player2State.positionX)
+        // When Character 2 is on Right Side
+        if (character1State.positionX < character2State.positionX)
         {
-            if (!player1State.attacking && player1State.stun == 0)
+            if (!character1State.attacking && character1State.stun == 0)
             {
-                player1State.mirrored = false;
+                character1State.mirrored = false;
             }
 
-            if (!player2State.attacking && player2State.stun == 0)
+            if (!character2State.attacking && character2State.stun == 0)
             {
-                player2State.mirrored = true;
+                character2State.mirrored = true;
             }
         }
     }
 
-    private void CharacterVerticalMovement(BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CharacterVerticalMovement(bool isCharacter1)
     {
-        // Player Velocity
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+        StatsData characterStats = isCharacter1 ? battleManager.ninjaStats[battleManager.player1Ninja] : battleManager.ninjaStats[battleManager.player2Ninja];
+
+        // Character Velocity
         characterState.positionY += characterState.velocityY;
 
         // Gravity
         if (characterState.positionY > battleManager.battleData.groundLevel)
         {
-            characterState.velocityY -= characterData.stats.fallSpeed;
+            characterState.velocityY -= characterStats.fallSpeed;
         }
 
         // If goes over limit
@@ -92,9 +102,12 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CharacterHorizontalMovement(BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CharacterHorizontalMovement(bool isCharacter1)
     {
-        // Player Velocity
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
+        // Character Velocity
         characterState.positionX += characterState.velocityX;
 
         // Deceleration on pushback
@@ -117,8 +130,12 @@ public class CharacterMovement : MonoBehaviour
         battleManager.collisionManager.HandleCollisionBoxes();
     }
 
-    private void CharacterWalk(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CharacterWalk(bool isCharacter1, PlayerButtons playerButtons)
     {
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+        StatsData characterStats = isCharacter1 ? battleManager.ninjaStats[battleManager.player1Ninja] : battleManager.ninjaStats[battleManager.player2Ninja];
+
         // Walk
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
@@ -129,8 +146,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.crouching)
 					{
-                        characterState.velocityX = characterData.stats.forwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                        characterState.velocityX = characterStats.forwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "WalkForward");
 					}
 
                     characterState.blocking = false;
@@ -139,8 +156,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.crouching)
                     {
-                        characterState.velocityX = characterData.stats.backwardMoveSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                        characterState.velocityX = characterStats.backwardMoveSpeed;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "WalkBackward");
                     }
 
                     characterState.blocking = true;
@@ -154,8 +171,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.crouching)
                     {
-                        characterState.velocityX = characterData.stats.backwardMoveSpeed * -1;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkBackward");
+                        characterState.velocityX = characterStats.backwardMoveSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "WalkBackward");
                     }
 
                     characterState.blocking = true;
@@ -164,8 +181,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.crouching)
                     {
-                        characterState.velocityX = characterData.stats.forwardMoveSpeed * -1;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "WalkForward");
+                        characterState.velocityX = characterStats.forwardMoveSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "WalkForward");
                     }
 
                     characterState.blocking = false;
@@ -178,7 +195,7 @@ public class CharacterMovement : MonoBehaviour
                 if (!characterState.crouching)
                 {
                     characterState.velocityX = 0;
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "Idle");
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "Idle");
                 }
 
                 characterState.blocking = false;
@@ -192,8 +209,12 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CharacterDash(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData, Dictionary<int, PlayerButtons> inputHistory)
+    private void CharacterDash(bool isCharacter1, PlayerButtons playerButtons, Dictionary<int, PlayerButtons> inputHistory)
 	{
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+        StatsData characterStats = isCharacter1 ? battleManager.ninjaStats[battleManager.player1Ninja] : battleManager.ninjaStats[battleManager.player2Ninja];
+
         // Dash
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0 && !characterState.crouching)
         {
@@ -230,14 +251,14 @@ public class CharacterMovement : MonoBehaviour
 				{
                     if (!characterState.mirrored)
                     {
-                        characterState.velocityX = characterData.stats.forwardDashSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
+                        characterState.velocityX = characterStats.forwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "DashForward");
                         characterState.attacking = true;
                     }
                     else
                     {
-                        characterState.velocityX = characterData.stats.backwardDashSpeed;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
+                        characterState.velocityX = characterStats.backwardDashSpeed;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "DashBackward");
                         characterState.attacking = true;
                     }
                 }
@@ -276,14 +297,14 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (!characterState.mirrored)
                     {
-                        characterState.velocityX = characterData.stats.backwardDashSpeed * -1;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashBackward");
+                        characterState.velocityX = characterStats.backwardDashSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "DashBackward");
                         characterState.attacking = true;
                     }
                     else
                     {
-                        characterState.velocityX = characterData.stats.forwardDashSpeed * -1;
-                        battleManager.characterAnimator.SetAnimation(characterState, characterData, "DashForward");
+                        characterState.velocityX = characterStats.forwardDashSpeed * -1;
+                        battleManager.characterAnimator.SetAnimation(isCharacter1, "DashForward");
                         characterState.attacking = true;
                     }
                 }
@@ -291,8 +312,12 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CharacterJump(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CharacterJump(bool isCharacter1, PlayerButtons playerButtons)
     {
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+        StatsData characterStats = isCharacter1 ? battleManager.ninjaStats[battleManager.player1Ninja] : battleManager.ninjaStats[battleManager.player2Ninja];
+
         // Jump Start
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
@@ -300,8 +325,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 characterState.jumping = 2;
                 characterState.jumpWindow = battleManager.inputData.jumpingWindow;
-                characterState.velocityY = characterData.stats.jumpForce;
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpNeutral");
+                characterState.velocityY = characterStats.jumpForce;
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "JumpNeutral");
             }
         }
 
@@ -313,14 +338,14 @@ public class CharacterMovement : MonoBehaviour
                 if (!characterState.mirrored)
                 {
                     characterState.jumping = 1;
-                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed * -1;
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpBackward");
+                    characterState.velocityX = characterStats.jumpHorizontalSpeed * -1;
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "JumpBackward");
                 }
                 else
                 {
                     characterState.jumping = 3;
-                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed * -1;
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpForward");
+                    characterState.velocityX = characterStats.jumpHorizontalSpeed * -1;
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "JumpForward");
                 }
             }
 
@@ -329,14 +354,14 @@ public class CharacterMovement : MonoBehaviour
                 if (!characterState.mirrored)
                 {
                     characterState.jumping = 3;
-                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed;
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpForward");
+                    characterState.velocityX = characterStats.jumpHorizontalSpeed;
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "JumpForward");
                 }
                 else
                 {
                     characterState.jumping = 1;
-                    characterState.velocityX = characterData.stats.jumpHorizontalSpeed;
-                    battleManager.characterAnimator.SetAnimation(characterState, characterData, "JumpBackward");
+                    characterState.velocityX = characterStats.jumpHorizontalSpeed;
+                    battleManager.characterAnimator.SetAnimation(isCharacter1, "JumpBackward");
                 }
             }
         }
@@ -348,15 +373,18 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CharacterCrouch(PlayerButtons playerButtons, BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void CharacterCrouch(bool isCharacter1, PlayerButtons playerButtons)
     {
-        // Player 1 Crouch
+        // Character Data
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
+        // Crouch
         if (characterState.stun == 0 && !characterState.attacking && characterState.jumping == 0)
         {
             if (playerButtons.GetDown(true))
             {
                 characterState.crouching = true;
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "Crouch");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "Crouch");
             }
             else
             {

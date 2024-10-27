@@ -8,14 +8,17 @@ public class StunManager : MonoBehaviour
 
     public void ReduceStuns()
 	{
-        ReduceStun(battleManager.gameState.player1, battleManager.player1Data);
-        ReduceStun(battleManager.gameState.player2, battleManager.player2Data);
-        ReducePushBacks(battleManager.gameState.player1, battleManager.player1Data);
-        ReducePushBacks(battleManager.gameState.player2, battleManager.player2Data);
+        ReduceStun(true);
+        ReduceStun(false);
+        ReducePushBacks(true);
+        ReducePushBacks(false);
     }
 
-    private void ReduceStun(BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void ReduceStun(bool isCharacter1)
 	{
+        // Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
         if (characterState.stun > 0)
 		{
             characterState.stun -= 1;
@@ -23,13 +26,16 @@ public class StunManager : MonoBehaviour
             // End Stun
             if (characterState.stun == 0)
 			{
-                battleManager.characterAnimator.SetAnimation(characterState, characterData, "Idle");
+                battleManager.characterAnimator.SetAnimation(isCharacter1, "Idle");
 			}
         }
     }
 
-    private void ReducePushBacks(BattleGameState.CharacterState characterState, CharacterData characterData)
+    private void ReducePushBacks(bool isCharacter1)
     {
+        // Character State
+        BattleGameState.CharacterState characterState = isCharacter1 ? battleManager.gameState.character1 : battleManager.gameState.character2;
+
         if (characterState.pushback > 0)
         {
             characterState.pushback -= 1;
